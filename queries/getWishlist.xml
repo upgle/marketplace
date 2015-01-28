@@ -1,0 +1,32 @@
+<query id="getWishlist" action="select">
+    <tables>
+        <table name="marketplace_wishlist" alias="wishlist" />
+        <table name="documents" alias="documents" type="left join">
+            <conditions>
+                <condition operation="equal" column="documents.document_srl" default="wishlist.document_srl" />
+            </conditions>
+        </table>
+        <table name="marketplace_items" alias="items" type="left join">
+            <conditions>
+                <condition operation="equal" column="documents.document_srl" default="items.document_srl" />
+            </conditions>
+        </table>
+    </tables>
+    <columns>
+		<column name="items.*" />
+		<column name="documents.*" />
+    </columns>
+    <conditions>
+        <condition operation="equal" column="documents.module_srl" var="module_srl" filter="number" pipe="and" />
+        <condition operation="equal" column="wishlist.member_srl" var="member_srl" filter="number" notnull="notnull" pipe="and" />
+    </conditions>
+    <navigation>
+        <index var="sort_index" default="documents.list_order" order="order_type" />
+        <list_count var="list_count" default="20" />
+        <page_count var="page_count" default="10" />
+        <page var="page" default="1" />
+    </navigation>
+</query>
+
+
+

@@ -1,0 +1,15 @@
+<query id="getWishlistItem" action="select">
+    <tables>
+        <table name="marketplace_wishlist" />
+    </tables>
+    <columns>
+		<column name="marketplace_wishlist.*" />
+    </columns>
+    <conditions>
+        <condition operation="equal" column="document_srl" var="document_srl" filter="number" notnull="notnull" pipe="and" />
+        <condition operation="equal" column="member_srl" var="member_srl" filter="number" notnull="notnull" pipe="and" />
+    </conditions>
+</query>
+
+
+

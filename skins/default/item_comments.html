@@ -1,0 +1,110 @@
+<include target="_header.html" />
+
+<div class="mp-content content-insert-page">
+	<div class="content_header">
+		<div class="mp-title-item-comments mp-hidetext">내 상품에 달린 댓글</div>
+		<a href="{getUrl('act','dispMarketplaceContent')}" class="mp-button button-white button-small button-return"><i class="xe-mail-reply"></i> 마켓으로 돌아가기</a>
+	</div>
+	<div class="mp-notice">
+		<i class="xe-announce"> 내가 등록한 상품에 올라온 댓글들을 모아 볼 수 있습니다.</i>
+	</div>
+
+	<div class="mp-block">
+		<div class="board">
+			<div class="board_list basic_type">
+				<table class="tbl_board_lst">
+				<caption>게시판 리스트</caption>
+				<colgroup>
+				<col style="width: 77px;">
+				<col>
+				<col style="width: 200px">
+
+				</colgroup>
+				<thead>
+				<!-- LIST HEADER -->
+				<tr>
+				<th scope="col"><div class="ta_c">프로필</div></th>
+				<th scope="col"><div class="ta_c">내용</div></th>
+				<th scope="col"><div class="ta_c">상품정보</div></th>
+
+				</tr>
+				<!-- /LIST HEADER -->
+				</thead>
+				<tbody cond="!$comment_list">
+					<tr>
+						<td colspan="3">
+							<p style="text-align:center">{$lang->no_documents}</p>
+						</td>
+					</tr>
+				</tbody>
+
+				<tbody cond="$comment_list">
+					<!-- LIST -->           
+					<tr loop="$comment_list=>$key,$comment" id="comment_{$comment->comment_srl}">
+					{@ $oMarketItem = $comment->oMarketItem}
+					<td class="bd_thmb" style="text-align:center">
+						<img src="images/thumb_user.png" alt="" class="cmt_profile_img" style="width:50px;height:50px" cond="!$comment->getProfileImage()" />
+						<img src="{$comment->getProfileImage()}" alt="Profile" class="cmt_profile_img" style="width:50px;height:50px" cond="$comment->getProfileImage()" />
+					</td>
+					<td>
+						<div class="cmt_item">
+
+							<div class="cmt_con">
+								<!-- 댓글 작성자 정보-->
+								<span class="cmt_writer">
+									<a cond="!$comment->member_srl && $comment->homepage" href="{$comment->getHomepageUrl()}">{$comment->getNickName()}</a>
+									<strong cond="!$comment->member_srl && !$comment->homepage">{$comment->getNickName()}</strong>
+									<a cond="$comment->member_srl" href="#popup_menu_area" class="member_{$comment->member_srl}" onclick="return false">{$comment->getNickName()}</a>
+								</span>
+								<span class="cmt_date">{$comment->getRegdate('Y.m.d H:i')}</span>
+
+								<!-- 댓글 내용 -->
+								<div class="xe_content">
+									{$comment->getContent(false, true, false)}
+								</div>
+							</div>
+
+						</div>
+					</td>
+					
+					<td>
+
+						<div style="border:1px solid #eaeaea; margin:0 5px; background-color:#fff; padding:8px; overflow:hidden; ">
+							<img src="{$oMarketItem->getThumbnail()}" alt="" style="float:left; width:50px;height:32px; margin-right:8px" />
+
+							<!-- 타이틀 -->
+							<div style="line-height:1.3"><a href="{getUrl('','mid',$mid,'document_srl',$oMarketItem->document_srl)}">{$oMarketItem->getTitle('25')}</a></div>
+						</div>
+					</td>
+					
+					</tr>
+				</tbody>
+				</table>
+			</div>
+
+
+			<div class="list_footer">
+				<!-- PAGINATE -->
+				<div class="bd_paginate">
+					<a class="pg_btn" href="{getUrl('page','','document_srl','')}">
+						<i class="xe-angle-left"><span class="blind">{$lang->first_page}</span></i>
+					</a>
+					<block loop="$page_no=$page_navigation->getNextPage()">
+					<strong cond="$page==$page_no">{$page_no}</strong> 
+					<a cond="$page!=$page_no" href="{getUrl('page',$page_no,'document_srl','')}">{$page_no}</a>
+					</block>
+					<a class="pg_btn" href="{getUrl('page',$page_navigation->last_page,'document_srl','','division',$division,'last_division',$last_division)}">
+					<i class="xe-angle-right"><span class="blind">{$lang->last_page}</span></i>
+					</a>
+				</div>
+				<!-- /PAGINATE -->
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+            
+
+<include target="_footer.html" />

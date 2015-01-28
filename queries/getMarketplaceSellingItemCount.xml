@@ -1,0 +1,17 @@
+<query id="getMarketplaceSellingItemCount" action="select">
+    <tables>
+        <table name="documents" alias="documents" />
+        <table name="marketplace_items" alias="items" type="left join">
+            <conditions>
+                <condition operation="equal" column="documents.document_srl" default="items.document_srl" />
+            </conditions>
+        </table>
+    </tables>
+    <columns>
+        <column name="count(*)" alias="count" />
+    </columns>
+    <conditions>
+        <condition operation="equal" column="documents.member_srl" var="category_srl" filter="number" notnull="notnull" />
+        <condition operation="equal" column="items.item_status" var="module_srl" filter="number" notnull="notnull" pipe="and" />
+    </conditions>
+</query>

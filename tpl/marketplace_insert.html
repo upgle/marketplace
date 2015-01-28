@@ -1,0 +1,356 @@
+<include target="header.html" />
+<load target="../../module/tpl/js/multi_order.js" />
+<div cond="$XE_VALIDATOR_MESSAGE && $XE_VALIDATOR_ID == 'modules/marketplace/tpl/marketplace_insert/1'" class="message {$XE_VALIDATOR_MESSAGE_TYPE}">
+	<p>{$XE_VALIDATOR_MESSAGE}</p>
+</div>
+<form ruleset="insertMarketplace" class="x_form-horizontal" action="./" method="post" enctype="multipart/form-data">
+	<input type="hidden" name="module" value="marketplace" />
+	<input type="hidden" name="act" value="procMarketplaceAdminInsertMarketplace" />
+	<input type="hidden" name="page" value="{$page}" />
+	<input type="hidden" name="module_srl" value="{$module_info->module_srl}" />
+	<input cond="$mid || $module_srl" type="hidden" name="success_return_url" value="{getRequestUriByServerEnviroment()}" />
+	<input cond="$logged_info->is_admin != 'Y'" type="hidden" name="marketplace_name" value="{$module_info->mid}" />
+	<input type="hidden" name="xe_validator_id" value="modules/marketplace/tpl/marketplace_insert/1" />
+	<section class="section">
+		<h1>{$lang->subtitle_primary}</h1>
+		<div cond="$logged_info->is_admin == 'Y'" class="x_control-group">
+			<label class="x_control-label" for="marketplace_name">{$lang->mid}</label>
+			<div class="x_controls">
+				<input type="text" name="marketplace_name" id="marketplace_name" value="{$module_info->mid}" />
+				<a href="#module_name_help" class="x_icon-question-sign" data-toggle>{$lang->help}</a>
+				<p id="module_name_help" class="x_help-block" hidden>{$lang->about_mid}</p>
+			</div>
+		</div>
+		<div class="x_control-group">
+			<label class="x_control-label" for="lang_browser_title">{$lang->browser_title}</label>
+			<div class="x_controls">
+				<input type="text" name="browser_title" id="browser_title" value="<!--@if(strpos($module_info->browser_title, '$user_lang->') === false)-->{$module_info->browser_title}<!--@else-->{htmlspecialchars($module_info->browser_title)}<!--@end-->" class="lang_code" />
+				<a href="#browser_title_help" class="x_icon-question-sign" data-toggle>{$lang->help}</a>
+				<p id="browser_title_help" class="x_help-block" hidden>{$lang->about_browser_title}</p>
+			</div>
+		</div>
+		<div class="x_control-group">
+			<label class="x_control-label" for="layout_srl">{$lang->layout}</label>
+			<div class="x_controls">
+				<select name="layout_srl" id="layout_srl">
+					<option value="0">{$lang->notuse}</option>
+					<option loop="$layout_list => $key, $val" value="{$val->layout_srl}" selected="selected"|cond="$module_info->layout_srl== $val->layout_srl">{$val->title} ({$val->layout})</option>
+				</select>
+				<a href="#layout_help" class="x_icon-question-sign" data-toggle>{$lang->help}</a>
+				<p id="layout_help" class="x_help-block" hidden>{$lang->about_layout}</p>
+			</div>
+		</div>
+		<div class="x_control-group">
+			<label class="x_control-label" for="skin">{$lang->skin}</label>
+			<div class="x_controls">
+				<select name="skin" id="skin" style="width:auto">
+					<option loop="$skin_list=> $key, $val" value="{$key}" selected="selected"|cond="$module_info->skin== $key || (!$module_info->skin && $key=='default')">{$val->title}</option>
+				</select>
+			</div>
+		</div>
+	</section>
+	<section class="section">
+		<h1>{$lang->cmd_marketplace_setting}</h1>
+
+		<div class="x_control-group">
+			<label class="x_control-label" for="contact_number_field">연락처 필드 설정</label>
+			<div class="x_controls">
+				<select name="contact_number_field" id="contact_number_field">
+					<option value="{$val->column_name}" selected="selected"|cond="$val->column_name == $module_info->contact_number_field" loop="$form_list => $val">{$val->column_title} ({$val->column_name})</option>
+				</select>
+				<p class="x_help-block">장터에서 사용할 연락처 필드를 선택합니다. 이 필드는 [회원설정 > 회원관리 > 사용자 정의 항목]에서 추가한 항목입니다.</p>
+			</div>
+		</div>
+
+
+		<div class="x_control-group">
+			<label class="x_control-label" for="use_reinsert">재등록 기능</label>
+			<div class="x_controls">
+				<select name="use_reinsert" id="use_reinsert">
+					<option value="1" selected="selected"|cond="$module_info->use_reinsert">{$lang->use}</option>
+					<option value="0" selected="selected"|cond="!$module_info->use_reinsert">{$lang->notuse}</option>
+				</select>
+			</div>
+		</div>
+		<div class="x_control-group">
+			<label class="x_control-label" for="reinsert_interval">재등록 허용 기간</label>
+			<div class="x_controls">
+				{@ if(!$module_info->reinsert_interval_day) $module_info->reinsert_interval_day = 5}
+				글 작성 혹은 재등록 후 <input type="text" name="reinsert_interval" id="reinsert_interval_day" value="{$module_info->reinsert_interval_day}" style="width:60px;text-align:center" /> 일 후 가능 (기본 5일)
+			</div>
+		</div>
+
+		
+        <div class="x_control-group">
+			<label class="x_control-label">연락처 보호 기능</label>
+			<div class="x_controls">
+				<label class="x_inline" for="protect_contact"><input type="checkbox" name="protect_contact" id="protect_contact" value="Y" checked="checked"|cond="$module_info->protect_contact == 'Y'" /> 판매완료된 글과 댓글에 텍스트로 작성된 연락처를 모두 가려줍니다.</label>
+			</div>
+		</div>
+	</section>
+
+
+
+	<section class="section">
+		<h1>판매자 광고 설정</h1>
+		<div class="x_control-group">
+			<div class="message" style="margin:0; padding: 10px 20px; line-height:1.6">
+			이 기능은 판매자가 마켓플레이스에서 판매중인 상품을 모듈 리스트 페이지에서 광고를 진행하여 노출시킬 수 있는 기능입니다.<br />
+			광고는 <strong>XE 포인트 CPC(Cost Per Click) 기반</strong>으로 운영되며 판매자가 자유롭게 입찰가를 수정할 수 있습니다.
+			</div>
+		</div>
+		<div class="x_control-group">
+			<label class="x_control-label" for="use_advertise">{$lang->cmd_premium_ad_setting}</label>
+			<div class="x_controls">
+				<select name="use_advertise" id="use_advertise">
+					<option value="0">{$lang->notuse}</option>
+					<option value="1" selected="selected"|cond="$module_info->use_advertise== 1">{$lang->use}</option>
+				</select>
+				<p class="x_help-block">{$lang->about_premium_ad_setup}</p>
+			</div>
+		</div>
+		<div class="x_control-group mp-cpc">
+			<label class="x_control-label" for="minimum_bid_price">CPC 최저입찰금액</label>
+			<div class="x_controls">
+				<input type="text" name="minimum_bid_price" id="minimum_bid_price" value="{intval($module_info->minimum_bid_price)}" />
+				<a href="#minimum_bid_price_help" class="x_icon-question-sign" data-toggle>{$lang->help}</a>
+				<p id="minimum_bid_price_help" class="x_help-block" hidden>{$lang->about_browser_title}</p>
+			</div>
+		</div>
+        <div class="x_control-group">
+			<label class="x_control-label">비회원 행동 적용</label>
+			<div class="x_controls">
+				<label class="x_inline" for="advertise_guest"><input type="checkbox" name="advertise_guest" id="advertise_guest" value="Y" checked="checked"|cond="$module_info->advertise_guest == 'Y'" /> 비회원이 회원의 광고를 클릭했을때 과금합니다.</label>
+			</div>
+		</div>
+		<div class="x_control-group">
+			<label class="x_control-label" for="advertise_list_count">광고 노출 개수</label>
+			<div class="x_controls">
+				{@ if(!$module_info->advertise_list_count) $module_info->advertise_list_count = 5}
+				<input type="text" name="advertise_list_count" id="advertise_list_count" value="{$module_info->advertise_list_count}" /> (기본 5개)
+			</div>
+		</div>
+		<div class="x_control-group">
+			<label class="x_control-label" for="advertise_interval">클릭 과금 간격 (분)</label>
+			<div class="x_controls">
+				{@ if(!$module_info->advertise_interval) $module_info->advertise_interval = 360}
+				<input type="text" name="advertise_interval" id="advertise_interval" value="{$module_info->advertise_interval}" /> (기본 360분, 6시간)
+				<p class="x_help-block">광고가 클릭되었을때 과금되는 시간 간격을 설정합니다. 처음 클릭 후 지정된 시간안에서는 광고료가 재 과금되지 않습니다.</p>
+			</div>
+		</div>
+	</section>
+
+	<section class="section">
+		<h1>키워드 알림 설정</h1>
+		<div class="x_control-group">
+			<div class="message" style="margin:0; padding: 10px 20px;">키워드 알림 기능은 사용자가 미리 등록해둔 키워드가 새 글에 포함하고 있으면 사용자에게 알려주는 서비스입니다.</div>
+		</div>
+		<div class="x_control-group">
+			<label class="x_control-label" for="use_keyword_notify">키워드 알림 기능</label>
+			<div class="x_controls">
+				<select name="use_keyword_notify" id="use_keyword_notify">
+					<option value="1" selected="selected"|cond="$module_info->use_keyword_notify">{$lang->use}</option>
+					<option value="0" selected="selected"|cond="!$module_info->use_keyword_notify">{$lang->notuse}</option>
+				</select>
+			</div>
+		</div>
+		<div class="x_control-group">
+			<label class="x_control-label" for="limit_keyword_count">키워드 알림 갯수 제한</label>
+			<div class="x_controls">
+				{@ if(!$module_info->limit_keyword_count) $module_info->limit_keyword_count = 5}
+				<input type="text" name="limit_keyword_count" id="limit_keyword_count" value="{$module_info->limit_keyword_count}" />
+				<p class="x_help-block">DB의 부하를 줄이기 위해 회원이 등록할 수 있는 키워드 알림의 갯수를 제한합니다. (0 : 무제한, 기본 5)</p>
+			</div>
+		</div>
+		<div class="x_control-group">
+			<label class="x_control-label" for="keyword_expiry_date">키워드 보관 기간</label>
+			<div class="x_controls">
+				<select name="keyword_expiry_date" id="keyword_expiry_date">
+					<option value="1" selected="selected"|cond="$module_info->keyword_expiry_date == '1'">1개월</option>
+					<option value="2" selected="selected"|cond="$module_info->keyword_expiry_date =='2'">2개월</option>
+					<option value="3" selected="selected"|cond="$module_info->keyword_expiry_date =='3'">3개월</option>
+					<option value="6" selected="selected"|cond="$module_info->keyword_expiry_date =='6'">6개월</option>
+					<option value="12" selected="selected"|cond="$module_info->keyword_expiry_date =='12'">12개월</option>
+				</select>
+				<p class="x_help-block">DB의 부하를 줄이기 위해 회원이 등록한 키워드와 찾은 문서 보관 기간을 설정합니다</p>
+			</div>
+		</div>
+	</section>
+
+
+	<section class="section">
+		<h1>{$lang->mobile_settings}</h1>
+		<div class="x_control-group">
+			<div class="message" style="margin:0; padding: 10px 20px; line-height:1.6">
+			마켓플레이스 모듈은 모바일을 지원합니다. 판매자는 모바일에서 언제 어디서든 상품을 바로 찍어 업로드 할 수 있습니다.
+			</div>
+		</div>
+
+		<div class="x_control-group">
+			<label class="x_control-label">{$lang->mobile_view}</label>
+			<div class="x_controls">
+				<label class="x_inline" for="use_mobile"><input type="checkbox" name="use_mobile" id="use_mobile" value="Y" checked="checked"|cond="$module_info->use_mobile == 'Y'" /> {$lang->about_mobile_view}</label>
+			</div>
+		</div>
+		<div class="x_control-group">
+			<label class="x_control-label" for="mlayout_srl">{$lang->mobile_layout}</label>
+			<div class="x_controls">
+				<select name="mlayout_srl" id="mlayout_srl">
+					<option value="0">{$lang->notuse}</option>
+					<option loop="$mlayout_list => $key, $val" value="{$val->layout_srl}" selected="selected"|cond="$module_info->mlayout_srl== $val->layout_srl">{$val->title} ({$val->layout})</option>
+				</select>
+				<a href="#mobile_layout_help" class="x_icon-question-sign" data-toggle>{$lang->help}</a>
+				<p id="mobile_layout_help" class="x_help-block" hidden>{$lang->about_layout}</p>
+			</div>
+		</div>
+		<div class="x_control-group">
+			<label class="x_control-label" for="mskin">{$lang->mobile_skin}</label>
+			<div class="x_controls">
+				<select name="mskin" id="mskin">
+					<option loop="$mskin_list=> $key, $val" value="{$key}" selected="selected"|cond="$module_info->mskin== $key || (!$module_info->skin && $key=='default')">{$val->title}</option>
+				</select>
+				<a href="#mobile_skin_help" class="x_icon-question-sign" data-toggle>{$lang->help}</a>
+				<p id="mobile_skin_help" class="x_help-block" hidden>{$lang->about_skin}</p>
+			</div>
+		</div>
+	</section>
+	<section class="section">
+		<h1>{$lang->subtitle_advanced}</h1>
+		<div class="x_control-group">
+			<label class="x_control-label">{$lang->cmd_list_setting}</label>
+			<div class="x_controls">
+				{@$list = array_keys($list_config)}
+				<input type="hidden" name="list" value="{implode(',', $list)}" />
+				<p style="padding:3px 0 0 0">{$lang->about_list_config}</p>
+				<div style="display:inline-block">
+					<select class="multiorder_show" size="8" multiple="multiple" style="width:220px;vertical-align:top;margin-bottom:8px">
+						<option loop="$extra_vars => $key, $val" cond="!$list_config[$key]" value="{$key}">{$val->name}</option>
+					</select><br />
+					<button type="button" class="x_btn multiorder_add" style="vertical-align:top">{$lang->cmd_insert}</button>
+				</div>
+				<div style="display:inline-block">
+					<select class="multiorder_selected" size="8" multiple="multiple" style="width:220px;vertical-align:top;margin-bottom:8px">
+						<option loop="$list_config => $key, $val" value="{$key}">{$val->name}</option>
+					</select><br />
+					<span class="x_btn-group">
+						<button type="button" class="x_btn multiorder_up" style="vertical-align:top">{$lang->cmd_move_up}</button>
+						<button type="button" class="x_btn multiorder_down" style="vertical-align:top">{$lang->cmd_move_down}</button>
+						<button type="button" class="x_btn multiorder_del" style="vertical-align:top">{$lang->cmd_delete}</button>
+					</span>
+				</div>
+				<script>
+					xe.registerApp(new xe.MultiOrderManager('list'));
+				</script>
+			</div>
+		</div>
+		<div class="x_control-group">
+			<label class="x_control-label">{$lang->order_type}</label>
+			<div class="x_controls">
+				<select name="order_target" id="order_target" title="{$lang->order_target}">
+					<option loop="$order_target=> $key, $val" value="{$key}" selected="selected"|cond="$module_info->order_target== $key">{$val}</option>
+					<block cond="$extra_order_target">
+					<option loop="$extra_order_target=> $key, $val" value="{$key}" selected="selected"|cond="$module_info->order_target== $key">{$val}</option>
+					</block>
+				</select>
+				<select name="order_type" id="order_type" title="{$lang->order_type}">
+					<option value="asc" selected="selected"|cond="$module_info->order_type != 'desc'">{$lang->order_asc}</option>
+					<option value="desc" selected="selected"|cond="$module_info->order_type == 'desc'">{$lang->order_desc}</option>
+				</select>
+			</div>
+		</div>
+		<div class="x_control-group">
+			<label class="x_control-label" for="list_count">{$lang->list_count}</label>
+			<div class="x_controls">
+				<input type="text" name="list_count" id="list_count" value="{$module_info->list_count?$module_info->list_count:20}" style="width:30px" />
+				<p class="x_help-inline">{$lang->about_list_count}</p>
+			</div>
+		</div>
+		<div class="x_control-group">
+			<label class="x_control-label" for="search_list_count">{$lang->search_list_count}</label>
+			<div class="x_controls">
+				<input type="text" name="search_list_count" id="search_list_count" value="{$module_info->search_list_count?$module_info->search_list_count:20}" style="width:30px" />
+				<p class="x_help-inline">{$lang->about_search_list_count}</p>
+			</div>
+		</div>
+		<div class="x_control-group">
+			<label class="x_control-label" for="page_count">{$lang->page_count}</label>
+			<div class="x_controls">
+				<input type="text" name="page_count" id="page_count" value="{$module_info->page_count?$module_info->page_count:10}" style="width:30px" />
+				<p class="x_help-inline">{$lang->about_page_count}</p>
+			</div>
+		</div>
+		<div class="x_control-group">
+			<label class="x_control-label">{$lang->except_notice}</label>
+			<div class="x_controls">
+				<label class="x_inline" for="except_notice"><input type="checkbox" name="except_notice" id="except_notice" value="Y" checked="checked"|cond="$module_info->except_notice != 'N'" /> {$lang->about_except_notice}</label>
+			</div>
+		</div>
+		<div class="x_control-group">
+			<label class="x_control-label" for="admin_mail">{$lang->admin_mail}</label>
+			<div class="x_controls">
+				<input type="text" name="admin_mail" id="admin_mail" value="{$module_info->admin_mail}" />
+				<a href="#admin_mail_help" class="x_icon-question-sign" data-toggle>{$lang->help}</a>
+				<p id="admin_mail_help" class="x_help-block" hidden>{$lang->about_admin_mail}</p>
+			</div>
+		</div>
+		<div class="x_control-group">
+			<label class="x_control-label" for="module_category_srl">{$lang->module_category}</label>
+			<div class="x_controls">
+				<select name="module_category_srl" id="module_category_srl">
+					<option value="0">{$lang->notuse}</option>
+					<option loop="$module_category => $key, $val" value="{$key}" selected="selected"|cond="$module_info->module_category_srl == $key">{$val->title}</option>
+				</select>
+				<a href="#module_category_help" class="x_icon-question-sign" data-toggle>{$lang->help}</a>
+				<p id="module_category_help" class="x_help-block" hidden>{$lang->about_module_category}</p>
+			</div>
+		</div>
+
+		<div class="x_control-group">
+			<label class="x_control-label">댓글 비밀글</label>
+			<div class="x_controls">
+				<input type="hidden" name="use_status[]" value="PUBLIC" />
+				<label class="x_inline"><input type="checkbox" name="" value="" checked="checked" disabled="disabled" /> {$document_status_list['PUBLIC']}</label>
+				<block loop="$document_status_list => $key, $value">
+					<block cond="$key != 'PRIVATE' && $key != 'TEMP' && $key != 'PUBLIC'">
+						<label class="x_inline" for="{$key}"><input type="checkbox" name="use_status[]" id="{$key}" value="{$key}" checked="checked"|cond="@in_array($key, $module_info->use_status) || ($key == 'PUBLIC' && !$module_srl)" /> {$value}</label>
+					</block>
+				</block>
+				<p class="x_help-block">댓글 작성 시 선택할 수 있는 상태를 지정해주세요.</p>
+			</div>
+		</div>
+		<div class="x_control-group">
+			<label class="x_control-label" for="lang_header_text">{$lang->header_text}</label>
+			<div class="x_controls">
+				<textarea name="header_text" id="header_text" class="lang_code" rows="8" cols="42" placeholder="{$lang->about_header_text}"><!--@if(strpos($module_info->header_text, '$user_lang->') === false)-->{$module_info->header_text}<!--@else-->{htmlspecialchars($module_info->header_text)}<!--@end--></textarea>
+				<a href="#header_text_help" class="x_icon-question-sign" data-toggle>{$lang->help}</a>
+				<p id="header_text_help" class="x_help-block" hidden>{$lang->about_header_text}</p>
+			</div>
+		</div>
+		<div class="x_control-group">
+			<label class="x_control-label" for="lang_footer_text">{$lang->footer_text}</label>
+			<div class="x_controls">
+				<textarea name="footer_text" id="footer_text" class="lang_code" rows="8" cols="42" placeholder="{$lang->about_footer_text}"><!--@if(strpos($module_info->footer_text, '$user_lang->') === false)-->{$module_info->footer_text}<!--@else-->{htmlspecialchars($module_info->footer_text)}<!--@end--></textarea>
+				<a href="#footer_text_help" class="x_icon-question-sign" data-toggle>{$lang->help}</a>
+				<p id="footer_text_help" class="x_help-block" hidden>{$lang->about_footer_text}</p>
+			</div>
+		</div>
+
+		<div class="x_control-group">
+			<label class="x_control-label" for="description">{$lang->description}</label>
+			<div class="x_controls">
+				<textarea name="description" id="description" rows="4" cols="42" placeholder="{$lang->about_description}" style="vertical-align:top">{htmlspecialchars($module_info->description)}</textarea>
+				<a href="#description_help" class="x_icon-question-sign" data-toggle>{$lang->help}</a>
+				<p id="description_help" class="x_help-block" hidden>{$lang->about_description}</p>
+			</div>
+		</div>
+	</section>
+	<div class="x_clearfix btnArea">
+		<div class="x_pull-left">
+			<a href="{getUrl('act', 'dispMarketplaceAdminContent')}" type="button" class="x_btn">{$lang->cmd_cancel}</a>
+		</div>
+		<div class="x_pull-right">
+			<button class="x_btn x_btn-primary" type="submit">{$lang->cmd_registration}</button>
+		</div>
+	</div>
+</form>
+<style>.g11n{vertical-align:top !important}</style>

@@ -1,0 +1,18 @@
+<query id="insertMarketplaceItemInfo" action="insert">
+    <tables>
+        <table name="marketplace_items" />
+    </tables>
+    <columns>
+        <column name="document_srl" var="document_srl" filter="number" notnull="notnull" />
+        <column name="thumbnails_srl" var="thumbnails_srl" filter="number" notnull="notnull" />
+        <column name="product_name" var="product_name" />
+        <column name="original_price" var="original_price" />
+        <column name="price" var="price" />
+        <column name="item_condition" var="item_condition" />
+        <column name="used_month" var="used_month" />
+        <column name="priority_area" var="priority_area" />
+        <column name="delivery" var="delivery" />
+        <column name="direct_dealing" var="direct_dealing" />
+        <column name="safe_dealing" var="safe_dealing" />
+    </columns>
+</query>

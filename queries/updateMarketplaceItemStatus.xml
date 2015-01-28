@@ -1,0 +1,12 @@
+<query id="updateMarketplaceItemStatus" action="update">
+    <tables>
+        <table name="marketplace_items" />
+    </tables>
+    <columns>
+        <column name="item_status" var="item_status" />
+    </columns>
+    <conditions>
+        <condition operation="equal" column="document_srl" var="document_srl" filter="number" notnull="notnull" />
+    </conditions>
+</query>
+

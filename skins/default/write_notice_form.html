@@ -1,0 +1,64 @@
+<include target="_header.html" />
+
+<form action="./" method="post" enctype="multipart/form-data" class="mp-form-insert">
+    <input type="hidden" name="act" value="procMarketplaceInsertNotice" />
+    <input type="hidden" name="mid" value="{$mid}" />
+	<input type="hidden" name="content" value="{$oDocument->getContentText()}" />
+	<input type="hidden" name="document_srl" value="{$document_srl}" />
+    <input type="hidden" name="status" value="PUBLIC" />
+    <input type="hidden" name="is_notice" value="Y" cond="$grant->manager" />
+
+        <div class="mp-content content-insert-page">
+			<div class="content_header">
+                <div class="mp-title-insert-notice mp-hidetext">내 상품 등록</div>
+                <a href="{getUrl('act','dispMarketplaceContent','')}" class="mp-button button-white button-small button-return"><i class="xe-mail-reply"></i> 마켓으로 돌아가기</a>
+            </div>
+			<div class="mp-notice"><i class="xe-announce"> 공지사항 등록은 권한이 있는 관리자만 등록하실 수 있습니다. </i></div>
+
+			<div cond="$XE_VALIDATOR_MESSAGE" class="message {$XE_VALIDATOR_MESSAGE_TYPE}">
+				<p>{$XE_VALIDATOR_MESSAGE}</p>
+			</div>
+
+			<div class="mp-block">
+				<div class="mp-block" style="padding-top:0; padding-left:0; padding-right:0">
+                    <section class="mp-section">
+                      <label for="title" class="mp-label">글 제목</label>
+                      <input id="title" type="text" name="title" title="{$lang->title}" value="{htmlspecialchars($oDocument->getTitleText())}"|cond="$oDocument->getTitleText()" class="mp-input input-full" />
+                        <block cond="$is_logged">
+                            <input type="checkbox" name="notify_message" class="iCheck" value="Y" checked="checked"|cond="$oDocument->useNotify()" id="notify_message" />
+                            <label for="notify_message">{$lang->notify}</label>
+                        </block>
+                    </section>
+                    <section class="mp-section">
+                      {$oDocument->getEditor()}
+                    </section>
+				</div>
+			</div>
+        </div>
+
+		<div class="write_footer">
+			<div class="write_author">
+				<span class="item" cond="!$is_logged">
+					<label for="userName" class="iLabel">{$lang->writer}</label>
+					<input type="text" name="nick_name" id="userName" class="iText userName" style="width:80px" value="{htmlspecialchars($oDocument->get('nick_name'))}" />
+				</span>
+				<span class="item" cond="!$is_logged">
+					<label for="userPw" class="iLabel">{$lang->password}</label>
+					<input type="password" name="password" id="userPw" class="iText userPw" style="width:80px" />
+				</span>
+				<span class="item" cond="!$is_logged">
+					<label for="homePage" class="iLabel">{$lang->homepage}</label>
+					<input type="text" name="homepage" id="homePage" class="iText homePage"  style="width:140px"value="{htmlspecialchars($oDocument->get('homepage'))}" />
+				</span>
+			</div>
+			<div class="btnArea">
+				<input type="submit" value="{$lang->cmd_registration}" class="btn" />
+				<block cond="!$oDocument->isExists() || $oDocument->get('status') == 'TEMP'">
+				<button cond="$is_logged" class="btn" type="button" onclick="doDocumentSave(this);">{$lang->cmd_temp_save}</button>
+				<button cond="$is_logged" class="btn" type="button" onclick="doDocumentLoad(this);">{$lang->cmd_load}</button>
+				</block>
+			</div>
+		</div>
+    </div>
+</form>
+<include target="_footer.html" />

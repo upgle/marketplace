@@ -1,0 +1,12 @@
+<query id="getSettingCondition" action="select">
+    <tables>
+        <table name="marketplace_conditions" />
+    </tables>
+    <columns>
+        <column name="marketplace_conditions.*" />
+    </columns>
+    <conditions>
+        <condition operation="equal" column="module_srl" var="module_srl" filter="number" notnull="notnull" />
+        <condition operation="equal" column="eid" var="eid" notnull="notnull" pipe="and" />
+    </conditions>
+</query>

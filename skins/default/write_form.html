@@ -1,0 +1,212 @@
+<include target="_header.html" />
+
+<!--relatedselects plugin load-->
+<load target="plugin/dependent-selects/jquery.dependent-selects.js" type="head" />
+
+<form action="./" method="post" enctype="multipart/form-data" class="mp-form-insert" ruleset="insertItem">
+    <input type="hidden" name="act" value="procMarketplaceInsertDocument" />
+    <input type="hidden" name="mid" value="{$mid}" />
+	<input type="hidden" name="content" value="{$oDocument->getContentText()}" />
+	<input type="hidden" name="document_srl" value="{$document_srl}" />
+    <input type="hidden" name="status" value="PUBLIC" />
+
+        <div class="mp-content content-insert-page">
+			<div class="content_header">
+                <div class="mp-title-insert-myitem mp-hidetext">내 상품 등록</div>
+                <a href="{getUrl('act','dispMarketplaceContent','')}" class="mp-button button-white button-small button-return"><i class="xe-mail-reply"></i> 마켓으로 돌아가기</a>
+            </div>
+			<div class="mp-notice"><i class="xe-announce"> 한줄 공지사항 부분입니다. 이 부분은 세팅에서 설정이 가능합니다.</i></div>
+
+			<div class="mp-block">
+
+				<div cond="$XE_VALIDATOR_MESSAGE" class="message {$XE_VALIDATOR_MESSAGE_TYPE}">
+					<p>{$XE_VALIDATOR_MESSAGE}</p>
+				</div>
+			
+				<div class="information">
+					<h3><i class="xe-information-circle" style="color:red"></i> 연락처를 꼭 확인하세요!</h3>
+					<p>현재 등록된 회원님의 연락처는 ( <strong>{$contact_number}</strong> )입니다.<br />
+					회원님의 연락처가 올바르지 않다면 <a href="{getUrl('mid',$mid,'act','dispMemberInfo')}">회원정보수정</a>에서 변경해주시기 바랍니다.</p>
+				</div>
+
+				<h1 class="section_title">1. 물품 대표 사진 등록</h1>
+				<div class="mp-block">
+					<p><span class="mp-important">*</span> 판매하실 물품의 대표 사진을 등록해주세요.</p>
+                    <div class="mp-imagefile-upload">
+						<img class="preview" src="#" alt="your image" style="display:none;"/>
+						<div class="mp-no-image">
+							<i class="xe-photo-camera-c"></i>
+							<p><span>대표 사진 등록</span></p>
+						</div>
+						<input name="thumbnail[0]" class="insertImage"  type="file" size="1" />
+                    </div>
+					<div class="mp-clearfix"></div>
+
+                    <div class="mp-imagefile-upload small">
+						<img class="preview" src="#" alt="your image" style="display:none;"/>
+						<div class="mp-no-image">
+							<i class="xe-photo-camera-c"></i>
+							<p>사진등록(선택)</p>
+						</div>
+						<input name="thumbnail[1]" class="insertImage" type="file" size="1" />
+                    </div>
+
+                    <div class="mp-imagefile-upload small">
+						<img class="preview" src="#" alt="your image" style="display:none;"/>
+						<div class="mp-no-image">
+							<i class="xe-photo-camera-c"></i>
+							<p>사진등록(선택)</p>
+						</div>
+						<input name="thumbnail[2]" class="insertImage" type="file" size="1" />
+                    </div>
+                    <div class="mp-imagefile-upload small" style="margin-right:0">
+						<img class="preview" src="#" alt="your image" style="display:none;"/>
+						<div class="mp-no-image">
+							<i class="xe-photo-camera-c"></i>
+							<p>사진등록(선택)</p>
+						</div>
+						<input name="thumbnail[3]" id="insertImage" class="insertImage" type="file" size="1" />
+                    </div>
+
+				</div>
+				<div class="mp-clearfix"></div>
+			</div>
+
+			<div class="mp-block">
+				<h1 class="section_title">2. 판매 정보 등록</h1>
+				<div class="mp-block">
+
+
+                    <section class="mp-section" cond="$module_info->use_category=='Y'" >
+                      <label class="mp-label">상품 카테고리</label>			
+                        <select name="category_srl" class="mp-input mp-dependent">
+                            <option value="">{$lang->category}</option>
+                            <block loop="$category_list => $val">
+                            {@ 
+                                if($val->child_count) $_parent_text[$val->category_srl] = $_parent_text[$val->parent_srl].$val->title." || ";
+                            }
+                            <option disabled="disabled"|cond="!$val->grant" value="{$val->category_srl}" selected="selected"|cond="$val->grant&&$val->selected||$val->category_srl==$oDocument->get('category_srl')" cond="!$val->child_count" >
+                                {$_parent_text[$val->parent_srl]}{$val->title}
+                            </option>
+                            </block>
+                        </select>
+                    </section>
+                    <script>
+                    jQuery('.mp-dependent').dependentSelects({
+                        separator: ' || ', 
+                        placeholderOption: '선택',
+                        class: 'mp-input mp-dependent'
+                    });
+                    </script>
+
+                    <section class="mp-section">
+                        <label for="item_name" class="mp-label">판매 상품명 <small>(*검색용)</small></label>
+                        <input id="item_name" type="text" value="" name="item_name" class="mp-input input-full">
+                        <p class="description">상품명만 입력하시기 바랍니다. (예. 아이패드 셀룰러 16GB, 캐논 60D)</p>
+                    </section>
+                    
+                    <section class="mp-section">
+                      <label for="item_price" class="mp-label">판매 가격</label>
+                      <input id="item_price" type="text" value="" name="item_price" class="mp-input number"> 원 <span id="item_price_ko"></span>
+                    </section>
+
+                    <div class="mp-block">
+
+                        <section class="mp-section">
+                            <label for="item_condition" class="mp-label"><strong>제품 구분</strong></label>
+                            <select name="item_condition" id="item_condition" class="mp-input">
+                                <option value="{$condition->eid}" loop="$condition_list => $condition">{$condition->name}</option>
+                            </select>
+                        </section>
+
+                        <section class="mp-section">
+                            <label for="item_original_price" class="mp-label">구매 가격 (선택)</label>
+                            <input id="item_original_price" type="text" value="" name="item_original_price" class="mp-input number"> 원
+                        </section>
+
+                        <section class="mp-section">
+                          <label for="item_used_month" class="mp-label">사용 기간</label>
+							{@
+								$used_month=array();
+								for($i=1;$i<=24;$i++) $used_month[] = $i;
+							}
+                            <select id="item_used_month" name="item_used_month" class="mp-input">
+                                <option value="0">미개봉</option>
+                                <option value="{$val}" loop="$used_month => $val">{$val}개월</option>
+                                <option value="25">24개월 이상</option>
+                            </select> 
+                        </section>
+
+
+   
+						<block cond="count($extra_keys)">
+                        <section class="mp-section mp-extra-vars" loop="$extra_keys=>$key,$val">
+                          <label for="extra_vars{$val->idx}" class="mp-label"><em cond="$val->is_required=='Y'">*</em> {$val->name}</label>
+                            {$val->getFormHTML()}
+                        </section>
+						</block>
+
+                    </div>
+
+				</div>
+			</div>
+			
+
+			<div class="mp-block">
+				<h1 class="section_title">2. 판매 정보 등록</h1>
+				<div class="mp-block">
+
+                    <section class="mp-section">
+                      <label for="title" class="mp-label">판매 글 제목</label>
+                      <input cond="!$oDocument->getTitleText()" id="title" type="text" name="title" title="{$lang->title}" value="{htmlspecialchars($oDocument->getTitleText())}"|cond="$oDocument->getTitleText()" class="mp-input input-full" />
+                        <block cond="$is_logged">
+                            <input type="checkbox" name="notify_message" class="iCheck" value="Y" checked="checked"|cond="$oDocument->useNotify()" id="notify_message" />
+                            <label for="notify_message">{$lang->notify}</label>
+                        </block>
+                    </section>
+
+                    <section class="mp-section">
+                      <label for="subject" class="mp-label">물품 소개</label>
+                      {$oDocument->getEditor()}
+                    </section>
+
+                    <div class="mp-block">
+
+                        <section class="mp-section">
+                          <label class="mp-label">거래 방법</label>		
+                            <label><input type="checkbox" name="item_delivery" value="Y" checked="checked"  /> 택배거래</label> <label><input type="checkbox" name="item_direct_dealing" value="Y"  checked="checked" /> 직거래</label> <label><input type="checkbox" name="item_safe_dealing" value="Y" checked="checked"  /> 안전거래</label>
+                        </section>
+
+                        <section class="mp-section">
+                          <label class="mp-label">거래 우선 지역</label>
+                            <select id="priority_area" name="priority_area" class="mp-input mp-district">
+                                <option loop="$korea_districts => $val" value="{$val}">{$val}</option>
+                            </select>
+                        </section>
+                        <script>
+                        jQuery('.mp-district').dependentSelects({
+                            separator: ' ', 
+                            placeholderOption: '선택',
+                            class: 'mp-input mp-district'
+                        });
+                        </script>
+                    </div>
+
+
+				</div>
+			</div>
+        </div>
+
+		<div class="write_footer">
+
+			<div class="btnArea">
+				<input type="submit" value="{$lang->cmd_registration}" class="btn" />
+				<block cond="!$oDocument->isExists() || $oDocument->get('status') == 'TEMP'">
+				<button cond="$is_logged" class="btn" type="button" onclick="doDocumentSave(this);">{$lang->cmd_temp_save}</button>
+				<button cond="$is_logged" class="btn" type="button" onclick="doDocumentLoad(this);">{$lang->cmd_load}</button>
+				</block>
+			</div>
+		</div>
+    </div>
+</form>
+<include target="_footer.html" />

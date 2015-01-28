@@ -1,0 +1,21 @@
+/* instant style */
+.mp-no-margin {margin: 0px  !important;}
+.mp-no-padding {padding: 0px !important;}
+.mp-margin-top-15 {margin-top: 15px !important;}
+.mp-margin-top-20 {margin-top: 20px !important;}
+.mp-margin-top-25 {margin-top: 25px !important;}
+.mp-margin-top-30 {margin-top: 30px !important;}
+.mp-margin-top-35 {margin-top: 35px !important;}
+
+.mp-margin-right-10 {margin-right: 10px !important;}
+
+.mp-hidetext {text-indent: -200%;white-space: nowrap;overflow: hidden;}
+.mp-price {
+	font-size: 14px;
+	color: #000000;
+	margin-top:4px;
+	&.price-original {font-size:11px;color: #FF0000;margin-top:0;}
+	.won {
+		font-size:0.9em;margin-right:3px;
+	}
+}

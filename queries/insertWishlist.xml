@@ -1,0 +1,10 @@
+<query id="insertWishlist" action="insert">
+    <tables>
+        <table name="marketplace_wishlist" />
+    </tables>
+    <columns>
+        <column name="document_srl" var="document_srl" filter="number" notnull="notnull" />
+        <column name="member_srl" var="member_srl" filter="number" notnull="notnull" />
+        <column name="regdate" var="regdate" default="curdate()" />
+    </columns>
+</query>

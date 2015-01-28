@@ -1,0 +1,13 @@
+<query id="updateMarketplaceAdvertise" action="update">
+    <tables>
+        <table name="marketplace_advertise" alias="advertise" />
+    </tables>
+    <columns>
+        <column name="bid_price" var="bid_price" filter="number" />
+        <column name="balance" var="balance" filter="number" />
+        <column name="regdate" var="regdate" default="curdate()" />
+    </columns>
+    <conditions>
+        <condition operation="equal" column="document_srl" var="document_srl" notnull="notnull" filter="number" pipe="and" />
+    </conditions>
+</query>

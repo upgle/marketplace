@@ -1,0 +1,14 @@
+<query id="insertAdvertiseLog" action="insert">
+    <tables>
+        <table name="marketplace_advertise_log" />
+    </tables>
+    <columns>
+        <column name="module_srl" var="module_srl" filter="number" notnull="notnull" />
+		<column name="document_srl" var="document_srl" filter="number" notnull="notnull" />
+        <column name="member_srl" var="member_srl" filter="number" />
+        <column name="action" var="action" notnull="notnull" />
+        <column name="charging" var="charging" filter="number" notnull="notnull" />
+        <column name="ipaddress" var="ipaddress" notnull="notnull" default="ipaddress()" />
+        <column name="regdate" var="regdate" default="curdate()" />
+    </columns>
+</query>

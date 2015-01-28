@@ -1,0 +1,25 @@
+<query id="getAdvertiseBidList" action="select">
+    <tables>
+        <table name="marketplace_advertise" alias="advertise" />
+        <table name="documents" alias="documents" type="left join">
+            <conditions>
+                <condition operation="equal" column="advertise.document_srl" default="documents.document_srl" />
+            </conditions>
+        </table>
+    </tables>
+    <columns>
+		<column name="advertise.bid_price" />
+        <column name="documents.document_srl" />
+        <column name="documents.category_srl" />
+    </columns>
+    <conditions>
+        <condition operation="equal" column="documents.module_srl" var="module_srl" filter="number" pipe="and" />
+	</conditions>
+	<navigation>
+		<index var="sort_index" default="advertise.bid_price" order="desc" />
+		<list_count var="list_count" default="5" />
+	</navigation>
+</query>
+
+
+

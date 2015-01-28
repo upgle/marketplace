@@ -1,0 +1,6 @@
+<table name="marketplace_keyword_member">
+    <column name="module_srl" type="number" size="11" notnull="notnull" unique="unique_keywords" />
+	<column name="member_srl" type="number" size="11" notnull="notnull" unique="unique_keywords" />
+    <column name="keyword" type="varchar" size="15" notnull="notnull" unique="unique_keywords" />
+    <column name="regdate" type="date" index="idx_regdate" />
+</table>

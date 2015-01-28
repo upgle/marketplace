@@ -1,0 +1,9 @@
+<query id="deleteKeywordMember" action="delete" priority="LOW">
+    <tables>
+        <table name="marketplace_keyword_member" />
+    </tables>
+    <conditions>
+        <condition operation="equal" column="member_srl" var="member_srl" filter="number" notnull="notnull" pipe="and" />
+        <condition operation="equal" column="keyword" var="keyword" notnull="notnull" pipe="and" />
+    </conditions>
+</query>

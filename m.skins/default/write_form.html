@@ -1,0 +1,156 @@
+{@ Context::addJsFile("./common/js/jquery.js", true, '', -100000) }
+{@ Context::addJsFile("./common/js/js_app.js", true, '', -100000) }
+{@ Context::addJsFile("./common/js/x.js", true, '', -100000) }
+{@ Context::addJsFile("./common/js/common.js", true, '', -100000) }
+{@ Context::addJsFile("./common/js/xml_handler.js", true, '', -100000) }
+{@ Context::addJsFile("./common/js/xml_js_filter.js", true, '', -100000) }
+<!--%import("js/mmarketplace.js")-->
+<!--%import("css/mmarketplace.css")-->
+
+
+<!--relatedselects plugin load-->
+<load target="plugin/dependent-selects/jquery.dependent-selects.js" type="head" />
+
+
+<div class="bd">
+	<div class="hx h2">
+		<h2><a href="{getUrl('','vid',$vid,'mid',$mid)}">{$module_info->browser_title}</a></h2>
+	</div>
+	<div class="hx h3">
+		<h3>내 물품 판매하기</h3>
+	</div>
+
+	<div cond="$XE_VALIDATOR_MESSAGE" class="message {$XE_VALIDATOR_MESSAGE_TYPE}">
+		<p>{$XE_VALIDATOR_MESSAGE}</p>
+	</div>
+	<form action="./" method="post" enctype="multipart/form-data" class="ff" ruleset="insertItem">
+    <input type="hidden" name="act" value="procMarketplaceInsertDocument" />
+    <input type="hidden" name="mid" value="{$mid}" />
+	<input type="hidden" name="document_srl" value="{$document_srl}" />
+    <input type="hidden" name="status" value="PUBLIC" />
+		<ul>
+			<li>
+				<label for="nText">제품구분</label>
+				<select name="item_condition" id="item_condition" class="mp-input">
+					<option value="used">중고 제품</option>
+					<option value="new">새 제품</option>
+					<option value="refurbish">리퍼비시 제품</option>
+				</select>
+			</li>
+
+			<!--@if($module_info->use_category == "Y")-->
+			<li>
+				<label for="nCategory">{$lang->category}</label>
+				<select name="category_srl" id="nCategory">
+					<!--@foreach($category_list as $val)-->	
+					<option <!--@if(!$val->grant)-->disabled="disabled"<!--@endif--> value="{$val->category_srl}" <!--@if($val->grant&&$val->selected||$val->category_srl==$oDocument->get('category_srl'))-->selected="selected"<!--@endif-->>
+					{str_repeat("&nbsp;&nbsp;",$val->depth)} {$val->title} ({$val->document_count})
+					</option>
+					<!--@end-->
+				</select>
+			</li>
+			<!--@end-->
+
+			<li>
+				<label for="nText">물품 사진 (대표사진)</label>
+				<input name="thumbnail[0]" type="file" />
+			</li>
+
+			<li>
+				<label for="nText">물품 사진 (+)</label>
+				<input name="thumbnail[1]" type="file" />
+			</li>
+
+			<li>
+				<label for="nTitle">판매글 제목</label>
+				<input name="title" type="text" id="nTitle" style="width:100%" />
+			</li>
+			<li>
+				<label for="item_name">판매 상품명</label>
+                <input type="text" value="" name="item_name" id="item_name" style="width:60%">
+			</li>
+
+			<li>
+				<label for="item_price">판매가격</label>
+                <input type="text" value="" name="item_price" id="item_price" style="width:60%">
+			</li>
+
+			<li>
+				<label for="item_price">구매 당시 가격</label>
+                <input type="text" value="" name="item_original_price" id="item_original_price" style="width:60%">
+			</li>
+			<li>
+				<label for="item_used_month">사용 기간</label>
+				{@
+					$used_month=array();
+					for($i=1;$i<=24;$i++) $used_month[] = $i;
+				}
+				<select id="item_used_month" name="item_used_month">
+					<option value="0">미개봉</option>
+					<option value="{$val}" loop="$used_month => $val">{$val}개월</option>
+					<option value="25">24개월 이상</option>
+				</select> 
+			</li>
+
+
+			<!--@if(count($extra_keys))-->
+			<!--@foreach($extra_keys as $key=> $val)-->
+			<li class="exvar">
+				<label for="ex_{$val->name}">{$val->name} <!--@if($val->is_required=="Y")-->*<!--@end--></label>
+				{$val->getFormHTML()}
+			</li>
+			<!--@endforeach-->
+			<!--@end-->
+
+
+			<li>
+				<label for="nText">{$lang->content}</label>
+				<textarea name="content" rows="8" cols="42" id="nText" class="textarea"></textarea>
+			</li>
+
+			<li>
+				<label for="nText">거래 방법</label>
+				<input type="checkbox" name="item_delivery" value="Y" checked="checked"  /> 택배거래
+				<input type="checkbox" name="item_direct_dealing" value="Y"  checked="checked" /> 직거래
+				<input type="checkbox" name="item_safe_dealing" value="Y" checked="checked"  /> 안전거래
+			</li>
+
+			<li>
+				<label for="nText">거래 우선 지역</label>
+				<select id="priority_area" name="priority_area" class="mp-input mp-district">
+					<option loop="$korea_districts => $val" value="{$val}">{$val}</option>
+				</select>
+			</li>
+
+			<script>
+			jQuery('.mp-district').dependentSelects({
+				separator: ' ', 
+				placeholderOption: '선택',
+				class: 'mp-input mp-district'
+			});
+			</script>
+
+			<!--@if(!$is_logged)-->
+			<li>
+				<label for="uName">{$lang->writer}</label>
+				<input name="nick_name" type="text" id="uName" />
+			</li>
+			<li>
+				<label for="uMail">{$lang->email_address}</label>
+				<input name="email_address" type="email" id="uMail" />
+			</li>
+			<li>
+				<label for="uPw">{$lang->password}</label>
+				<input name="password" type="password" id="uPw" />
+			</li>
+			<li>
+				<label for="uSite">{$lang->homepage}</label>
+				<input name="homepage" type="url" id="uSite" value="" />
+			</li>
+			<!--@endif-->
+		</ul>
+		<div class="bna">
+			<button type="submit" class="bn dark">{$lang->cmd_registration}</button>
+		</div>
+</form>
+</div>

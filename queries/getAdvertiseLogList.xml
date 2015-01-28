@@ -1,0 +1,28 @@
+<query id="getAdvertiseLogList" action="select">
+    <tables>
+        <table name="marketplace_advertise_log" alias="advertise_log" />
+        <table name="documents" alias="documents" type="left join">
+            <conditions>
+                <condition operation="equal" column="advertise_log.document_srl" default="documents.document_srl" />
+            </conditions>
+        </table>
+    </tables>
+    <columns>
+		<column name="advertise_log.*" />
+		<column name="documents.title" />
+		<column name="documents.member_srl" alias="seller_member_srl"  />
+    </columns>
+    <conditions>
+        <condition operation="equal" column="advertise_log.module_srl" var="module_srl" filter="number" pipe="and" />
+        <condition operation="equal" column="documents.member_srl" var="member_srl" filter="number" pipe="and" />
+    </conditions>
+    <navigation>
+        <index var="sort_index" default="advertise_log.regdate" order="order_type" />
+        <list_count var="list_count" default="12" />
+        <page_count var="page_count" default="10" />
+        <page var="page" default="1" />
+    </navigation>
+</query>
+
+
+

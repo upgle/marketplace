@@ -1,0 +1,31 @@
+$font-stack: '맑은 고딕', 'Malgun Gothic', 'NanumGothic', '나눔고딕','NanumGothicWeb', Dotum;
+$font-dotum: Dotum;
+
+.mp-box {
+	margin:0 auto;
+	margin-bottom: 20px;
+	font-family: $font-stack;
+	font-size:12px;
+	
+	table, input, textarea, select, button {
+		font-family: $font-stack;
+	}
+	@import 'reset';
+	@import 'layout';
+	@import 'button';
+	@import 'board';
+	@import 'keywordbox';
+	@import 'image_title';
+	@import 'form';
+	@import 'instant';
+
+	/* popup layout */
+	&.mp-popup-box .mp-content {margin: 0;float:none;width:100%;}
+
+	/* clearfix */
+	.mp-clearfix {
+		*zoom: 1;
+		&:before, &:after {display: table;line-height: 0;content: "";}
+		&:after {clear: both;}
+	}
+}

@@ -1,0 +1,36 @@
+<!--xe icon load-->
+<load target="plugin/xe-icon/xeicon.css" />
+<load target="default.css" />
+
+<form action="./" method="get" onsubmit="return procFilter(this, delete_document)" class="context_message">
+	<input type="hidden" name="mid" value="{$mid}" />
+	<input type="hidden" name="page" value="{$page}" />
+	<input type="hidden" name="document_srl" value="{$document_srl}" />
+
+	<div class="context_message" cond="$oDocument->isExists()">
+		<div class="message_box">
+			<h2><i class="xe-exclamation-triangle"></i> {$lang->cmd_document_do} {$lang->confirm_delete}</h2>
+			<p>{$oDocument->getTitle()}</p>
+		</div>
+		<div class="btnArea">
+			<input type="submit" class="btn" value="{$lang->cmd_delete}" />
+			<button type="button" class="btn" onclick="history.back()">{$lang->cmd_cancel}</button>
+		</div>
+	</div>
+</form>
+<style type="text/css">
+	.context_message {
+		width:400px;
+		margin:0 auto;
+		text-align:center
+	}
+	.context_message .message_box {
+		display: block;
+		border: 1px solid #999;
+		padding: 30px;
+		box-shadow: 0px 3px 5px #CCC;
+		border-radius: 6px;
+		box-sizing: border-box;
+	}
+</style>
+

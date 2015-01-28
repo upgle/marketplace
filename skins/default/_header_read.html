@@ -1,0 +1,22 @@
+<load target="marketplace.default.js" type="body" />
+<load target="default.css" />
+
+<!--xe icon load-->
+<load target="plugin/xe-icon/xeicon.css" />
+
+<!--carousel plugin load-->
+<load target="plugin/owl-carousel/owl.carousel.css" />
+<load target="plugin/owl-carousel/owl.theme.css" />
+<load target="plugin/owl-carousel/owl.carousel.js" type="body" />
+
+<!--@if($order_type == "desc")-->
+    {@ $order_type = "asc"; }
+<!--@else-->
+    {@ $order_type = "desc"; }
+<!--@end-->
+{@
+    $_mypage_act = array("dispMarketplaceWrite", "dispMarketplaceItemManage", "dispMarketplaceMemberModify","dispMarketplaceAdvertiseManage","dispMarketplaceAdvertiseLog");
+}
+<div class="mp-box">
+
+

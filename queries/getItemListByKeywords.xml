@@ -1,0 +1,45 @@
+<query id="getItemListByKeywords" action="select">
+    <tables>
+        <table name="marketplace_keyword_document" alias="keyword_document" />
+        <table name="documents" alias="documents" type="left join">
+            <conditions>
+                <condition operation="equal" column="documents.document_srl" default="keyword_document.document_srl" />
+            </conditions>
+        </table>
+        <table name="marketplace_items" alias="items" type="left join">
+            <conditions>
+                <condition operation="equal" column="documents.document_srl" default="items.document_srl" />
+            </conditions>
+        </table>
+    </tables>
+    <columns>
+		<column name="group_concat(keyword_document.keyword)" alias="keywords" />
+        <column name="documents.*" />
+		<column name="items.thumbnails_srl" />
+		<column name="items.product_name" />
+		<column name="items.original_price" />
+		<column name="items.price" />
+		<column name="items.item_condition" />
+		<column name="items.used_month" />
+		<column name="items.priority_area" />
+		<column name="items.delivery" />
+		<column name="items.direct_dealing" />
+		<column name="items.safe_dealing" />
+		<column name="items.item_status" />
+    </columns>
+    <conditions>
+        <condition operation="in" column="keyword_document.keyword" var="keywords" />
+    </conditions>
+    <navigation>
+        <index var="sort_index" default="keyword_document.regdate" order="desc" />
+        <list_count var="list_count" default="10" />
+        <page_count var="page_count" default="10" />
+        <page var="page" default="1" />
+    </navigation>
+	<groups>
+		<group column="keyword_document.document_srl" />
+	</groups>
+</query>
+
+
+

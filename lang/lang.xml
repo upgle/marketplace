@@ -1,0 +1,365 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<lang>
+	<item name="marketplace">
+		<value xml:lang="ko"><![CDATA[게시판]]></value>
+		<value xml:lang="en"><![CDATA[Marketplace]]></value>
+	</item>
+	<item name="except_notice">
+		<value xml:lang="ko"><![CDATA[공지사항 제외]]></value>
+		<value xml:lang="en"><![CDATA[Exclude Notices]]></value>
+	</item>
+	<item name="cmd_manage_menu">
+		<value xml:lang="ko"><![CDATA[메뉴관리]]></value>
+		<value xml:lang="en"><![CDATA[Manage Menus]]></value>
+	</item>
+	<item name="list_target_item">
+		<value xml:lang="ko"><![CDATA[대상 항목]]></value>
+		<value xml:lang="en"><![CDATA[Target Item]]></value>
+	</item>
+	<item name="list_display_item">
+		<value xml:lang="ko"><![CDATA[표시 항목]]></value>
+		<value xml:lang="en"><![CDATA[Display Item]]></value>
+	</item>
+	<item name="summary">
+		<value xml:lang="ko"><![CDATA[요약]]></value>
+		<value xml:lang="en"><![CDATA[Summary]]></value>
+	</item>
+	<item name="thumbnail">
+		<value xml:lang="ko"><![CDATA[섬네일]]></value>
+		<value xml:lang="en"><![CDATA[Thumbnail]]></value>
+	</item>
+	<item name="click">
+		<value xml:lang="ko"><![CDATA[클릭]]></value>
+		<value xml:lang="en"><![CDATA[Click]]></value>
+	</item>
+	<item name="last_post">
+		<value xml:lang="ko"><![CDATA[최종 글]]></value>
+		<value xml:lang="en"><![CDATA[Last post]]></value>
+	</item>
+	<item name="marketplace_management">
+		<value xml:lang="ko"><![CDATA[장터 관리]]></value>
+		<value xml:lang="en"><![CDATA[Marketplace Management]]></value>
+	</item>
+	<item name="search_result">
+		<value xml:lang="ko"><![CDATA[검색결과]]></value>
+		<value xml:lang="en"><![CDATA[Search Result]]></value>
+	</item>
+	<item name="secret">
+		<value xml:lang="ko"><![CDATA[비밀글 기능]]></value>
+		<value xml:lang="en"><![CDATA[Secret]]></value>
+	</item>
+	<item name="thisissecret">
+		<value xml:lang="ko"><![CDATA[비밀글입니다.]]></value>
+		<value xml:lang="en"><![CDATA[This is a secret article.]]></value>
+	</item>
+	<item name="admin_mail">
+		<value xml:lang="ko"><![CDATA[관리자 메일]]></value>
+		<value xml:lang="en"><![CDATA[Administrator's Mail]]></value>
+	</item>
+	<item name="cmd_marketplace_list">
+		<value xml:lang="ko"><![CDATA[게시판 목록]]></value>
+		<value xml:lang="en"><![CDATA[Marketplaces List]]></value>
+	</item>
+	<item name="cmd_module_config">
+		<value xml:lang="ko"><![CDATA[게시판 공통 설정]]></value>
+		<value xml:lang="en"><![CDATA[Common Marketplace Setting]]></value>
+	</item>
+	<item name="cmd_marketplace_info">
+		<value xml:lang="ko"><![CDATA[게시판 정보]]></value>
+		<value xml:lang="en"><![CDATA[Marketplace Info]]></value>
+	</item>
+	<item name="cmd_list_setting">
+		<value xml:lang="ko"><![CDATA[목록설정]]></value>
+		<value xml:lang="en"><![CDATA[List Setting]]></value>
+	</item>
+	<item name="cmd_marketplace_setting">
+		<value xml:lang="ko"><![CDATA[장터설정]]></value>
+		<value xml:lang="en"><![CDATA[Marketplace Setting]]></value>
+	</item>
+	<item name="cmd_item_condition_setting">
+		<value xml:lang="ko"><![CDATA[제품 구분(상태) 설정]]></value>
+		<value xml:lang="en"><![CDATA[Item Condition Setting]]></value>
+	</item>
+	<item name="cmd_premium_ad_setting">
+		<value xml:lang="ko"><![CDATA[프리미엄 광고 설정]]></value>
+	</item>
+	<item name="msg_alreay_scrapped">
+		<value xml:lang="ko"><![CDATA[이미 찜 한 상품입니다.]]></value>
+	</item>
+	<item name="msg_cannot_insert_anymore">
+		<value xml:lang="ko"><![CDATA[더 이상 등록할 수 없습니다.]]></value>
+	</item>
+	<item name="msg_already_exist_keyword">
+		<value xml:lang="ko"><![CDATA[이미 존재하는 키워드입니다.]]></value>
+	</item>
+
+
+	<item name="msg_thumbnail_exceeds_limit_size">
+		<value xml:lang="ko"><![CDATA[물품사진이 허용된 용량을 초과하여 첨부가 되지 않았습니다.]]></value>
+	</item>
+	<item name="msg_thumbnail_image_file_only">
+		<value xml:lang="ko"><![CDATA[물품사진은 이미지만 업로드하실 수 있습니다.]]></value>
+	</item>
+
+	<item name="ask_change_soldout">
+		<value xml:lang="ko"><![CDATA[상품 상태를 판매완료로 변경하겠습니까?]]></value>
+	</item>
+	<item name="ask_change_cancel">
+		<value xml:lang="ko"><![CDATA[상품 판매를 중단하시겠습니까?]]></value>
+	</item>
+	<item name="ask_change_selling">
+		<value xml:lang="ko"><![CDATA[상품을 다시 판매하시겠습니까?]]></value>
+	</item>
+	<item name="cmd_create_marketplace">
+		<value xml:lang="ko"><![CDATA[마켓플레이스 등록]]></value>
+		<value xml:lang="en"><![CDATA[Create a new marketplace]]></value>
+	</item>
+	<item name="cmd_manage_selected_marketplace">
+		<value xml:lang="ko"><![CDATA[선택한 게시판 관리]]></value>
+		<value xml:lang="en"><![CDATA[Manage Selected Marketplace]]></value>
+	</item>
+	<item name="about_marketplace_condition_setup">
+		<value xml:lang="ko"><![CDATA[판매 상품의 상태를 구분합니다. 콤마(,)를 이용하여 작성해주세요. (기본 값 : 새 제품, 중고 제품, 리퍼비시 제품)]]></value>
+	</item>
+
+	<item name="about_premium_ad_setup">
+		<value xml:lang="ko"><![CDATA[판매자가 자신의 상품을 포인트를 사용하여 광고할 수 있는 기능입니다.]]></value>
+	</item>
+	<item name="about_layout_setup">
+		<value xml:lang="ko"><![CDATA[블로그의 레이아웃 코드를 직접 수정할 수 있습니다. 위젯 코드를 원하는 곳에 삽입하시거나 관리하세요]]></value>
+		<value xml:lang="en"><![CDATA[You can manually modify marketplace layout code. Insert or manage the widget code anywhere you want]]></value>
+	</item>
+	<item name="about_marketplace_category">
+		<value xml:lang="ko"><![CDATA[분류를 만들 수 있습니다. 분류가 오동작을 할 경우 캐시파일 재생성을 수동으로 해주시면 해결이 될 수 있습니다.]]></value>
+		<value xml:lang="en"><![CDATA[You can make marketplace categories. When marketplace category is broken, try rebuilding the cache file manually.]]></value>
+	</item>
+	<item name="about_except_notice">
+		<value xml:lang="ko"><![CDATA[목록 상단에 늘 나타나는 공지사항을 일반 목록에서 공지사항을 출력하지 않도록 합니다.]]></value>
+		<value xml:lang="en"><![CDATA[Notice articles will not be displayed on normal list.]]></value>
+	</item>
+	<item name="about_use_anonymous">
+		<value xml:lang="ko"><![CDATA[글쓴이의 정보를 없애고 익명으로 게시판 사용을 할 수 있게 합니다. 스킨설정에서 글쓴이 정보등을 보이지 않도록 하시면 더욱 유용합니다. 추가설정의 문서 히스토리 사용이 꺼져있지 않으면 문서 수정시 작성자가 표시될 수 있습니다.]]></value>
+		<value xml:lang="en"><![CDATA[Make this marketplace into an anonymous marketplace by hiding the author's information. It is more useful if you make the author's information hidden at skin setup. <strong>Please turn off history at additional setup. If not, editing document might show the author's info.</strong>]]></value>
+	</item>
+	<item name="about_marketplace">
+		<value xml:lang="ko"><![CDATA[게시판을 생성하고 관리할 수 있습니다.]]></value>
+		<value xml:lang="en"><![CDATA[This module is for creating and managing marketplaces.]]></value>
+	</item>
+	<item name="about_secret">
+		<value xml:lang="ko"><![CDATA[게시판 및 댓글의 비밀글 기능을 사용할 수 있도록 합니다.]]></value>
+		<value xml:lang="en"><![CDATA[Users will be able to write secret articles or comments.]]></value>
+	</item>
+	<item name="about_admin_mail">
+		<value xml:lang="ko"><![CDATA[글이나 댓글이 등록될때 등록된 메일주소로 메일이 발송됩니다. 콤마(,)로 연결시 다수의 메일주소로 발송할 수 있습니다.]]></value>
+		<value xml:lang="en"><![CDATA[A mail will be sent when an article or comment is submitted. Mails can be sent to mutiple mail addresses if connecting addresses with commas(,).]]></value>
+	</item>
+	<item name="about_list_config">
+		<value xml:lang="ko"><![CDATA[게시판의 목록형식 사용시 원하는 항목들로 배치를 할 수 있습니다. 단 스킨에서 지원하지 않는 경우 불가능합니다. 대상항목/ 표시항목의 항목을 더블클릭하면 추가/ 제거가 됩니다.]]></value>
+		<value xml:lang="en"><![CDATA[If using list-style skin, you may arrange items to display. However, this feature might not be availble for non-official skins. If you double-click target items and display items, then you can add / remove them]]></value>
+	</item>
+	<item name="about_use_status">
+		<value xml:lang="ko"><![CDATA[글 작성 시 선택할 수 있는 상태를 지정해주세요.]]></value>
+		<value xml:lang="en"><![CDATA[Please select status that can be selected when you write article.]]></value>
+	</item>
+	<item name="msg_not_enough_point">
+		<value xml:lang="ko"><![CDATA[포인트가 부족합니다]]></value>
+		<value xml:lang="en"><![CDATA[Your point is not enough to write an article in this marketplace.]]></value>
+	</item>
+	<item name="write_comment">
+		<value xml:lang="ko"><![CDATA[댓글 쓰기]]></value>
+		<value xml:lang="en"><![CDATA[Write a comment]]></value>
+	</item>
+	<item name="msg_not_allow_comment">
+		<value xml:lang="ko"><![CDATA[해당 글의 댓글 쓰기가 잠겨있습니다.]]></value>
+		<value xml:lang="en"><![CDATA[This article is not allowed to write comment.]]></value>
+	</item>
+	<item name="no_marketplace_instance">
+		<value xml:lang="ko"><![CDATA[생성된 게시판이 없습니다.]]></value>
+		<value xml:lang="en"><![CDATA[There is no marketplace created.]]></value>
+	</item>
+	<item name="choose_marketplace_instance">
+		<value xml:lang="ko"><![CDATA[관리할 게시판을 선택해 주세요.]]></value>
+		<value xml:lang="en"><![CDATA[Please choose one or more marketplace instance.]]></value>
+	</item>
+	<item name="comment_status">
+		<value xml:lang="ko"><![CDATA[댓글]]></value>
+		<value xml:lang="en"><![CDATA[Comments]]></value>
+	</item>
+	<item name="category_settings">
+		<value xml:lang="ko"><![CDATA[분류 설정]]></value>
+		<value xml:lang="en"><![CDATA[Category settings]]></value>
+	</item>
+	<item name="hide_category">
+		<value xml:lang="ko"><![CDATA[분류 숨기기]]></value>
+		<value xml:lang="en"><![CDATA[Hide categories]]></value>
+	</item>
+	<item name="about_hide_category">
+		<value xml:lang="ko"><![CDATA[임시로 분류를 사용하지 않으려면 체크하세요.]]></value>
+		<value xml:lang="en"><![CDATA[You can disable a category feature.]]></value>
+	</item>
+	<item name="protect_content">
+		<value xml:lang="ko"><![CDATA[글 보호 기능]]></value>
+		<value xml:lang="en"><![CDATA[Protect contents]]></value>
+	</item>
+	<item name="about_protect_content">
+		<value xml:lang="ko"><![CDATA[판매 글에 댓글이 작성된 경우 글 작성자는 해당 글을 수정하거나 삭제 할 수 없도록 합니다.]]> </value>
+		<value xml:lang="en"><![CDATA[If there is any comment on document, document's owner cannot modify or delete that.]]></value>
+	</item>
+	<item name="msg_protect_content">
+		<value xml:lang="ko"><![CDATA[댓글이 작성된 게시물의 글을 수정 또는 삭제 할 수 없습니다.]]></value>
+		<value xml:lang="en"><![CDATA[You cannot modify or delete document which has any comment on it.]]></value>
+	</item>
+	<item name="year">
+		<value xml:lang="ko"><![CDATA[년]]></value>
+		<value xml:lang="en"><![CDATA[year]]></value>
+	</item>
+	<item name="years">
+		<value xml:lang="ko"><![CDATA[년]]></value>
+		<value xml:lang="en"><![CDATA[years]]></value>
+	</item>
+	<item name="month">
+		<value xml:lang="ko"><![CDATA[개월]]></value>
+		<value xml:lang="en"><![CDATA[month]]></value>
+	</item>
+	<item name="months">
+		<value xml:lang="ko"><![CDATA[개월]]></value>
+		<value xml:lang="en"><![CDATA[months]]></value>
+	</item>
+	<item name="week">
+		<value xml:lang="ko"><![CDATA[주일]]></value>
+		<value xml:lang="en"><![CDATA[week]]></value>
+	</item>
+	<item name="weeks">
+		<value xml:lang="ko"><![CDATA[주일]]></value>
+		<value xml:lang="en"><![CDATA[weeks]]></value>
+	</item>
+	<item name="day">
+		<value xml:lang="ko"><![CDATA[일]]></value>
+		<value xml:lang="en"><![CDATA[day]]></value>
+	</item>
+	<item name="days">
+		<value xml:lang="ko"><![CDATA[일]]></value>
+		<value xml:lang="en"><![CDATA[days]]></value>
+	</item>
+	<item name="hour">
+		<value xml:lang="ko"><![CDATA[시간]]></value>
+		<value xml:lang="en"><![CDATA[hour]]></value>
+	</item>
+	<item name="hours">
+		<value xml:lang="ko"><![CDATA[시간]]></value>
+		<value xml:lang="en"><![CDATA[hours]]></value>
+	</item>
+	<item name="minute">
+		<value xml:lang="ko"><![CDATA[분]]></value>
+		<value xml:lang="en"><![CDATA[minute]]></value>
+	</item>
+	<item name="minutes">
+		<value xml:lang="ko"><![CDATA[분]]></value>
+		<value xml:lang="en"><![CDATA[minutes]]></value>
+	</item>
+	<item name="second">
+		<value xml:lang="ko"><![CDATA[초]]></value>
+		<value xml:lang="en"><![CDATA[second]]></value>
+	</item>
+	<item name="seconds">
+		<value xml:lang="ko"><![CDATA[초]]></value>
+		<value xml:lang="en"><![CDATA[seconds]]></value>
+	</item>
+	<item name="time_ago">
+		<value xml:lang="ko"><![CDATA[ 전]]></value>
+		<value xml:lang="en"><![CDATA[ ago]]></value>
+	</item>
+	<item name="time_just_now">
+		<value xml:lang="ko"><![CDATA[방금]]></value>
+		<value xml:lang="en"><![CDATA[just now]]></value>
+	</item>
+
+	<item name="invalid_category">
+		<value xml:lang="ko"><![CDATA[카테고리를 선택해주시기 바랍니다.]]></value>
+	</item>
+
+
+	<item name="msg_find_keyword_title">
+		<value xml:lang="ko"><![CDATA[키워드 [%s]를 포함한 상품이 발견되었습니다.]]></value>
+	</item>
+	<item name="msg_find_keyword_content">
+		<value xml:lang="ko"><![CDATA[회원님께서 찾고계시는 키워드를 포함한 상품이 발견되었습니다.<br />지금 바로 확인하시겠습니까?]]></value>
+	</item>
+	<item name="success_changed">
+		<value xml:lang="ko"><![CDATA[변경되었습니다.]]></value>
+	</item>
+	
+
+	<item name="add_content_time">
+		<value xml:lang="ko"><![CDATA[%s에 내용 추가]]></value>
+	</item>
+
+	<item name="item_name">
+		<value xml:lang="ko"><![CDATA[상품명]]></value>
+	</item>
+	<item name="item_price">
+		<value xml:lang="ko"><![CDATA[상품 가격]]></value>
+	</item>
+	<item name="bid_price">
+		<value xml:lang="ko"><![CDATA[입찰가]]></value>
+	</item>
+	<item name="balance">
+		<value xml:lang="ko"><![CDATA[광고료 제한 금액]]></value>
+	</item>
+	<item name="item_status" type="array">
+		<item name="selling">
+			<value xml:lang="ko"><![CDATA[판매중]]></value>
+		</item>
+		<item name="soldout">
+			<value xml:lang="ko"><![CDATA[판매 완료]]></value>
+		</item>
+		<item name="cancel">
+			<value xml:lang="ko"><![CDATA[판매 중단]]></value>
+		</item>
+	</item>
+	<item name="conditions" type="array">
+		<item name="used" type="array">
+			<item name="eid">
+				<value xml:lang="ko"><![CDATA[used]]></value>
+			</item>
+			<item name="name">
+				<value xml:lang="ko"><![CDATA[중고 제품]]></value>
+			</item>
+			<item name="short_name">
+				<value xml:lang="ko"><![CDATA[중고]]></value>
+			</item>
+			<item name="desc">
+				<value xml:lang="ko"><![CDATA[이미 사용한 제품입니다.]]></value>
+			</item>
+		</item>
+		<item name="new" type="array">
+			<item name="eid">
+				<value xml:lang="ko"><![CDATA[new]]></value>
+			</item>
+			<item name="name">
+				<value xml:lang="ko"><![CDATA[새 제품]]></value>
+			</item>
+			<item name="short_name">
+				<value xml:lang="ko"><![CDATA[새제품]]></value>
+			</item>
+			<item name="desc">
+				<value xml:lang="ko"><![CDATA[한번도 사용하지 않은 새 제품입니다.]]></value>
+			</item>
+		</item>
+		<item name="refurbish" type="array">
+			<item name="eid">
+				<value xml:lang="ko"><![CDATA[refurbish]]></value>
+			</item>
+			<item name="name">
+				<value xml:lang="ko"><![CDATA[리퍼비시 제품]]></value>
+			</item>
+			<item name="short_name">
+				<value xml:lang="ko"><![CDATA[리퍼비시]]></value>
+			</item>
+			<item name="desc">
+				<value xml:lang="ko"><![CDATA[리퍼를 받은 제품입니다.]]></value>
+			</item>
+		</item>
+	</item>
+
+</lang>

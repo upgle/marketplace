@@ -1,0 +1,7 @@
+<table name="marketplace_advertise">
+	<column name="document_srl" type="number" size="11" notnull="notnull" index="idx_document_srl" primary_key="primary_key" />
+	<column name="bid_price" type="number" size="11" index="idx_bid_price" default="0" notnull="notnull" />
+	<column name="balance" type="number" size="11" default="0" notnull="notnull" />
+    <column name="expiry_date" type="number" size="8" index="idx_expiry_date"  notnull="notnull"  />
+    <column name="regdate" type="date" index="idx_regdate" />
+</table>

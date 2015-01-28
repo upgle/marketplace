@@ -1,0 +1,240 @@
+<include target="_header.html" cond="!$oDocument->isExists()"  />
+<include target="_header_read.html" cond="$oDocument->isExists()"  />
+
+<div class="mp-content" style="<!--@if($module_info->flybanner_width)-->width:{960-$module_info->flybanner_width}px;<!--@else-->width:{960-110}px;<!--@end-->
+"|cond="$oDocument->isExists() && $module_info->flybanner == 'Y'" style="width:960px"|cond="$oDocument->isExists() && $module_info->flybanner != 'Y'">
+	<include cond="$oDocument->isExists()" target="_read.html" />
+
+	<block cond="!$oDocument->isExists()">
+    <div class="mp-searchbox" style="float:left">
+        <form cond="$grant->view" action="{getUrl()}" method="get" onsubmit="return procFilter(this, search)" id="marketplace_search" class="marketplace_search" no-error-return-url="true">
+            <input type="hidden" name="vid" value="{$vid}" />
+            <input type="hidden" name="mid" value="{$mid}" />
+            <input type="hidden" name="category" value="{$category}" />
+
+            <input type="text" placeholder="이곳에 검색어를 입력하세요" name="search_keyword" value="{htmlspecialchars($search_keyword)}" title="{$lang->cmd_search}" /><input type="submit" value="검색" class="mp-hidetext" onclick="xGetElementById('marketplace_search').submit();return false;" />
+        </form>
+    </div>
+    <a href="{getUrl('act','dispMarketplaceWrite','document_srl','')}" class="mp-button button-red" style="float:right; margin-left:10px"><i class="xe-photo-camera-b"></i> 내 물품 판매하기</a>
+	<div class="mp-clearfix"></div>
+	</block>
+	<block cond="$module_info->use_advertise && !$oDocument->isExists() && !Context::get('search_keyword') && !$category" >
+    <div class="mp-premiumarea mp-margin-top-30">
+        <h3 class="mp-title mp-title-premium-list mp-hidetext"><span>프리미엄 등록 상품</span></h3>
+        <div class="mp-margin-top-15">
+            <div id="premium-ad" class="mp-carousel">
+                <div class="item" loop="$advertise_list => $item">
+					<div class="thumb_area">
+						<span class="mp-condition-badge  mp-{$item->getItemCondition()}">{$condition_list[$item->getItemCondition()]->short_name}</span>
+						<img src="{$item->getThumbnail(110,110)}" />
+						<span class="mask"></span>
+						<div class="hover_info_mask">
+							<div class="hover_info_wrap">
+								<span class="hover_info">
+									<a href="{getUrl('','act','procMarketplaceActionRecord','document_srl',$item->document_srl)}" class="btn_show"><i class=" xe-magnifier"></i><span class="blind">상품보기</span></a>
+								</span>  
+							</div>
+						</div>
+					</div>
+
+                    <p class="item_name"><a href="{getUrl('','act','procMarketplaceActionRecord','document_srl',$item->document_srl)}">{$item->getTitle(34,'..')}</a></p>
+                    <p class="mp-price">￦ {$item->getPrice(true)}</p>
+                </div>
+                <div class="item" loop="$i=0;$i<5-count($advertise_list);$i++">
+					<div class="blank_area">
+						<img src="./images/advertise_here.png" />
+					</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+	<!-- 프리미엄 상품 로딩 -->
+    <script>
+    jQuery(document).ready(function() {
+
+      var owl = jQuery("#premium-ad");
+      owl.owlCarousel({
+        autoPlay: false, //Set AutoPlay to 3 seconds
+        stopOnHover : true,
+        scrollPerPage : true,
+        items : 5,
+        itemsDesktop : false,
+        itemsDesktopSmall : false,
+        itemsTablet : false,
+        itemsMobile : false,
+		scrollPerPage : true,
+		navigation: true,
+		pagination: true,
+		navigationText : ["<",">"]
+      });
+
+	  /*
+	  jQuery('.thumb_area').height(jQuery('.thumb_area').children('img').height());
+	  */
+
+      jQuery('.select_redirect').bind('change', function () {
+          var url = jQuery(this).val(); // get selected value
+          if (url) { // require a URL
+              window.location = url; // redirect
+          }
+          return false;
+      });
+
+    });
+    </script>
+	</block>
+
+	<div style="border-top:1px solid #bbbbbb; border-bottom:1px solid #bbbbbb; padding: 13px 10px 12px; font-size: 13px;" class="mp-margin-top-30" cond="$category">
+	<span style="color:#fff;background:#313131; padding:3px 6px;margin-right: 8px; border-radius:2px; font-size: 14px;">선택된 카테고리</span> {$category_list[$category_list[$category]->parent_srl]->title} <i class=" xe-angle-right" cond="$category_list[$category]->parent_srl"></i> {$category_list[$category]->title}
+	</div>
+	
+	<!-- 게시판 시작 -->
+    <div class="board mp-margin-top-35">
+        <div class="list_header">
+            <div class="btn_area">
+                <div class="btn_area_l btn_area_count">
+                    등록된 상품 총 <strong>{$total_count}</strong>개
+                </div>
+				<!-- 게시판 상단 컨트롤러 -->
+                <div class="btn_area_r">
+                    <div class="select_area">
+                        <form action="" method="post">
+                            <div class="search_select">
+                                <select class="select_redirect">
+                                <option value="{getUrl('list_count','5')}" selected="selected"|cond="Context::get('list_count')==5">5개씩 보기</option>
+                                <option value="{getUrl('list_count','10')}" selected="selected"|cond="Context::get('list_count')==10">10개씩 보기</option>
+                                <option value="{getUrl('list_count','25')}" selected="selected"|cond="Context::get('list_count')==25">25개씩 보기</option>
+                                <option value="{getUrl('list_count','50')}" selected="selected"|cond="Context::get('list_count')==50">50개씩 보기</option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="select_area">
+						<div class="search_select">
+							<select class="select_redirect">
+							<option value="{getUrl('sort_index','list_order','order_type','asc')}" selected="selected"|cond="Context::get('sort_index')=='list_order' && Context::get('order_type')=='asc'">신규등록순</option>
+							<option value="{getUrl('sort_index','price','order_type','asc')}" selected="selected"|cond="Context::get('sort_index')=='price' && Context::get('order_type')=='asc'">낮은가격순</option>
+							<option value="{getUrl('sort_index','price','order_type','desc')}" selected="selected"|cond="Context::get('sort_index')=='price' && Context::get('order_type')=='desc'">높은가격순</option>
+							</select>
+						</div>
+                    </div>
+
+					<!-- 판매중인 상품/ 판매완료 상품 보기 버튼 -->
+                    <a class="btn_type btn_lst" style="padding: 0 8px;" href="{getUrl('item_status','selling')}" cond="!$item_status">
+                        <i class=" xe-check-square"></i>
+                        <span class="btn_txt">판매중인 상품만 보기</span>
+                    </a>
+                    <a class="btn_type btn_lst" style="padding: 0 8px;" href="{getUrl('item_status','')}" cond="$item_status=='selling'">
+                        <i class=" xe-check-square"></i>
+                        <span class="btn_txt">판매완료된 상품도 보기</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+		<!-- 게시판 목록 시작 -->
+        <div class="board_list basic_type">
+            <table class="tbl_board_lst">
+            <caption>마켓 상품 목록</caption>
+            <colgroup>
+            <col style="width: 128px;">
+            <col>
+            <col style="width: 98px;">
+            <col style="width: 79px;">
+            <col style="width:44px" cond="$grant->manager">
+            </colgroup>
+            <thead>
+            <!-- 목록 헤더 -->
+            <tr>
+            <th scope="col"><div class="ta_c">사진</div></th>
+            <th scope="col"><div class="ta_c">{$lang->title}</div></th>
+            <th scope="col"><div class="ta_c"><a href="#">가격</a></div></th>
+            <th scope="col"><div class="ta_l"><a href="{getUrl('sort_index','readed_count','order_type',$order_type)}">{$lang->readed_count}</a></div></th>
+			<th scope="col" cond="$grant->manager"><div class="ta_c"><input type="checkbox" onclick="XE.checkboxToggleAll({ doClick:true });" class="iCheck" title="Check All" /></div></th>
+
+            </tr>
+            <!-- 목록 헤더 끝 -->
+            </thead>
+
+			<!-- 등록된 글 없음 출력 (조건. 글 없을 때)-->
+            <tbody cond="!$marketitem_list && !$notice_list">
+                <tr>
+                    <td colspan="4"|cond="!$grant->manager" colspan="5"|cond="$grant->manager">
+                        <p style="text-align:center">{$lang->no_documents}</p>
+                    </td>
+                </tr>
+            </tbody>
+
+			<!-- 목록 출력 (조건. 글 있을 때) -->
+            <tbody cond="$marketitem_list || $notice_list">
+                <!-- 공지사항 리스트 -->
+                <tr class="bd_notice" loop="$notice_list=>$no,$document">
+                <td colspan="3"><div class="ta_l bd_tit notice_check"><a href="{getUrl('document_srl',$document->document_srl, 'listStyle', $listStyle, 'cpage','')}"><span class="badge">장터공지</span> {$document->getTitle()}</a></div></td>
+                <td><div class="ta_c">{$document->get('readed_count')>0?$document->get('readed_count'):'0'}</div></td>
+				<td cond="$grant->manager" class="ta_c"><input type="checkbox" name="cart" value="{$document->document_srl}" class="iCheck" title="Check This Article" onclick="doAddDocumentCart(this)" checked="checked"|cond="$document->isCarted()" /></td>
+                </tr>
+                <!-- 리스트  -->           
+                <tr loop="$marketitem_list=>$no,$document">
+                <td class="bd_thmb">
+					<div style="position:relative">
+					<span class="mp-condition-badge mp-condition-badge-small mp-{$document->getItemCondition()}">{$condition_list[$document->getItemCondition()]->short_name}</span>
+                    <img src="{$document->getThumbnail(118,77)}" />
+					</div>
+                </td>
+                <td>
+					<!-- 카테고리 -->
+					<div class="ta_l bd_catetgory" cond="$document->get('category_srl')">
+					<a href="{getUrl('category',$document->get('category_srl'), 'document_srl', '')}" class="category">
+					[{$category_list[$document->get('category_srl')]->title}] 
+					</a>
+					</div>
+					<!-- 타이틀 -->
+                    <div class="ta_l bd_tit"><span class="badge_soldout" cond="$document->isSoldout()">판매완료</span><span class="badge_reupload" cond="$document->isReinserted() && $document->isSelling()">재등록</span><a href="{getUrl('document_srl',$document->document_srl, 'listStyle', $listStyle, 'cpage','')}" class="soldout"|cond="$document->isSoldout()">{$document->getTitle()}</a> <em class="cmt_count" cond="$document->getCommentCount()">({$document->getCommentCount()})</em> </div>
+					<!-- 작성일 -->
+                    <div class="ta_l bd_date"><i class="xe-time-o"></i> {$document->getRegdate('Y년 m월 d일')} ({$document->getRegdateElapsedString()}) / <a href="#popup_menu_area" class="member_{$document->get('member_srl')}" onclick="return false">{$document->getNickName()}</a></div>
+                </td>
+                <td>
+					<!-- 가격 -->
+                    <div class="ta_c mp-price"><span class="won">￦</span>{number_format($document->get('price'))}</div>
+                    <div class="ta_c mp-price price-original" cond="$document->get('original_price')">({number_format($document->get('original_price'))})</div>
+                </td>
+                <td>
+					<!-- 조회수 -->
+					<div class="ta_c">{$document->get('readed_count')>0?$document->get('readed_count'):'0'}</div>
+				</td>
+				<td cond="$grant->manager" class="ta_c"><input type="checkbox" name="cart" value="{$document->document_srl}" class="iCheck" title="Check This Article" onclick="doAddDocumentCart(this)" checked="checked"|cond="$document->isCarted()" /></td>
+                </tr>
+            </tbody>
+            </table>
+        </div>
+
+        <div class="list_footer">
+            <!-- PAGINATE -->
+            <div class="bd_paginate" cond="$marketitem_list">
+                <a class="pg_btn" href="{getUrl('page','','document_srl','','division',$division,'last_division',$last_division)}">
+                    <i class="xe-angle-left"><span class="blind">{$lang->first_page}</span></i>
+                </a>
+                <block loop="$page_no=$page_navigation->getNextPage()">
+                <strong cond="$page==$page_no">{$page_no}</strong> 
+                <a cond="$page!=$page_no" href="{getUrl('page',$page_no,'document_srl','','division',$division,'last_division',$last_division)}">{$page_no}</a>
+                </block>
+                <a class="pg_btn" href="{getUrl('page',$page_navigation->last_page,'document_srl','','division',$division,'last_division',$last_division)}">
+                    <i class="xe-angle-right"><span class="blind">{$lang->last_page}</span></i>
+                </a>
+            </div>
+            <!-- /PAGINATE -->
+        </div>
+    </div>
+	<!-- 게시판 끝 -->
+	
+	<div class="list_footer">
+		<div class="btnArea">
+			<a cond="$grant->manager" href="{getUrl('mid',$mid,'act','dispMarketplaceNoticeWrite')}" class="btn"><i class="xe-pen"></i> 공지사항 작성</a>
+
+			<a cond="$grant->manager" href="{getUrl('','module','document','act','dispDocumentManageDocument')}" class="btn" onclick="popopen(this.href,'manageDocument'); return false;">{$lang->cmd_manage_document}</a>
+		</div>
+	</div>
+</div>
+
+<include target="_footer.html" />

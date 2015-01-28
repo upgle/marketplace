@@ -1,0 +1,120 @@
+<script>
+xe.lang.ask_change_soldout = '{$lang->ask_change_soldout}';
+xe.lang.ask_change_cancel = '{$lang->ask_change_cancel}';
+xe.lang.ask_change_selling = '{$lang->ask_change_selling}';
+</script>
+<include target="_header.html" />
+
+<div class="mp-content content-insert-page">
+	<div class="content_header">
+		<div class="mp-title-manage-myitem mp-hidetext">내 상품 등록</div>
+
+		<a href="{getUrl('act','dispMarketplaceContent')}" class="mp-button button-white button-small button-return"><i class="xe-mail-reply"></i> 마켓으로 돌아가기</a>
+	</div>
+	<div class="mp-notice">
+		<i class="xe-announce"> 한번 등록된 상품은 삭제할 수 없으며 <strong>'판매 중단/완료'</strong> 처리만 가능합니다.</i>
+		<div>
+			<ul class="notice_list">
+			<li><strong>판매 중단</strong> : 판매를 중지한 상태로 리스트에 노출되지 않으며 검색이 불가능합니다. (판매실적 포함X)</li>
+			<li><strong>판매 완료</strong> : 판매가 완료된 상품으로 리스트에 노출되며 연락처는 자동으로 가려집니다. </li>
+		</div>
+	</div>
+	<div class="mp-block">
+		<div class="board_header">
+			<ul class="board_tab">
+			<li class="active"|cond="!$item_status"><a href="{getUrl('','mid',$mid,'act','dispMarketplaceItemManage')}">전체({$total_count})</a></li>
+			<li class="active"|cond="$item_status == 'selling'"><a href="{getUrl('act','dispMarketplaceItemManage','item_status','selling')}">판매중 상품({$selling_count})</a></li>
+			<li class="active"|cond="$item_status == 'soldout'"><a href="{getUrl('act','dispMarketplaceItemManage','item_status','soldout')}">판매완료 상품({$soldout_count})</a></li>
+			<li class="active"|cond="$item_status == 'cancel'"><a href="{getUrl('act','dispMarketplaceItemManage','item_status','cancel')}">판매중단 상품({$cancel_count})</a></li>
+			</ul>
+		</div>
+		<div class="board">
+			<div class="board_list basic_type">
+				<table class="tbl_board_lst">
+				<caption>게시판 리스트</caption>
+				<colgroup>
+				<col style="width: 125px;">
+				<col>
+				<col style="width: 150px;">
+				</colgroup>
+				<thead>
+				<!-- LIST HEADER -->
+				<tr>
+				<th scope="col"><div class="ta_c">사진</div></th>
+				<th scope="col"><div class="ta_c">{$lang->title}</div></th>
+				<th scope="col"><div class="ta_c">가격</div></th>
+				</tr>
+				<!-- /LIST HEADER -->
+				</thead>
+				<tbody cond="!$marketitem_list">
+					<tr>
+						<td colspan="4"|cond="!$grant->manager" colspan="5"|cond="$grant->manager">
+							<p style="text-align:center">{$lang->no_documents}</p>
+						</td>
+					</tr>
+				</tbody>
+				<tbody cond="$marketitem_list">
+					<!-- LIST -->           
+					<tr loop="$marketitem_list=>$no,$document">
+
+					<td class="bd_thmb">
+						<div style="position:relative">
+						<span class="mp-condition-badge mp-condition-badge-small mp-{$document->getItemCondition()}">{$condition_list[$document->getItemCondition()]->short_name}</span>
+						<img src="{$document->getThumbnail(118,77)}" />
+						</div>
+					</td>
+					<td>
+						<!-- 카테고리 -->
+						<div class="ta_l bd_catetgory">
+						<a href="{getUrl('category',$document->get('category_srl'), 'document_srl', '')}" class="category">
+						[{$category_list[$document->get('category_srl')]->title}] 
+						</a>
+						</div>
+						<!-- 타이틀 -->
+						<div class="ta_l bd_tit"><a href="{getUrl('','mid',$mid,'document_srl',$document->document_srl)}">{$document->getTitle()}</a> {$document->printExtraImages(60*60*$module_info->duration_new)}</div>
+						<div class="ta_l bd_date"><i class="xe-time-o"></i> {$document->getRegdate('Y년 m월 d일 H시 i분')}</div>
+						<div class="ta_l">
+							<div class="manage_area">
+							<!-- 프리미엄 광고 관리 -->
+							<block cond="$document->isSelling()">
+							<a onclick="popopen(this.href); return false;" href="{getUrl('act','dispMarketplaceAdvertiseInsert','document_srl',$document->document_srl)}" class="btn_action btn_action_yellow" cond="!$document->isAdvertise()"><i class="xe-tree" ></i> 프리미엄 광고 등록</a> <span href="{getUrl('act','dispMarketplaceAdvertiseManage')}" class="btn_action" style="background:#5D6872;color:#fff" cond="$document->isAdvertise()"><i class="xe-leaf" ></i> 광고 잔액 : {number_format($document->getAdvertiseBalance())} P</span>
+							<a href="javascript:doChangeItemStatus({$document->document_srl},'soldout');" class="btn_action"><i class="xe-status-check"></i> 판매 완료</a> <a href="javascript:doChangeItemStatus({$document->document_srl},'cancel');" class="btn_action"><i class="xe-close-circle"></i> 판매 중단</a> 
+
+							</block>
+							<block cond="$document->get('item_status')!='selling'">
+							이 상품은 <strong class="{$document->get('item_status')}">{$lang->item_status[$document->get('item_status')]}</strong> 되었습니다. <a href="javascript:doChangeItemStatus({$document->document_srl},'selling');" class="btn_action btn_action_none"><i class="xe-rotate-left"></i> 다시판매</a> 
+							</block>
+							</div>
+
+						</div>
+					</td>
+
+					<td>
+						<div class="ta_c mp-price">\ {number_format($document->get('price'))}</div>
+						<div class="ta_c mp-price price-original" cond="$document->get('original_price')">({number_format($document->get('original_price'))})</div>
+					</td>
+					</tr>
+				</tbody>
+				</table>
+			</div>
+
+			<div class="list_footer">
+				<!-- PAGINATE -->
+				<div class="bd_paginate" cond="$marketitem_list">
+					<a class="pg_btn" href="{getUrl('page','','document_srl','','division',$division,'last_division',$last_division)}">
+						<i class="xe-angle-left"><span class="blind">{$lang->first_page}</span></i>
+					</a>
+					<block loop="$page_no=$page_navigation->getNextPage()">
+					<strong cond="$page==$page_no">{$page_no}</strong> 
+					<a cond="$page!=$page_no" href="{getUrl('page',$page_no,'document_srl','','division',$division,'last_division',$last_division)}">{$page_no}</a>
+					</block>
+					<a class="pg_btn" href="{getUrl('page',$page_navigation->last_page,'document_srl','','division',$division,'last_division',$last_division)}">
+					<i class="xe-angle-right"><span class="blind">{$lang->last_page}</span></i>
+					</a>
+				</div>
+				<!-- /PAGINATE -->
+			</div>
+		</div>
+	</div>
+</div>
+<include target="_footer.html" />

@@ -1,0 +1,187 @@
+{@ 
+	$oMemberModel = getModel('member');
+	$profile = $oMemberModel->getProfileImage($logged_info->member_srl);
+}
+<div class="lst_header cmt_header">
+	<h3 class="lst_tit">댓글 <em class="lst_cnt">{$oDocument->getCommentcount()}</em></h3>
+</div>
+<div class="cmt_lst_wrap" style="display:block">
+	<!-- COMMENT LIST -->
+	<ul class="cmt_lst">
+
+	<li class="cmt_item" cond="!$oDocument->getCommentcount()">
+		<div class="cmt_item_con">
+			<div class="no_comment">
+			<i class="xe-exclamation-circle"></i> 이 상품에 등록된 댓글이 없습니다.
+			</div>
+		</div>
+	</li>
+
+	<!-- 코멘트 반복-->
+	<li loop="$oMarketItem->getComments()=>$key,$comment" class="cmt_item"|cond="!$comment->get('depth')" class="cmt_item re_cmt cmt_depth{$comment->get('depth')}"|cond="$comment->get('depth')" id="comment_{$comment->comment_srl}">
+		<div class="cmt_item_con">
+			<div class="cmt_profile">
+				<span class="ico_recmt"><span class="blind">대댓글</span></span>
+				<img src="images/thumb_user.png" alt="" class="cmt_profile_img" style="width:50px;height:50px" cond="!$comment->getProfileImage()" />
+				<img src="{$comment->getProfileImage()}" alt="Profile" class="cmt_profile_img" style="width:50px;height:50px" cond="$comment->getProfileImage()" />
+			</div>
+			<div class="cmt_con">
+				<!-- 댓글 작성자 정보-->
+				<span class="cmt_writer">
+					<a cond="!$comment->member_srl && $comment->homepage" href="{$comment->getHomepageUrl()}">{$comment->getNickName()}</a>
+					<strong cond="!$comment->member_srl && !$comment->homepage">{$comment->getNickName()}</strong>
+					<a cond="$comment->member_srl" href="#popup_menu_area" class="member_{$comment->member_srl}" onclick="return false">{$comment->getNickName()}</a>
+				</span>
+				<span class="cmt_date">{$comment->getRegdate('Y.m.d H:i')}</span>
+
+				<!-- 댓글 내용 -->
+				<div class="xe_content">
+
+					<!--@if(!$comment->isAccessible())-->
+					<form action="./" method="get" class="xe_content" onsubmit="return procFilter(this, input_password)">
+						<p><label for="cpw_{$comment->comment_srl}">{$lang->msg_is_secret} {$lang->msg_input_password}</label></p>
+						<p><input type="password" name="password" id="cpw_{$comment->comment_srl}" class="iText" /><input type="submit" class="btn" value="{$lang->cmd_input}" /></p>
+						<input type="hidden" name="mid" value="{$mid}" />
+						<input type="hidden" name="page" value="{$page}" />
+						<input type="hidden" name="document_srl" value="{$comment->get('document_srl')}" />
+						<input type="hidden" name="comment_srl" value="{$comment->get('comment_srl')}" />
+					</form>
+					<!--@else-->
+					{nl2br($comment->getContent(false, true, false))}
+					<!--@end-->
+					<div cond="$comment->hasUploadedFiles()" class="fileList">
+						<button type="button" class="toggleFile" onclick="jQuery(this).next('ul.files').toggle();">{$lang->uploaded_file} [<strong>{$comment->get('uploaded_count')}</strong>]</button>
+						<ul class="files">
+							<li loop="$comment->getUploadedFiles()=>$key,$file"><a href="{getUrl('')}{$file->download_url}">{$file->source_filename} <span class="fileSize">[File Size:{FileHandler::filesize($file->file_size)}/Download:{number_format($file->download_count)}]</span></a></li>
+						</ul>
+					</div>
+
+				</div>
+				<div class="cmt_func_area">
+					<div class="cmt_func_more">
+						<a cond="$is_logged" class="comment_{$comment->comment_srl} this" href="#popup_menu_area" onclick="return false"><i class="xe-ellipsis-h"></i><span class="cmt_txt"> {$lang->cmd_comment_do}</span></a>
+					</div>
+					<a cond="$comment->isGranted()||!$comment->get('member_srl')" href="{getUrl('act','dispMarketplaceModifyComment','comment_srl',$comment->comment_srl)}"><i class="xe-pen"></i><span class="cmt_txt">{$lang->cmd_modify}</span></a>
+					<a cond="$comment->isGranted()||!$comment->get('member_srl')" href="{getUrl('act','dispMarketplaceDeleteComment','comment_srl',$comment->comment_srl)}"><i class="xe-close"></i><span class="cmt_txt">{$lang->cmd_delete}</span></a>
+					<a cond="$oMarketItem->allowComment()" href="javascript:reComment({$comment->comment_srl})" class="reply"><i class="xe-comment-bubble"></i><span class="cmt_txt">{$lang->cmd_reply}</span></a>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+		<!--
+		function reComment(comment_srl) {
+			jQuery("#cmt_write_form").find("input[name=parent_srl]").val(comment_srl);
+			jQuery("#cmt_write_form").hide().appendTo("#comment_" + comment_srl).show();
+		}
+		//-->
+		</script>
+	</li>
+
+	<!-- RECOMMENT WRITE -->
+	<div id="cmt_write_form" class="cmt_write_form" style="display:none" >
+		<form ruleset="insertComment" action="./" method="post" class="write_comment" >
+			<input type="hidden" name="act" value="procMarketplaceInsertComment" />
+			<input type="hidden" name="mid" value="{$mid}" />
+			<input type="hidden" name="document_srl" value="{$document_srl}" />
+			<input type="hidden" name="comment_srl" value="" />
+			<input type="hidden" name="parent_srl" value="" />
+
+			<div class="cmt_editor">
+				<div class="cmt_profile">
+					<span class="ico_recmt"></span>
+					<!-- [D] 댓글에 노출될 프로필 이미지 적용 및 노출 사이즈 적용 -->
+					<img src="images/thumb_user.png"|cond="!$profile->src" src="{$profile->src}"|cond="$profile->src" alt="" class="cmt_profile_img" style="width:50px;height:50px">
+				</div>
+				<div class="cmt_textarea_wrap">
+					<textarea rows="8" cols="42" class="cmt_textarea" name="content"></textarea>
+
+					<!-- [D] 비로그인 일 경우 노출 -->
+					<div class="write_author" cond="!$is_logged">
+						<div class="cmt_user_form essen_check">
+							<label for="author" title="{$lang->writer}"><i class="xe-user"></i><span class="blind">{$lang->writer}</span></label>
+							<input name="nick_name" class="text-input" id="author" placeholder="{$lang->writer}" type="text">
+						</div>
+						<div class="cmt_user_form essen_check">
+							<label for="password" title="{$lang->password}"><i class="xe-lock"></i><span class="blind">{$lang->password}</span></label>
+							<input name="password" class="text-input" id="password" placeholder="{$lang->password}" type="password">
+						</div>
+						<div class="cmt_user_form">
+							<label for="url" title="홈페이지"><i class="xe-link-l"></i><span class="blind">{$lang->homepage}</span></label>
+							<input name="homepage" class="text-input" id="url" placeholder="{$lang->homepage}" type="text">
+						</div>
+					</div>
+				</div>
+
+				<div class="cmt_submit">
+					<input type="image" alt="등록" src="images/btn_registry.gif" />
+				</div>
+			</div>
+		</form>
+	</div>
+	<!-- /RECOMMENT WRITE -->
+
+	</ul>
+	<!-- /COMMENT LIST -->
+	<!-- 댓글 쓰기 -->
+	<div class="write_comment cmt_write_form" cond="$grant->write_comment && $oMarketItem->isEnableComment()" >
+        <form ruleset="insertComment" action="./" method="post" >
+        <input type="hidden" name="act" value="procMarketplaceInsertComment" />
+        <input type="hidden" name="mid" value="{$mid}" />
+        <input type="hidden" name="document_srl" value="{$oMarketItem->document_srl}" />
+        <input type="hidden" name="comment_srl" value="" />
+        <input type="hidden" name="content" value="" />
+			<div class="cmt_editor">
+				<div class="cmt_profile">
+					<span class="ico_recmt"></span>
+					<!-- [D] 댓글에 노출될 프로필 이미지 적용 및 노출 사이즈 적용 -->
+					<img src="images/thumb_user.png"|cond="!$profile->src" src="{$profile->src}"|cond="$profile->src" alt="" class="cmt_profile_img" style="width:50px;height:50px">
+				</div>
+				<div class="cmt_textarea_wrap">
+					{$oMarketItem->getCommentEditor()}
+				
+					<!-- [D] 비로그인 일 경우 노출 -->
+					<div class="write_author" style="display:inline-block" cond="!$is_logged">
+						<div class="cmt_user_form essen_check">
+							<label for="author" title="{$lang->writer}"><i class="xe-user"></i><span class="blind">{$lang->writer}</span></label>
+							<input name="nick_name" class="text-input" id="author" placeholder="{$lang->writer}" type="text">
+						</div>
+						<div class="cmt_user_form essen_check">
+							<label for="password" title="{$lang->password}"><i class="xe-lock"></i><span class="blind">{$lang->password}</span></label>
+							<input name="password" class="text-input" id="password" placeholder="{$lang->password}" type="password">
+						</div>
+						<div class="cmt_user_form">
+							<label for="url" title="홈페이지"><i class="xe-link-l"></i><span class="blind">{$lang->homepage}</span></label>
+							<input name="homepage" class="text-input" id="url" placeholder="{$lang->homepage}" type="text">
+						</div>
+					</div>
+					<!-- [D] 비밀글 쓰기 설정 시 노출 -->
+					<div class="secret_box" style="display:inline-block">
+						<input id="cmt_write_secret" name="is_secret" value="Y" type="checkbox">
+						<label for="cmt_write_secret">{$lang->secret}</label> 
+					</div>
+					<div class="secret_box" style="display:inline-block" cond="$is_logged">
+						<input id="cmt_notify_message" name="notify_message" value="Y" type="checkbox">
+						<label for="cmt_notify_message">{$lang->notify}</label> 
+					</div>
+				</div>
+				<div class="cmt_submit">
+		            <input type="image" alt="등록" src="images/btn_registry.gif" />
+				</div>
+			</div>
+		</form>
+	</div>
+	<!-- /댓글 쓰기 -->
+</div>
+
+<div class="mp-comment" id="comment" cond="$oMarketItem->getCommentcount()">
+
+    <div cond="$oMarketItem->comment_page_navigation" class="pagination">
+        <a href="{getUrl('cpage',1)}#comment" class="direction prev"><span></span><span></span> {$lang->first_page}</a> 
+        <block loop="$page_no=$oMarketItem->comment_page_navigation->getNextPage()">
+			<strong cond="$cpage==$page_no">{$page_no}</strong> 
+			<a cond="$cpage!=$page_no" href="{getUrl('cpage',$page_no)}#comment">{$page_no}</a>
+        </block>
+        <a href="{getUrl('cpage',$oMarketItem->comment_page_navigation->last_page)}#comment" class="direction next">{$lang->last_page} <span></span><span></span></a>
+    </div>
+</div>
+<!-- /COMMENT -->

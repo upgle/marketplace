@@ -1,0 +1,5 @@
+<table name="marketplace_wishlist">
+    <column name="document_srl" type="number" size="11" notnull="notnull" index="idx_document_srl" />
+    <column name="member_srl" type="number" size="11" notnull="notnull" index="idx_member_srl" />
+    <column name="regdate" type="date" index="idx_regdate" />
+</table>

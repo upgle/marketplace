@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module version="0.2">
+	<title xml:lang="ko">마켓플레이스</title>
+	<title xml:lang="en">Marketplace</title>
+	<description xml:lang="ko">게시판의 기능을 담당. 게시판의 생성/추가 관리등의 관리자 기능도 포함합니다.</description>
+	<version>1.0.0</version>
+	<date>2015-01-26</date>
+	<category>service</category>
+	<author email_address="admin@upgle.com" link="http://upgle.com/">
+		<name xml:lang="ko">UPGLE</name>
+	</author>
+</module>

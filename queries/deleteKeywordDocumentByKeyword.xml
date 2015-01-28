@@ -1,0 +1,8 @@
+<query id="deleteKeywordDocumentByKeyword" action="delete" priority="LOW">
+    <tables>
+        <table name="marketplace_keyword_document" />
+    </tables>
+    <conditions>
+        <condition operation="equal" column="keyword" var="keyword" notnull="notnull" />
+    </conditions>
+</query>

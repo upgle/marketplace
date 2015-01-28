@@ -1,0 +1,18 @@
+<query id="getMarketplaceItemCountByStatus" action="select">
+    <tables>
+        <table name="marketplace_items" alias="items" />
+		<table name="documents" alias="documents" type="left join">
+            <conditions>
+                <condition operation="equal" column="documents.document_srl" default="items.document_srl" />
+            </conditions>
+        </table>
+    </tables>
+    <columns>
+        <column name="count(*)" alias="count" />
+    </columns>
+    <conditions>
+        <condition operation="equal" column="documents.module_srl" var="module_srl" filter="number" pipe="and" />
+        <condition operation="equal" column="documents.member_srl" var="member_srl" filter="number"  pipe="and" />
+		<condition operation="equal" column="items.item_status" var="item_status" pipe="and" />
+    </conditions>
+</query>

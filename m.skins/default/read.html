@@ -1,0 +1,148 @@
+{@ Context::addJsFile("./common/js/jquery.js", true, '', -100000) }
+{@ Context::addJsFile("./common/js/js_app.js", true, '', -100000) }
+{@ Context::addJsFile("./common/js/common.js", true, '', -100000) }
+{@ Context::addJsFile("./common/js/xml_handler.js", true, '', -100000) }
+{@ Context::addJsFile("./common/js/xml_js_filter.js", true, '', -100000) }
+{@ Context::loadLang('./modules/marketplace/m.skins/default/lang')}
+<!--%import("js/mmarketplace.js")-->
+<!--%import("css/mmarketplace.css")-->
+<div class="hd hx h2">
+	<div class="category"><!--@if($module_info->use_category == "Y" && $oDocument->get('category_srl'))--><a href="{getUrl('document_srl','','category',$oDocument->get('category_srl'))}">{$category_list[$oDocument->get('category_srl')]->title}</a><!--@end--></div>
+	<h2 class="title">{$oDocument->getTitle()}</h2>
+	<div class="ex">{$oDocument->getNickName()} | {$oDocument->getRegdate()} | <a href="#skip_co">{$lang->skip_to_content}</a></div>
+</div>
+<div class="co">
+
+{@ $thumbnails = $oMarketItem->getThumbnails(400,0,'ratio')}
+<img src="{$val}" loop="$thumbnails => $val" />
+
+
+<dl class="xv">
+	<dt>상품명</dt>
+	<dd>{$oMarketItem->get('product_name')}</dd>
+
+	<dt>사용 기간</dt>
+	<dd>
+	{@
+		$used_month = $oMarketItem->get('used_month');
+		if($used_month>12)
+		  echo sprintf("%d년",intval($used_month/12));
+		if($used_month%12)
+		  echo sprintf("%d개월",$used_month%12);
+		if($used_month == 0)
+		  echo "미사용";
+	}
+	</dd>
+
+	<dt>판매 가격</dt>
+	<dd>{number_format($oMarketItem->get('price'))}<small>원</small></dd>
+	
+	<dt>우선 거래 지역</dt>
+	<dd>{$oMarketItem->get('priority_area')}</dd>
+	
+	<dt>거래 방법</dt>
+	<dd><span class="badge" cond="$oMarketItem->get('direct_dealing')=='Y'">직거래</span> <span class="badge" cond="$oMarketItem->get('delivery')=='Y'">택배거래</span> <span class="badge badge-yellow" cond="$oMarketItem->get('safe_dealing')=='Y'">안전거래</span></dd>
+
+	<!--@if($oDocument->isExtraVarsExists())-->
+	<!--@foreach($_extra_vars as $key => $val)-->
+		<dt>{$val->name}</dt>
+		<dd>{$val->getValueHTML()}</dd>
+	<!--@end-->
+	<!--@end-->
+</dl>
+
+
+{$oDocument->getContent(false)}
+
+</div>
+<div id="skip_co"></div>
+<!--@if($oDocument->hasUploadedFiles())-->
+{@ $uploaded_list = $oDocument->getUploadedFiles() }
+<div class="hx h3">
+	<h3>{$lang->uploaded_file} <em>[{count($uploaded_list)}]</em></h3> 
+	<button type="button" class="tg" title="open/close"></button>
+</div>
+<ul class="file tgo open">
+	<!--@foreach($uploaded_list as $key => $file)-->
+	<li><a href="{getUrl('')}{$file->download_url}">{$file->source_filename} <span class="size">{FileHandler::filesize($file->file_size)}</span></a></li>
+	<!--@end-->
+</ul>
+<!--@endif-->
+<!--@if($oDocument->getCommentCount())-->
+<div class="hx h3">
+	<h3 id="clb">{$lang->comment} <em>[{$oDocument->getCommentCount()}]</em></h3> 
+	<button type="button" class="tg tgr" title="open/close"></button>
+</div>
+<!--@endif-->
+<!--@if($grant->write_comment && $oDocument->isEnableComment() )-->
+<div class="hx h3">
+	<h3>{$lang->write_comment}</h3>
+	<button type="button" class="tg" title="open/close"></button>
+</div>
+<form ruleset="insertComment" action="./" method="post" class="ff tgo open">
+	<input type="hidden" name="act" value="procMarketplaceInsertComment" />
+	<input type="hidden" name="mid" value="{$mid}" />
+	<input type="hidden" name="document_srl" value="{$oDocument->document_srl}" />
+	<input type="hidden" name="comment_srl" value="" />
+	<ul>
+		<li>
+			<label for="rText">{$lang->comment}</label>
+			<textarea class="textarea" name="content" rows="8" cols="10" id="rText"></textarea>
+		</li>
+		<!--@if(!$is_logged)-->
+		<li>
+			<label for="uName">{$lang->writer}</label>
+			<input name="nick_name" type="text" id="uName" />
+		</li>
+		<li>
+			<label for="uMail">{$lang->email_address}</label>
+			<input name="email_address" type="email" id="uMail" />
+		</li>
+		<li>
+			<label for="uPw">{$lang->password}</label>
+			<input name="password" type="password" id="uPw" />
+		</li>
+		<li>
+			<label for="uSite">{$lang->homepage}</label>
+			<input name="homepage" type="url" id="uSite" value="http://" />
+		</li>
+		<!--@endif-->
+	</ul>
+	<div class="bna">
+		<input name="" type="submit" value="{$lang->cmd_comment_registration}" class="bn white full" />
+	</div>
+</form>
+<!--@end-->
+<div style="height:1px;overflow:hidden;background:#ddd"></div>
+<div class="bna">
+	<span class="fl"><a href="{getUrl('document_srl','')}" class="bn white">{$lang->cmd_list}</a></span>
+	<span class="fr">
+		<!--@if($oDocument->isEditable())-->
+		<a href="{getUrl('act','dispMarketplaceDelete','document_srl',$oDocument->document_srl,'comment_srl','')}" class="bn white">{$lang->cmd_delete}</a>
+		<!--@end-->
+	</span>
+</ul>
+<script>
+//<![CDATA[
+jQuery(function($){
+	$('.co .mm').next().hide();
+	$('.mm').click(function(){ $(this).hide().next().show();});
+	$('.tgo').removeClass('open');
+	$('.tg').click(function(){
+		$(this).parent('.h3').next('.tgo').toggleClass('open');
+	});
+	var loaded = false;
+	$('.tgr').click(function(){
+		if(!loaded) {
+			loaded = true;
+			{@ $lastpage = 1; }
+			{@ $temp = $oDocument->getComments() }
+			<!--@if($oDocument->comment_page_navigation)-->
+			{@ $lastpage = $oDocument->comment_page_navigation->last_page }
+			<!--@endif-->
+			loadPage({$oDocument->document_srl}, {$lastpage});
+		}
+	});
+});
+//]]>
+</script>

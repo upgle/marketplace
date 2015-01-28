@@ -1,0 +1,113 @@
+<include target="./header.html" />
+
+{@ print_r($module_info->item_conditions)}
+
+<div cond="$XE_VALIDATOR_MESSAGE" class="message {$XE_VALIDATOR_MESSAGE_TYPE}">
+	<p>{$XE_VALIDATOR_MESSAGE}</p>
+</div>
+
+<!--@if($type == 'insertExtraForm' || $eid)-->
+	<section class="section">
+		<h1>제품구분 관리</h1>
+		<form ruleset="insertExtraVar" action="./" method="post" class="x_form-horizontal">
+			<input type="hidden" name="module" value="marketplace" />
+			<input type="hidden" name="act" value="procMarketplaceAdminInsertItemCondition" />
+			<input type="hidden" name="success_return_url" value="{getUrl('eid', '','type','')}" />
+			<input type="hidden" name="eid" value="{$condition->eid}" cond="$condition->eid" />
+
+			<div class="x_control-group">
+				<label class="x_control-label" for="eid">영문 컬럼명</label>
+				<div class="x_controls">
+					<input type="text" name="eid" id="eid" value="{$condition->eid}" placeholder="Ex) new, used, aclass, bclass" disabled="disabled"|cond="$condition->eid" />
+					<p class="x_help">데이터베이스 입출력을 위한 영문컬럼명을 적어주세요 영문, 숫자, _를 조합해서 사용할 수 있으며 첫 글자는 영문이어야 합니다.</p>
+				</div>
+			</div>
+			<div class="x_control-group">
+				<label class="x_control-label" for="lang_name">제품 구분 이름</label>
+				<div class="x_controls">
+					<input type="text" name="name" id="name" value="{$condition->name}" placeholder="Ex) 중고제품, 리퍼비시제품" />
+					<p class="x_help">글 등록 화면이나 검색창에서 노출되는 이름입니다.</p>
+				</div>
+			</div>
+			<div class="x_control-group">
+				<label class="x_control-label" for="default">짧은 이름</label>
+				<div class="x_controls">
+					<input type="text" name="short_name" id="short_name"  value="{$condition->short_name}" value="{$selected_var->default}" placeholder="Ex) 중고, 새제품, 리퍼" />
+					<p class="x_help-inline">{$lang->about_extra_vars_default_value}</p>
+				</div>
+			</div>
+			<div class="x_control-group">
+				<label class="x_control-label" for="lang_desc">{$lang->description}</label>
+				<div class="x_controls">
+					<input type="text" name="desc" id="desc" value="{$condition->desc}" placeholder="Ex) Displayed as your choice." />
+				</div>
+			</div>
+			<div class="x_clearfix btnArea">
+				<div class="x_pull-left">
+					<a class="x_btn" href="{getUrl('type','','eid','')}">{$lang->cmd_back}</a>
+				</div>
+				<div class="x_pull-right">
+					<!--@if($eid)-->
+					<button type="submit" class="x_btn x_btn-primary">{$lang->cmd_modify}</button>
+					<!--@else-->
+					<button type="submit" class="x_btn x_btn-primary">{$lang->cmd_insert}</button>
+					<!--@end-->
+				</div>
+			</div>
+		</form>
+	</section>
+
+<!--@else-->
+
+<section class="section">
+	<div class="x_clearfix">
+		<div class="x_btn-group x_pull-right">
+			<a class="x_btn" href="{getUrl('type','insertExtraForm','selected_var_idx','')}">{$lang->cmd_insert}</a>
+		</div>
+	</div>
+	<table class="x_table x_table-striped x_table-hover">
+		<thead>
+			<tr class="nowr">
+				<th>{$lang->no}</th>
+				<th>영문 컬럼명</th>
+				<th>제품 구분 이름</th>
+				<th>짧은 이름</th>
+				<th>&nbsp;</th>
+			</tr>
+		</thead>
+		<tbody>
+			<block loop="$condition_list => $key,$val">
+			<tr>
+				<td rowspan="2"|cond="$val->desc">{$val->idx}</td>
+				<td>{$val->eid}</td>
+				<td class="nowr"><strong>{$val->name}</strong></td>
+				<td class="nowr">{$val->short_name}</td>
+				<td class="nowr" style="text-align:right">
+					<block cond="$val->idx > 1">
+						<button type="button" class="x_icon-arrow-up" onclick="moveCondition('up','{$module_srl}','{$val->eid}')">{$lang->cmd_move_up}</button>
+					</block>
+					<block cond="count($condition_list) > $val->idx">
+						<button type="button" class="x_icon-arrow-down" onclick="moveCondition('down','{$module_srl}','{$val->eid}')">{$lang->cmd_move_down}</button>
+					</block>
+					<a href="{getUrl('eid',$val->eid)}" class="x_icon-wrench">{$lang->cmd_modify}</a>
+					<button type="button" class="x_icon-trash" onclick="return doDeleteCondition('{$module_srl}','{$val->eid}');">{$lang->cmd_delete}</button>
+				</td>
+			</tr>
+			<tr cond="$val->desc">
+				<td colspan="5">{$val->desc}</td>
+			</tr>
+			</block>
+		</tbody>
+	</table>
+	<div class="x_clearfix">
+		<div class="x_pull-right">
+			<a class="x_btn" href="{getUrl('type','insertExtraForm','selected_var_idx','')}">{$lang->cmd_insert}</a>
+		</div>
+	</div>
+</section>
+<!--@end-->
+
+<form id="fo_delete" name="fo_delete" method="post" action="./">
+<input type="hidden" name="module_srl" value="" />
+<input type="hidden" name="var_idx" value="" />
+</form>

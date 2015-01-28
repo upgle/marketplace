@@ -1,0 +1,29 @@
+/* css reset */
+span, h1, h2, h3, h4, h5, h6, p, blockquote, pre, em, img, q, small, strike, strong, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th ,td, section
+{
+	margin: 0; padding: 0; border: 0; line-height: 1;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section
+{
+	display: block;
+}
+
+ol, ul 
+{
+	list-style: none;
+}
+table 
+{
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+strong { font-weight:bold; }
+
+a {
+	text-decoration: none;
+	&:link {color: #000000;}
+	&:visited {color: #2E2E2E;}
+	&:hover, &:active { text-decoration: underline;}
+}

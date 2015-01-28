@@ -1,0 +1,14 @@
+<query id="getKeywordCount" action="select">
+    <tables>
+        <table name="marketplace_keyword_member" alias="keyword_member" />
+    </tables>
+    <columns>
+        <column name="count(*)" alias="count" />
+    </columns>
+    <conditions>
+        <condition operation="equal" column="keyword" var="keyword" notnull="notnull"  />
+    </conditions>
+</query>
+
+
+

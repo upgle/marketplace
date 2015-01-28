@@ -1,0 +1,17 @@
+<query id="getAllKeywords" action="select">
+    <tables>
+        <table name="marketplace_keyword_member" alias="keyword_member" />
+    </tables>
+    <columns>
+		<column name="keyword_member.keyword" />
+    </columns>
+	<groups>
+		<group column="keyword_member.keyword" />
+	</groups>
+    <conditions>
+        <condition operation="equal" column="module_srl" var="module_srl" filter="number" notnull="notnull" pipe="and" />
+    </conditions>
+</query>
+
+
+

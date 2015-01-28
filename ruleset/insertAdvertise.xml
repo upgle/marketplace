@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ruleset version="1.5.0">
+	<fields>
+		<field name="bid_price" required="true" rule="number" length="1:11" />
+		<field name="balance" required="true" rule="number" length="1:11" />
+	</fields>
+</ruleset>

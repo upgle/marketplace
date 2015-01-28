@@ -1,0 +1,8 @@
+<table name="marketplace_conditions">
+    <column name="module_srl" type="number" size="11" notnull="notnull" unique="unique_condition" />
+    <column name="eid" type="varchar" size="40" notnull="notnull" unique="unique_condition" />
+    <column name="idx" type="number" size="11" notnull="notnull" unique="unique_condition" />
+	<column name="name" type="varchar" size="50" notnull="notnull" />
+    <column name="short_name" type="varchar" size="10" notnull="notnull" />
+    <column name="desc" type="text" />
+</table>

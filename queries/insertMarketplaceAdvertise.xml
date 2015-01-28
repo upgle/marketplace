@@ -1,0 +1,11 @@
+<query id="insertMarketplaceAdvertise" action="insert">
+    <tables>
+        <table name="marketplace_advertise" />
+    </tables>
+    <columns>
+        <column name="document_srl" var="document_srl" filter="number" notnull="notnull" />
+        <column name="bid_price" var="bid_price" filter="number" notnull="notnull" />
+        <column name="balance" var="balance" filter="number" notnull="notnull" />
+        <column name="regdate" var="regdate" default="curdate()" />
+    </columns>
+</query>

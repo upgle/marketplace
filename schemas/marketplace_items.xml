@@ -1,0 +1,17 @@
+<table name="marketplace_items">
+    <column name="document_srl" type="number" size="11" notnull="notnull" index="idx_document_srl" primary_key="primary_key" />
+    <column name="thumbnails_srl" type="number" size="11" notnull="notnull" index="idx_thumbnails_srl" />
+    <column name="product_name" type="varchar" size="250" />
+	<column name="original_price" type="number" size="11" default="0" notnull="notnull" />
+	<column name="price" type="number" size="11" default="0" notnull="notnull" />
+    <column name="item_condition" type="varchar" size="10" notnull="notnull" />
+    <column name="used_month" type="number" default="0" notnull="notnull" size="3" />
+    <column name="priority_area" type="varchar" size="30" />
+	<column name="delivery" type="char" size="1" default="Y"  notnull="notnull" />
+	<column name="direct_dealing" type="char" size="1" default="Y" notnull="notnull" />
+	<column name="safe_dealing" type="char" size="1" default="Y" notnull="notnull" />
+    <column name="reinsert_date" type="date" index="idx_regdate" />
+    <column name="seller_contact" type="varchar" size="20" />
+	<column name="item_status" type="varchar" size="20" default="selling" notnull="notnull" />
+</table>
+

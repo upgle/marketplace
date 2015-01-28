@@ -1,0 +1,9 @@
+<query id="deleteSettingCondition" action="delete">
+    <tables>
+        <table name="marketplace_conditions" />
+    </tables>
+    <conditions>
+        <condition operation="equal" column="module_srl" var="module_srl" filter="number" notnull="notnull"   pipe="and" />
+		<condition operation="equal" column="eid" var="eid" pipe="and" />
+    </conditions>
+</query>

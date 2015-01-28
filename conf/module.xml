@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<module>
+	<grants>
+		<grant name="list" default="guest">
+			<title xml:lang="ko">목록</title>
+			<title xml:lang="en">list</title>
+		</grant>
+		<grant name="view" default="guest">
+			<title xml:lang="ko">열람</title>
+			<title xml:lang="en">view</title>
+		</grant>
+		<grant name="write_document" default="guest">
+			<title xml:lang="ko">글 작성</title>
+			<title xml:lang="en">write document</title>
+		</grant>
+		<grant name="write_comment" default="guest">
+			<title xml:lang="ko">댓글 작성</title>
+			<title xml:lang="en">write comment</title>
+		</grant>
+	</grants>
+	<permissions>
+		<permission action="dispMarketplaceItemManage" target="member" />
+		<permission action="dispMarketplaceItemComments" target="member" />
+		<permission action="dispMarketplaceAdvertiseManage" target="member" />
+		<permission action="dispMarketplaceAdvertiseLog" target="member" />
+		<permission action="dispMarketplaceAdvertiseInsert" target="member" />
+		<permission action="dispMarketplaceNoticeWrite" target="member" />
+
+		<permission action="dispMarketplaceDelete" target="manager" />
+		<permission action="procMarketplaceDeleteDocument" target="manager" />
+
+		<permission action="dispMarketplaceAdminInsertMarketplace" target="manager" />
+		<permission action="dispMarketplaceAdminMarketplaceInfo" target="manager" />
+		<permission action="dispMarketplaceAdminExtraVars" target="manager" />
+		<permission action="dispMarketplaceAdminItemConditions" target="manager" />
+		<permission action="dispMarketplaceAdminMarketplaceAdditionSetup" target="manager" />
+		<permission action="dispMarketplaceAdminSkinInfo" target="manager" />
+		<permission action="procMarketplaceAdminInsertMarketplace" target="manager" />
+		<permission action="procMarketplaceAdminInsertItemCondition" target="manager" />
+		<permission action="procMarketplaceAdminUpdateMarketplaceFroBasic" target="manager" />
+		<permission action="procMarketplaceAdminSaveCategorySettings" target="manager" />
+		<permission action="procMarketplaceAdminDeleteItemCondition" target="manager" />
+		<permission action="procMarketplaceAdminMoveItemCondition" target="manager" />
+		<permission action="getMarketplaceAdminSimpleSetup" target="manager" />
+	</permissions>
+	<actions>
+		<action name="dispMarketplaceContent" type="view" index="true" />
+		<action name="dispMarketplaceNoticeList" type="view" />
+		<action name="dispMarketplaceContentList" type="view" />
+		<action name="dispMarketplaceContentView" type="view" />
+		<action name="dispMarketplaceWishList" type="view" />
+		<action name="dispMarketplaceCatogoryList" type="view" />
+		<action name="dispMarketplaceContentCommentList" type="view" />
+		<action name="dispMarketplaceContentFileList" type="view" />
+		<action name="dispMarketplaceAddContent" type="view" />
+		<action name="dispMarketplaceModifyItem" type="view" />
+		<action name="dispMarketplaceWrite" type="view" />
+		<action name="dispMarketplaceNoticeWrite" type="view" />
+		<action name="dispMarketplaceItemManage" type="view" />
+		<action name="dispMarketplaceItemComments" type="view" />
+		<action name="dispMarketplaceAdvertiseManage" type="view" />
+		<action name="dispMarketplaceAdvertiseLog" type="view" />
+		<action name="dispMarketplaceAdvertiseInsert" type="view" />
+		<action name="dispMarketplaceDelete" type="view" />
+		<action name="dispMarketplaceWriteComment" type="view" />
+		<action name="dispMarketplaceReplyComment" type="view" />
+		<action name="dispMarketplaceModifyComment" type="view" />
+		<action name="dispMarketplaceDeleteComment" type="view" />
+		<action name="dispMarketplaceDeleteTrackback" type="view" />
+		<action name="dispMarketplaceMessage" type="view" />
+		<action name="dispMarketplaceKeywordManage" type="view" />
+
+		<action name="procMarketplaceInsertDocument" type="controller" ruleset="insertItemServer" />
+		<action name="procMarketplaceInsertNotice" type="controller" />
+		<action name="procMarketplaceDeleteDocument" type="controller" />
+		<action name="procMarketplaceInsertComment" type="controller" />
+		<action name="procMarketplaceDeleteComment" type="controller" />
+		<action name="procMarketplaceDeleteTrackback" type="controller" />
+		<action name="procMarketplaceVerificationPassword" type="controller" />
+		<action name="procMarketplaceDeleteFile" type="controller" />
+		<action name="procMarketplaceUploadFile" type="controller" />
+		<action name="procMarketplaceDownloadFile" type="controller" />
+		<action name="procMarketplaceItemManage" type="controller"  />
+		<action name="procMarketplaceInsertAdvertise" type="controller"  />
+		<action name="procMarketplaceChangeStatus" type="controller" />
+		<action name="procMarketplaceDeleteAdvertise" type="controller" />
+		<action name="procMarketplaceInsertKeyword" type="controller" ruleset="insertKeyword" />
+		<action name="procMarketplaceDeleteKeyword" type="controller" />
+		<action name="procMarketplaceReinsertDocument" type="controller" />
+		<action name="procMarketplaceAddContent" type="controller" />
+		<action name="procMarketplaceItemModify" type="controller" />
+		<action name="procMarketplaceToggleWishlist" type="controller" />
+		<action name="triggerInsertMarketplaceItem" type="controller" />
+		<action name="triggerDeleteMarketplaceItem" type="controller" />
+		<action name="procMarketplaceActionRecord" type="controller" method="GET|POST" />
+
+		<action name="dispMarketplaceAdminContent" type="view" admin_index="true" menu_name="marketplace" menu_index="true" />
+		<action name="dispMarketplaceAdminMarketplaceInfo" type="view"  menu_name="marketplace" />
+		<action name="dispMarketplaceAdminExtraVars" type="view"  menu_name="marketplace" />
+		<action name="dispMarketplaceAdminItemConditions" type="view"  menu_name="marketplace" />
+		<action name="dispMarketplaceAdminMarketplaceAdditionSetup" type="view" menu_name="marketplace"  />
+		<action name="dispMarketplaceAdminInsertMarketplace" type="view" setup_index="true" menu_name="marketplace" />
+		<action name="dispMarketplaceAdminDeleteMarketplace" type="view" menu_name="marketplace"  />
+		<action name="dispMarketplaceAdminSkinInfo" type="view" menu_name="marketplace"  />
+		<action name="dispMarketplaceAdminMobileSkinInfo" type="view" menu_name="marketplace"  />
+		<action name="dispMarketplaceAdminGrantInfo" type="view" menu_name="marketplace"  />
+		<action name="dispMarketplaceAdminCategoryInfo" type="view" menu_name="marketplace"  />
+
+		<action name="procMarketplaceAdminInsertMarketplace" type="controller" ruleset="insertMarketplace" />
+		<action name="procMarketplaceAdminDeleteMarketplace" type="controller" />
+		<action name="procMarketplaceAdminUpdateMarketplaceFroBasic" type="controller" ruleset="insertMarketplaceForBasic" />
+		<action name="procMarketplaceAdminSaveCategorySettings" type="controller" ruleset="saveCategorySettings" />
+		<action name="procMarketplaceAdminInsertItemCondition" type="controller" />
+		<action name="procMarketplaceAdminDeleteItemCondition" type="controller" />
+		<action name="procMarketplaceAdminMoveItemCondition" type="controller" />
+
+		<action name="getMarketplaceContactNumber" type="model" />
+		<action name="getMarketplaceAdminSimpleSetup" type="model" simple_setup_index="true" />
+		<action name="dispMarketplaceCategory" type="mobile" />
+		<action name="getMarketplaceCommentPage" type="mobile" />
+	</actions>
+	<menus>
+		<menu name="marketplace" type="all">
+			<title xml:lang="en">Marketplace</title>
+			<title xml:lang="ko">마켓플레이스</title>
+		</menu>
+	</menus>
+</module>

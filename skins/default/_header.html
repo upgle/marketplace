@@ -1,0 +1,158 @@
+<load target="marketplace.default.js" type="body" />
+<load target="default.css" />
+
+<!--xe icon load-->
+<load target="plugin/xe-icon/xeicon.css" />
+
+<!--carousel plugin load-->
+<load target="plugin/owl-carousel/owl.carousel.css" />
+<load target="plugin/owl-carousel/owl.theme.css" />
+<load target="plugin/owl-carousel/owl.carousel.js" type="body" />
+
+<!--relatedselects plugin load-->
+<load target="plugin/dependent-selects/jquery.dependent-selects.js" type="head" />
+
+<block cond="!$module_info->duration_new = (int)$module_info->duration_new">{@ $module_info->duration_new = 12 }</block>
+{@ $cate_list = array(); $current_key = null; }
+<!--@foreach($category_list as $key=>$val)-->
+	<!--@if(!$val->depth)-->
+		{@
+			$cate_list[$key] = $val;
+			$cate_list[$key]->children = array();
+			$current_key = $key;
+		}
+	<!--@elseif($current_key)-->
+		{@ $cate_list[$current_key]->children[] = $val }
+	<!--@end-->
+<!--@end-->
+{@
+    $_mypage_act = array("dispMarketplaceWrite", "dispMarketplaceNoticeWrite", "dispMarketplaceItemManage", "dispMarketplaceItemComments", "dispMarketplaceMemberModify","dispMarketplaceAdvertiseManage","dispMarketplaceAdvertiseLog","dispMarketplaceKeywordManage", "dispMarketplaceWishList");
+}
+<block cond="!in_array($act, $_mypage_act)">
+<div class="mp-box">
+    <div class="mp-sidebar mp-clearfix">
+        <div class="menu_title mp-hidetext"><span>카테고리</span></div>
+        <ul class="sidemenu">
+            <li class="active"|cond="!$category"><a href="{getUrl('','mid',$mid)}">{$lang->total}</a></li>
+            <li loop="$cate_list=>$key,$val" class="active"|cond="$category==$val->category_srl || $category_list[$category]->parent_srl==$val->category_srl"><a href="{getUrl(category,$val->category_srl,'document_srl','', 'page', '', 'act', '')}">{$val->title}<!--<em cond="$val->document_count">[{$val->document_count}]</em>--></a>
+                <ul class="submenu" cond="count($val->children)">
+                    <li loop="$val->children=>$idx,$item" class="on_"|cond="$category==$item->category_srl"><a href="{getUrl(category,$item->category_srl,'document_srl','', 'page', '', 'act', '')}">{$item->title}<!--<em cond="$val->document_count">[{$item->document_count}]</em>--></a></li>
+                </ul>
+            </li>
+			
+			<block cond="$logged_info">
+            <li class="divider"></li>
+            <li><a href="{getUrl('', 'mid', $mid, 'act','dispMarketplaceWishList')}"><i class="xe-star"></i> 관심 상품 보기</a></li>
+            <li cond="$module_info->use_keyword_notify"><a href="{getUrl('','mid',$mid,'act','dispMarketplaceKeywordManage')}"><i class="xe-bell-ring"></i> 키워드 알림 설정</a></li>
+			</block>
+
+			<block cond="$grant->manager">
+			<li class="divider"></li>
+            <li><a href="{getUrl('act','dispMarketplaceAdminMarketplaceInfo')}"><strong><i class="xe-tool"></i> 마켓플레이스 모듈 설정</a></strong></li>
+			</block>
+        </ul>
+        <div class="option_selector">
+        <form name="quick_search" action="{getUrl()}" method="get" no-error-return-url="true">
+            <input type="hidden" name="mid" value="{$mid}" />
+            <input type="hidden" name="category" value="{$category}" />
+            <ul>
+                <li><strong>제품 구분 (상태)</strong></li>
+				<block loop="$condition_list => $condition">
+                <li><label><input type="checkbox" name="item_condition[]" value="{$condition->eid}" checked="checked"|cond="in_array($condition->eid,Context::get('item_condition'))" /> {$condition->name}</label></li></label></li>
+				</block>
+            </ul>
+            <ul class="mp-margin-top-15">
+                <li><strong>가격대</strong></li>
+                <li><input type="text" class="number price_from" id="price_from" name="price_from" value="{number_format($price_from)}"|cond="$price_from" size="7" /> - <input type="text" class="number price_to" id="price_to" name="price_to" value="{number_format($price_to)}"|cond="$price_to" size="8" /></li>
+            </ul>
+            <ul>
+                <li><strong>우선거래지역</strong></li>
+                <li>
+					{@ $oMarketplaceModel = getModel('marketplace');
+					   $districts = $oMarketplaceModel->getDistrict();
+					}
+					<select name="priority_area" class="mp-dependent">
+						<option value="">전체</option>
+						<option value="서울특별시" selected="selected"|cond="$priority_area=='서울특별시'">서울특별시 전체</option>
+						<option value="{trim($val)}" loop="$districts => $val"  selected="selected"|cond="$priority_area==trim($val)" cond="strpos($val,'서울') !== false">{$val}</option>
+						<option value="경기">경기도 전체</option>
+						<option value="{trim($val)}" loop="$districts => $val"  selected="selected"|cond="$priority_area==trim($val)" cond="strpos($val,'경기') !== false">{$val}</option>
+						<option value="인천" selected="selected"|cond="$priority_area=='인천'">인천광역시</option>
+						<option value="강원" selected="selected"|cond="$priority_area=='강원'">강원도</option>
+						<option value="경상" selected="selected"|cond="$priority_area=='경상'">경상도</option>
+						<option value="광주" selected="selected"|cond="$priority_area=='광주'">광주시</option>
+						<option value="대구" selected="selected"|cond="$priority_area=='대구'">대구시</option>
+						<option value="대전" selected="selected"|cond="$priority_area=='대전'">대전시</option>
+						<option value="부산" selected="selected"|cond="$priority_area=='부산'">부산시</option>
+						<option value="울산" selected="selected"|cond="$priority_area=='울산'">울산시</option>
+						<option value="전라" selected="selected"|cond="$priority_area=='전라'">전라도</option>
+						<option value="충청" selected="selected"|cond="$priority_area=='충청'">충청도</option>
+						<option value="제주" selected="selected"|cond="$priority_area=='제주'">제주도</option>
+					</select>
+                    <script>
+                    jQuery('.mp-dependent').dependentSelects({
+                        separator: ' ', 
+						placeholder : false,
+                        class: 'mp-input mp-dependent'
+                    });
+                    </script>
+				</li>
+            </ul>
+            <ul>
+                <li><strong>사용 기간</strong></li>
+                <li><label><input type="radio" name="used_month" value="all" checked="checked"|cond="Context::get('used_month')=='all'"/> 전체</label></li>
+                <li><label><input type="radio" name="used_month" value="1" checked="checked"|cond="Context::get('used_month')=='1'"/> 1개월 이내</label></li>
+                <li><label><input type="radio" name="used_month" value="6" checked="checked"|cond="Context::get('used_month')=='6'"/> 6개월 이내</label></li>
+                <li><label><input type="radio" name="used_month" value="12" checked="checked"|cond="Context::get('used_month')=='12'"/> 1년 이내</label></li>
+            </ul>
+
+            <div class="btn_area">
+            <a href="javascript:quickSearchSubmit();">조건별 검색</a>
+            <a href="{getUrl('used_month','','price_from','','price_to','','priority_area','','item_condition','')}" /><i class="xe-repeat"></i> 선택해제
+            </a>
+            </div>
+        </form>
+        </div>
+
+		<div class="mp-margin-top-25" cond="$module_info->mainbanner">
+			<!--일반 배너-->
+			<img src="{$module_info->mainbanner}" style="width:215px" cond="!$module_info->mainbanner_link" />
+			<!--링크 배너-->
+			<a href="{$module_info->mainbanner_link}" target="{$module_info->mainbanner_target}" cond="$module_info->mainbanner_link"><img src="{$module_info->mainbanner}" style="width:215px" /></a>
+		</div>
+
+    </div>
+	{$module_info->header_text}
+</block>
+
+
+
+<block cond="in_array($act, $_mypage_act)">
+<div class="mp-box">
+    <div class="mp-sidebar sidebar-insert-page">
+        <h3><img src="images/subtitle_manage_myitem.png" /></h3>
+        <ul class="sidemenu">
+            <li class="active"|cond="$act=='dispMarketplaceWrite'"><a href="{getUrl('','mid',$mid,'act','dispMarketplaceWrite')}"><i class="xe-photo-camera-a"></i> 내 상품 등록</a></li>
+            <li class="active"|cond="$act=='dispMarketplaceItemManage'"><a href="{getUrl('','mid',$mid,'act','dispMarketplaceItemManage')}"><i class="xe-archive"></i> 내 상품 관리</a></li>
+            <li class="active"|cond="$act=='dispMarketplaceItemComments'"><a href="{getUrl('','mid',$mid,'act','dispMarketplaceItemComments')}"><i class="xe-message-bubble"></i> 내 상품에 달린 댓글</a></li>
+            <li class="active"|cond="$act=='dispMarketplaceWishList'"><a href="{getUrl('','mid',$mid,'act','dispMarketplaceWishList')}"><i class="xe-star"></i> 내 관심 상품 보기</a></li>
+        </ul>
+
+		<block cond="$module_info->use_advertise">
+        <h3><img src="images/subtitle_manage_advertise.png" /></h3>
+        <ul class="sidemenu">
+            <li class="active"|cond="$act=='dispMarketplaceAdvertiseManage'"><a href="{getUrl('','mid',$mid,'act','dispMarketplaceAdvertiseManage')}">진행중인 프리미엄 광고</a></li>
+            <li class="active"|cond="$act=='dispMarketplaceAdvertiseLog'"><a href="{getUrl('','mid',$mid,'act','dispMarketplaceAdvertiseLog')}">프리미엄 광고 과금 내역</a></li>
+        </ul>
+		</block>
+
+		<block cond="$module_info->use_keyword_notify">
+        <h3><img src="images/subtitle_manage_keyword.png" /></h3>
+        <ul class="sidemenu">
+            <li class="active"|cond="$act=='dispMarketplaceKeywordManage'"><a href="{getUrl('','mid',$mid,'act','dispMarketplaceKeywordManage')}">장터 키워드 알림 설정</a></li>
+        </ul>
+		</block>
+	
+	</div>
+</block>
+

@@ -1,0 +1,53 @@
+<div class="hx hd h2">
+	<h2><a href="{getUrl('','vid',$vid,'mid',$mid)}">{$module_info->browser_title}</a> <em>[{number_format($total_count)}]</em></h2>
+	<!--@if($module_info->use_category == "Y")--><a href="{getUrl('page','','act','dispMarketplaceCategory','')}" class="ca">{$lang->category}</a><!--@endif-->
+	<a href="{getUrl('act','dispMarketplaceWrite','document_srl','')}" class="write">내 물품 판매</a>
+</div>
+<ul class="lt">
+	<!--@foreach($notice_list as $no => $document)-->
+	<li>
+		<a href="{getUrl('document_srl', $document->document_srl)}">
+		<span class="title"><span class="notice">{$lang->notice}</span> <strong>{$document->getTitle($module_info->subject_cut_size)}</strong> <!--@if($document->getCommentCount())--><em>[{$document->getCommentCount()}]</em><!--@endif--></span>
+			<span class="auth"><strong>{$document->getNickName()}</strong> <span class="time">{$document->getRegDate("Y.m.d")}</span></span>
+		</a>
+	</li>
+	<!--@end-->
+	<!--@foreach($marketitem_list as $no => $marketitem)-->
+	<li>
+		<a href="{getUrl('document_srl', $marketitem->document_srl)}">
+			<div class="thumb">
+				<span class="badge badge-{$marketitem->getItemCondition()}"  style="border-radius:3px 0 3px 0">{$condition_list[$marketitem->getItemCondition()]->short_name}</span>
+				<img src="{$marketitem->getThumbnail(80, 65)}" style="border-radius:3px"/>
+			</div>
+			<div class="meta">
+				<span class="category">
+					<!--@if($module_info->use_category == "Y" && $marketitem->get('category_srl'))-->{$category_list[$marketitem->get('category_srl')]->title} &rsaquo;<!--@end--> 				
+				</span>
+				<span class="title"><strong>{$marketitem->getTitle($module_info->subject_cut_size)}</strong> <!--@if($marketitem->getCommentCount())--><em>[{$marketitem->getCommentCount()}]</em><!--@endif--></span>
+				<span class="auth">
+				<span class="time">{$marketitem->getRegDate("Y.m.d")}</span><strong>{$marketitem->getNickName()}</strong></span>
+				<span class="price">{$marketitem->getPrice(true)}원</span>
+			</div>
+			<div style="clear:both"></div>
+		</a>
+	</li>
+	<!--@end-->
+</ul>
+<div class="pn">
+	<!--@if($page != 1)-->
+	<a href="{getUrl('page',$page-1,'document_srl','','division',$division,'last_division',$last_division,'entry','')}" class="prev">{$lang->cmd_prev}</a> 
+	<!--@endif-->
+	<strong>{$page} / {$page_navigation->last_page}</strong>
+	<!--@if($page != $page_navigation->last_page)-->
+	<a href="{getUrl('page',$page+1,'document_srl','','division',$division,'last_division',$last_division,'entry','')}" class="next">{$lang->cmd_next}</a>
+	<!--@endif-->
+</div>
+<div class="sh">
+	<form action="{getUrl()}" method="get">
+		<input type="hidden" name="vid" value="{$vid}" />
+		<input type="hidden" name="mid" value="{$mid}" />
+		<input type="hidden" name="category" value="{$category}" />
+		<input type="search" name="search_keyword" value="{htmlspecialchars($search_keyword)}" title="{$lang->cmd_search}" />
+		<button type="submit" class="shbn" title="{$lang->cmd_search}"></button>
+	</form>
+</div>

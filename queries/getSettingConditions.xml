@@ -1,0 +1,14 @@
+<query id="getSettingConditions" action="select">
+    <tables>
+        <table name="marketplace_conditions" />
+    </tables>
+    <columns>
+        <column name="marketplace_conditions.*" />
+    </columns>
+    <conditions>
+        <condition operation="equal" column="module_srl" var="module_srl" filter="number" notnull="notnull" />
+    </conditions>
+    <navigation>
+        <index var="sort_index" default="idx" order="asc" />
+    </navigation>
+</query>

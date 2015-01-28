@@ -1,0 +1,23 @@
+<load target="js/marketplace_admin.js" />
+<div class="x_page-header">
+	<h1>
+		{$lang->marketplace_management} 
+		<span class="path" cond="$module_info->mid">
+			&gt; <a href="{getSiteUrl($module_info->domain,'','mid',$module_info->mid)}" target="_blank"|cond="$module=='admin'">{$module_info->mid}<block cond="$module_info->is_default=='Y'">({$lang->is_default})</block></a>
+		</span>
+		<a href="#aboutModule" data-toggle class="x_icon-question-sign">{$lang->help}</a>
+	</h1>
+</div>
+<p class="x_alert x_alert-info" id="aboutModule" hidden>{$lang->about_marketplace}</p>
+<ul class="x_nav x_nav-tabs" cond="$module_info && $act != 'dispMarketplaceAdminContent' && $act != 'dispMarketplaceAdminDeleteMarketplace'">
+	<li cond="$module=='admin'" class="x_active"|cond="$act=='dispMarketplaceAdminContent'"><a href="{getUrl('act','dispMarketplaceAdminContent','module_srl','', 'selected_var_idx', '', 'type', '')}">{$lang->cmd_marketplace_list}</a></li>
+	<!--<li class="x_active" cond="$act=='dispMarketplaceAdminInsertMarketplace'"><a href="{getUrl('act','dispMarketplaceAdminInsertMarketplace', 'selected_var_idx', '', 'type', '')}">{$lang->cmd_create_marketplace}</a></li>-->
+	<li cond="$module_srl" class="x_active"|cond="$act=='dispMarketplaceAdminMarketplaceInfo'"><a href="{getUrl('act','dispMarketplaceAdminMarketplaceInfo', 'selected_var_idx', '', 'type', '')}">{$lang->cmd_marketplace_info}</a></li>
+	<li cond="$module_srl" class="x_active"|cond="$act=='dispMarketplaceAdminItemConditions'"><a href="{getUrl('act','dispMarketplaceAdminItemConditions', 'selected_var_idx', '', 'type', '')}">제품구분 관리</a></li>
+	<li cond="$module_srl" class="x_active"|cond="$act=='dispMarketplaceAdminCategoryInfo'"><a href="{getUrl('act','dispMarketplaceAdminCategoryInfo', 'selected_var_idx', '', 'type', '')}">{$lang->cmd_manage_category}</a></li>
+	<li cond="$module_srl" class="x_active"|cond="$act=='dispMarketplaceAdminExtraVars'"><a href="{getUrl('act','dispMarketplaceAdminExtraVars', 'selected_var_idx', '', 'type', '')}">{$lang->extra_vars}</a></li>
+	<li cond="$module_srl" class="x_active"|cond="$act=='dispMarketplaceAdminGrantInfo'"><a href="{getUrl('act','dispMarketplaceAdminGrantInfo', 'selected_var_idx', '', 'type', '')}">{$lang->cmd_manage_grant}</a></li>
+	<li cond="$module_srl" class="x_active"|cond="$act=='dispMarketplaceAdminMarketplaceAdditionSetup'"><a href="{getUrl('act','dispMarketplaceAdminMarketplaceAdditionSetup', 'selected_var_idx', '', 'type', '')}">{$lang->cmd_addition_setup}</a></li>
+	<li cond="$module_srl" class="x_active"|cond="$act=='dispMarketplaceAdminSkinInfo'"><a href="{getUrl('act','dispMarketplaceAdminSkinInfo', 'selected_var_idx', '', 'type', '')}">{$lang->cmd_manage_skin}</a></li>
+	<li cond="$module_srl" class="x_active"|cond="$act=='dispMarketplaceAdminMobileSkinInfo'"><a href="{getUrl('act','dispMarketplaceAdminMobileSkinInfo', 'selected_var_idx', '', 'type', '')}">{$lang->cmd_manage_mobile_skin}</a></li>
+</ul>

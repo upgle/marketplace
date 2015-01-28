@@ -1,0 +1,98 @@
+<include target="_header.html" />
+
+<div class="mp-content content-insert-page">
+	<div class="content_header">
+		<div class="mp-title-manage-premium mp-hidetext">내 상품 등록</div>
+		<a href="{getUrl('act','dispMarketplaceContent','')}" class="mp-button button-white button-small button-return"><i class="xe-mail-reply"></i> 마켓으로 돌아가기</a>
+	</div>
+	<div class="mp-notice"><i class="xe-announce"> 광고 입찰가를 적절히 조절하면 지나친 광고비 지출을 줄일 수 있습니다.</i></div>
+
+	<div class="mp-block">
+		<div class="board ">
+
+			<div class="board_list basic_type">
+				<table class="tbl_board_lst">
+				<caption>진행중인 광고 리스트</caption>
+				<colgroup>
+				<col style="width: 110px;">
+				<col style="width: 90px;">
+				<col style="width: 125px;">
+				<col>
+				</colgroup>
+				
+				<thead>
+				<!-- LIST HEADER -->
+				<tr>
+				<th scope="col"><div class="ta_c">남은 광고료</div></th>
+				<th scope="col"><div class="ta_c">입찰가</div></th>
+				<th scope="col"><div class="ta_c">사진</div></th>
+				<th scope="col"><div class="ta_c">제목</div></th>
+				</tr>
+				<!-- /LIST HEADER -->
+				</thead>
+				<tbody cond="!$advertise_list">
+					<tr>
+						<td colspan="4">
+							<p style="text-align:center">진행중인 광고가 없습니다.</p>
+						</td>
+					</tr>
+				</tbody>
+				<tbody cond="$advertise_list">
+					<!-- LIST -->           
+					<tr loop="$advertise_list=>$no,$document">
+	
+					<td>
+						<div class="ta_c mp-price"><span style="background:none repeat scroll 0% 0% #5D6872;color:#fff;padding:4px 6px 3px;border-radius:2px"><i class="xe-leaf"></i> {number_format($document->get('balance'))} P</span></div>
+					</td>
+					<td><div class="ta_c mp-price">{number_format($document->get('bid_price'))} P</div></td>
+					<td class="bd_thmb">
+						<div style="position:relative">
+						<span class="mp-condition-badge mp-condition-badge-small mp-{$document->getItemCondition()}">{$condition_list[$document->getItemCondition()]->short_name}</span>
+						<img src="{$document->getThumbnail(118,77)}" />
+						</div>					
+					</td>
+					<td>
+						<!-- 카테고리 -->
+						<div class="ta_l bd_catetgory">
+						<a href="{getUrl('category',$document->get('category_srl'), 'document_srl', '')}" class="category">
+						[{$category_list[$document->get('category_srl')]->title}] 
+						</a>
+						</div>
+						<!-- 타이틀 -->
+						<div class="ta_l bd_tit"><a href="{getUrl('document_srl',$document->document_srl, 'listStyle', $listStyle, 'cpage','')}" class="soldout"|cond="$document->isSoldout()">{$document->getTitle()}</a> </div>
+						<!-- 작성일 -->
+						<div class="ta_l bd_date"><i class="xe-time-o"></i> {$document->getRegdate('Y년 m월 d일')} ({$document->getRegdateElapsedString()}) / <a href="#popup_menu_area" class="member_{$document->get('member_srl')}" onclick="return false">{$document->getNickName()}</a></div>
+
+						<div class="ta_l">
+							<div class="manage_area"> 
+								<a href="javascript:doStopAdvertise({$document->document_srl});" class="btn_action"><i class="xe-wastebasket"></i> 광고 중단</a> <a onclick="popopen(this.href); return false;" href="{getUrl('act','dispMarketplaceAdvertiseInsert','document_srl',$document->document_srl)}" class="btn_action mp-btn_blue"><i class="xe-tool"></i> 광고 수정</a>
+							</div>
+						</div>
+					</td>
+
+					</tr>
+				</tbody>
+				</table>
+			</div>
+		</div>
+
+	</div>
+
+	<style type="text/css">
+		.mp-squarebutton {
+			float: left;
+			width: 100px;
+			background-color: #f3f3f3;
+			border-radius: 6px;
+			text-align:center;
+			padding:20px 0;
+			margin-right:13px;
+		}
+		.mp-squarebutton i {
+			display:block;
+			font-size:60px;
+			margin-bottom:10px;
+		}
+	</style>
+</div>
+<include target="_footer.html" />

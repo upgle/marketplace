@@ -1,0 +1,139 @@
+<include target="_header.html" />
+
+<div class="mp-content content-insert-page">
+	<div class="content_header">
+		<div class="mp-title-keyword-alarm mp-hidetext">키워드 알림 설정</div>
+		<a href="{getUrl('act','dispMarketplaceContent')}" class="mp-button button-white button-small button-return"><i class="xe-mail-reply"></i> 마켓으로 돌아가기</a>
+	</div>
+	<div class="mp-notice">
+		<i class="xe-announce"> 키워드 알람을 활용하면 장터를 더 편리하게 이용하실 수 있습니다..</i>
+	</div>
+	<div class="mp-block">
+		<div class="keyword_box">
+		<h3 class="header"><i class="xe-server-look"></i> 키워드 등록</h3>
+			<div class="keyword_wrap">
+				<div class="left_side">
+					<form ruleset="insertKeyword" action="./" method="post">
+						<input type="hidden" name="act" value="procMarketplaceInsertKeyword" />
+						<input type="hidden" name="mid" value="{$mid}" />
+
+						<input name="keyword" type="text" class="mp-input" />
+						<input type="submit" class="btn_submit" value="등록하기" />					
+					</form>
+
+					<div class="inserted_keyword">
+						<h4>등록된 키워드 {count($keyword_list)}개</h4>
+						<ul class="keyword_list">
+							<li loop="$keyword_list => $val">
+								{$val->keyword} <a href="javascript:deleteKeyword('{$val->keyword}')"><i class="xe-close"></i></a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="right_side">
+					<ul class="guide">
+						<li>
+							<i class="xe-icon xe-Antenna"></i>
+							<p class="title">찾고자 하는 상품이 있으신가요?<br />키워드 알림을 설정하세요</p>
+							<p class="description">장터에 새 글이 등록될 때 키워드와 일치하는 상품이 있으면 쪽지로 알려드립니다.</p>
+						</li>
+						<li>
+							<i class="xe-icon xe-list-ol"></i>
+							<p class="title">키워드 등록은 최대 {$module_info->limit_keyword_count}개까지 하실 수 있습니다.</p>
+							<p class="description">DB 부하를 최소화하기 위해 키워드는 최대 {$module_info->limit_keyword_count}개까지 등록하실 수 있습니다.</p>
+						</li>
+					</ul>
+				</div>
+				<div class="mp-clearfix"></div>
+			</div>
+		</div>
+
+		<!-- 게시판 시작 -->
+		<div class="board mp-margin-top-20">
+			<div class="board_list basic_type">
+				<table class="tbl_board_lst">
+				<caption>게시판 리스트</caption>
+				<colgroup>
+				<col style="width: 125px;">
+				<col>
+				<col style="width: 90px;">
+				<col style="width: 90px;">
+				</colgroup>
+				<thead>
+				<!-- LIST HEADER -->
+				<tr>
+				<th scope="col"><div class="ta_c">사진</div></th>
+				<th scope="col"><div class="ta_c">{$lang->title}</div></th>
+				<th scope="col"><div class="ta_c">가격</div></th>
+				<th scope="col"><div class="ta_c">키워드</div></th>
+				</tr>
+				<!-- /LIST HEADER -->
+				</thead>
+				<tbody cond="!$marketitem_list">
+					<tr>
+						<td colspan="4">
+							<p style="text-align:center">검색된 글이 없습니다.</p>
+						</td>
+					</tr>
+				</tbody>
+				<tbody cond="$marketitem_list">
+					<!-- 리스트  -->           
+					<tr loop="$marketitem_list=>$no,$document">
+					<td class="bd_thmb">
+						<div style="position:relative">
+						<span class="mp-condition-badge mp-condition-badge-small mp-{$document->getItemCondition()}">{$condition_list[$document->getItemCondition()]->short_name}</span>
+						<img src="{$document->getThumbnail(118,77)}" />
+						</div>
+					</td>
+					<td>
+						<!-- 카테고리 -->
+						<div class="ta_l bd_catetgory">
+						<a href="{getUrl('category',$document->get('category_srl'), 'document_srl', '')}" class="category">
+						[{$category_list[$document->get('category_srl')]->title}]
+						</a>
+						</div>
+						<!-- 타이틀 -->
+						<div class="ta_l bd_tit"><a href="{getUrl('','mid',$mid,'document_srl',$document->document_srl)}">{$document->getTitle()}</a> {$document->printExtraImages(60*60*$module_info->duration_new)}</div>
+						<!-- 작성일 -->
+						<div class="ta_l bd_date"><i class="xe-time-o"></i> {$document->getRegdate('Y년 m월 d일')} / <a href="#popup_menu_area" class="member_{$document->get('member_srl')}" onclick="return false">{$document->getNickName()}</a></div>
+					</td>
+
+					<td>
+						<div class="ta_c mp-price">\ {number_format($document->get('price'))}</div>
+						<div class="ta_c mp-price price-original" cond="$document->get('original_price')">({number_format($document->get('original_price'))})</div>
+					</td>
+					<td><div class="ta_c">{$document->get('keywords')}</div></td>	
+					</tr>
+				</tbody>
+				</table>
+			</div>
+
+			<div class="list_footer">
+				<!-- PAGINATE -->
+				<div class="bd_paginate" cond="$marketitem_list">
+					<a class="pg_btn" href="{getUrl('page','','document_srl','','division',$division,'last_division',$last_division)}">
+						<i class="xe-angle-left"><span class="blind">{$lang->first_page}</span></i>
+					</a>
+					<block loop="$page_no=$page_navigation->getNextPage()">
+					<strong cond="$page==$page_no">{$page_no}</strong> 
+					<a cond="$page!=$page_no" href="{getUrl('page',$page_no,'document_srl','','division',$division,'last_division',$last_division)}">{$page_no}</a>
+					</block>
+					<a class="pg_btn" href="{getUrl('page',$page_navigation->last_page,'document_srl','','division',$division,'last_division',$last_division)}">
+					<i class="xe-angle-right"><span class="blind">{$lang->last_page}</span></i>
+					</a>
+			</div>
+			<!-- /PAGINATE -->
+		</div>
+		<!-- 게시판 끝 -->
+	</div>
+
+</div>
+
+<include target="_footer.html" />
+<block cond="$XE_VALIDATOR_MESSAGE">
+<script type="text/javascript">
+<!--
+	alert('{$XE_VALIDATOR_MESSAGE}');
+//-->
+</script>
+</block>

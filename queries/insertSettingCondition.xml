@@ -1,0 +1,13 @@
+<query id="insertSettingCondition" action="insert">
+    <tables>
+        <table name="marketplace_conditions" />
+    </tables>
+    <columns>
+        <column name="module_srl" var="module_srl" filter="number" notnull="notnull" />
+        <column name="eid" var="eid" notnull="notnull" />
+        <column name="name" var="name" notnull="notnull" />
+        <column name="short_name" var="short_name" notnull="notnull" />
+        <column name="desc" var="desc" />
+        <column name="idx" var="idx" filter="number" notnull="notnull" />
+    </columns>
+</query>

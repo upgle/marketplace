@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<skin version="0.2">
+    <title xml:lang="ko">마켓플레이스 기본 스킨</title>
+    <description xml:lang="ko">
+        마켓플레이스의 기본 모바일 스킨입니다.
+        UPGLE (admin@upgle.com) 
+    </description>
+    <version>0.1</version>
+    <date>2015-01-27</date>
+    <author email_address="admin@upgle.com" link="http://upgle.com/">
+        <name xml:lang="ko">UPGLE</name>
+    </author>
+</skin>

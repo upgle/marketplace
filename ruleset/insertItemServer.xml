@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ruleset version="1.5.0">
+	<customrules>
+		<rule name="commanumber" type="regex" test="/^[1-9][,0-9]*$/" />
+		<rule name="category" type="regex" test="/^[1-9][0-9]*$/">
+			<message xml:lang="ko">%s를 올바르게 선택해주시기 바랍니다.</message>
+		</rule>
+	</customrules>
+
+	<fields>
+		<field name="thumbnail" required="true">
+            <title xml:lang="ko">대표 사진</title>
+		</field>
+		<field name="category_srl" rule="category">
+            <title xml:lang="ko">상품 카테고리</title>
+		</field>
+		<field name="item_name" length="1:250" required="true" />
+		<field name="item_price" length="1:11" required="true" rule="commanumber"  />
+		<field name="item_original_price" length="1:11" rule="commanumber" />
+
+		<field name="title" length="1:250" required="true" />
+		<field name="content" required="true" />
+	</fields>
+</ruleset>

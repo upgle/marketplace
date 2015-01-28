@@ -1,0 +1,30 @@
+<load target="default.css" />
+<load target="plugin/xe-icon/xeicon.css" />
+
+<form action="./" method="post" enctype="multipart/form-data" class="mp-form-insert" ruleset="insertItem">
+    <input type="hidden" name="act" value="procMarketplaceAddContent" />
+    <input type="hidden" name="mid" value="{$mid}" />
+	<input type="hidden" name="content" value="" />
+	<input type="hidden" name="document_srl" value="{$document_srl}" />
+
+	<div class="mp-box mp-popup-box">
+		<div class="mp-content">
+			<div class="content_header">
+				<div class="mp-title-add-content mp-hidetext">내 상품 등록</div>
+
+				<a href="javascript:window.close();" class="mp-button button-white button-small button-return"><i class="xe-close"></i> 창 닫기</a>
+			</div>
+		   <div class="mp-notice"><i class="xe-announce"> 상품의 내용을 추가하실 수 있습니다. 내용을 수정하실 수 없으니 <strong>신중히 작성</strong>해주시기 바랍니다.</i></div>
+		   <div class="mp-block">
+				{$oDocument->getEditor()}
+				<div class="btnArea">
+					<input type="submit" value="{$lang->cmd_registration}" class="btn" />
+					<block cond="!$oDocument->isExists() || $oDocument->get('status') == 'TEMP'">
+					<button cond="$is_logged" class="btn" type="button" onclick="doDocumentSave(this);">{$lang->cmd_temp_save}</button>
+					</block>
+				</div>		   
+		   </div>
+		</div>
+		<div class="mp-clearfix"></div>
+	</div>
+</form>

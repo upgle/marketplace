@@ -1,0 +1,14 @@
+<query id="getAllMarketplace" action="select">
+    <tables>
+        <table name="modules" />
+    </tables>
+    <columns>
+        <column name="*" />
+    </columns>
+    <conditions>
+        <condition operation="equal" column="module" default="marketplace" />
+    </conditions>
+    <navigation>
+        <index var="sort_index" default="mid" order="asc" />
+    </navigation>
+</query>

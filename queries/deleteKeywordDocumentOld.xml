@@ -1,0 +1,8 @@
+<query id="deleteKeywordDocumentOld" action="delete" priority="LOW">
+    <tables>
+        <table name="marketplace_keyword_document" />
+    </tables>
+    <conditions>
+        <condition operation="less" column="regdate" var="regdate" filter="number" notnull="notnull"  />
+    </conditions>
+</query>

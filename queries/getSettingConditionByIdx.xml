@@ -1,0 +1,11 @@
+<query id="getSettingConditionByIdx" action="select">
+    <tables>
+        <table name="marketplace_conditions" />
+    </tables>
+    <columns>
+        <column name="marketplace_conditions.*" />
+    </columns>
+    <conditions>
+        <condition operation="equal" column="idx" var="idx" filter="number" notnull="notnull" />
+    </conditions>
+</query>

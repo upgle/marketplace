@@ -1,0 +1,14 @@
+<query id="updateSettingCondition" action="update">
+    <tables>
+        <table name="marketplace_conditions" />
+    </tables>
+    <columns>
+        <column name="name" var="name" notnull="notnull" />
+        <column name="short_name" var="short_name" notnull="notnull" />
+        <column name="desc" var="desc" />
+    </columns>
+    <conditions>
+        <condition operation="equal" column="module_srl" var="module_srl" filter="number" notnull="notnull"   pipe="and" />
+		<condition operation="equal" column="eid" var="eid" notnull="notnull"  pipe="and" />
+    </conditions>
+</query>

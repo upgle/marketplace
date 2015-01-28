@@ -1,0 +1,21 @@
+<query id="getAdvertiseLogLatestOne" action="select">
+    <tables>
+        <table name="marketplace_advertise_log" />
+    </tables>
+    <columns>
+		<column name="*" />
+    </columns>
+    <conditions>
+        <condition operation="equal" column="module_srl" var="module_srl" filter="number" pipe="and" />
+		<condition operation="equal" column="document_srl" var="document_srl" filter="number" pipe="and" />
+        <condition operation="equal" column="member_srl" var="member_srl" filter="number" pipe="and" />
+        <condition operation="equal" column="ipaddress" var="ipaddress" pipe="and" />
+    </conditions>
+    <navigation>
+        <index var="sort_index" default="regdate" order="desc" />
+        <list_count var="list_count" default="1" />
+    </navigation>
+</query>
+
+
+

@@ -1,0 +1,11 @@
+<query id="getMemberListByKeyword" action="select">
+    <tables>
+        <table name="marketplace_keyword_member" alias="keyword_member" />
+    </tables>
+    <columns>
+        <column name="keyword_member.*" />
+    </columns>
+    <conditions>
+        <condition operation="equal" column="keyword" var="keyword" />
+    </conditions>
+</query>

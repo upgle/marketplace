@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<skin version="0.2">
+    <title xml:lang="ko">Marketplace Default</title>
+    <description xml:lang="ko">마켓플레이스 기본 게시판.</description>
+    <version>1.0</version>
+    <date>2015-01-26</date>
+    <author email_address="admin@upgle.com" link="http://upgle.com/">
+        <name xml:lang="ko">UPGLE</name>
+    </author>
+    <license>LGPL v2</license>
+    <extra_vars>
+		<var name="flybanner" type="select">
+			<title xml:lang="ko">글 보기 화면 플라이배너</title>
+			<description xml:lang="ko">글 보기 화면 좌측에 떠있는 배너입니다.</description>
+			<options value="N">
+				<title xml:lang="ko">미사용</title>
+			</options>
+			<options value="Y">
+				<title xml:lang="ko">사용</title>
+			</options>
+		</var>
+        <var name="flybanner_content" type="textarea">
+            <title xml:lang="ko">└ 배너 HTML</title>
+			<description xml:lang="ko">플라이배너에 출력할 HTML</description>
+        </var>
+        <var name="flybanner_width" type="text">
+            <title xml:lang="ko">└ 배너 폭(width)</title>
+			<description xml:lang="ko">기본 폭은 110px입니다.</description>
+        </var>
+
+        <var name="mainbanner" type="image">
+            <title xml:lang="ko">메인 사이드 배너 이미지 (215px)</title>
+			<description xml:lang="ko">메인 사이드 배너 이미지</description>
+        </var>
+        <var name="mainbanner_link" type="text">
+            <title xml:lang="ko">└ 배너 링크</title>
+			<description xml:lang="ko">배너 클릭 시 이동할 사이트</description>
+        </var>
+		<var name="mainbanner_target" type="select">
+			<title xml:lang="ko">└ 배너 이동 형태</title>
+			<description xml:lang="ko">A 태그 이동 형태를 선택합니다.</description>
+			<options value="_blank">
+				<title xml:lang="ko">새창(_blank)</title>
+			</options>
+			<options value="_self">
+				<title xml:lang="ko">현재창(_self)</title>
+			</options>
+		</var>
+    </extra_vars>
+</skin>
+

@@ -1,0 +1,42 @@
+<query id="getMarketplaceItemList" action="select">
+    <tables>
+        <table name="marketplace_items" alias="items" />
+        <table name="documents" alias="documents" type="left join">
+            <conditions>
+                <condition operation="equal" column="documents.document_srl" default="items.document_srl" />
+            </conditions>
+        </table>
+    </tables>
+    <columns>
+        <column name="items.*" />
+        <column name="documents.*" />
+    </columns>
+    <conditions>
+        <condition operation="in" column="documents.module_srl" var="module_srl" filter="number" />
+        <condition operation="in" column="documents.category_srl" var="category_srl" filter="number" pipe="and" />
+        <condition operation="in" column="items.item_condition" var="item_condition" pipe="and" />
+        <condition operation="equal" column="documents.member_srl" var="member_srl" filter="number" pipe="and" />
+		<condition operation="like_prefix" column="items.priority_area" var="priority_area" pipe="and" />
+		<group pipe="and">
+            <condition operation="like" column="documents.title" var="search_keyword" pipe="or" />
+            <condition operation="like" column="documents.content" var="search_keyword" pipe="or" />
+            <condition operation="like" column="items.product_name" var="search_keyword" pipe="or" />
+        </group>
+		<group pipe="and">
+			<condition operation="more" column="items.price" var="price_from" pipe="and" />
+			<condition operation="less" column="items.price" var="price_to" pipe="and" />
+        </group>
+		<condition operation="less" column="items.used_month" var="used_month" pipe="and" />
+		<condition operation="equal" column="items.item_status" var="item_status" pipe="and" />
+		<condition operation="notequal" column="items.item_status" var="not_item_status" pipe="and" />
+    </conditions>
+    <navigation>
+        <index var="sort_index" default="documents.list_order" order="order_type" />
+        <list_count var="list_count" default="20" />
+        <page_count var="page_count" default="10" />
+        <page var="page" default="1" />
+    </navigation>
+</query>
+
+
+
