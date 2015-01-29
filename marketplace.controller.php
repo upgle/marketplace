@@ -971,6 +971,11 @@ class marketplaceController extends marketplace
 
 	function triggerDeleteMarketplaceItem(&$obj)
 	{
+		// marketplace 모듈 문서인지 체크
+		$oModuleModel = getModel('module');
+		$module_info = $oModuleModel->getModuleInfoByModuleSrl($obj->module_srl, array('module'));
+		if($module_info->module != 'marketplace') return new Object();
+
 		// get marketplace item
 		$args->document_srl = $obj->document_srl;
 		$output = executeQuery('marketplace.getMarketplaceItemOnly', $args);
