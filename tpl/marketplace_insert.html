@@ -85,8 +85,21 @@
 			<label class="x_control-label">연락처 보호 기능</label>
 			<div class="x_controls">
 				<label class="x_inline" for="protect_contact"><input type="checkbox" name="protect_contact" id="protect_contact" value="Y" checked="checked"|cond="$module_info->protect_contact == 'Y'" /> 판매완료된 글과 댓글에 텍스트로 작성된 연락처를 모두 가려줍니다.</label>
+				<p class="x_help-block">이 기능을 사용하시면 판매완료된 글에 대해서 연락처를 가립니다. 검색엔진 크롤러는 기본적으로 연락처를 가립니다.</p>
 			</div>
 		</div>
+
+		<div class="x_control-group">
+			<label class="x_control-label" for="protect_contact_type">연락처 가림 형태</label>
+			<div class="x_controls">
+				<select name="protect_contact_type" id="protect_contact_type">
+					<option value="star" selected="selected"|cond="$module_info->protect_contact_type == 'star'">(별표형식) ***-****-****</option>
+					<option value="0" selected="text"|cond="$module_info->protect_contact_type == 'text'">(안내형식) [연락처 가림]</option>
+				</select>
+			</div>
+		</div>
+
+
 	</section>
 
 

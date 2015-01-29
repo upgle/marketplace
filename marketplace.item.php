@@ -458,6 +458,9 @@ class marketplaceItem extends Object
 
 		if($strlen) return cut_str(strip_tags($content),$strlen,'...');
 
+		// 연락처 가림
+		$this->hideContactNumber($content);
+
 		return htmlspecialchars($content);
 	}
 
@@ -559,11 +562,8 @@ class marketplaceItem extends Object
 			$content = preg_replace_callback('/<img([^>]+)>/i',array($this,'replaceResourceRealPath'), $content);
 		}
 
-		// If item is sold out, replace phone number
-		if($this->module_info->protect_contact == 'Y' && $this->isSoldout()) {
-			$val->content = eregi_replace("([0-9]{3})([\-])([0-9]{3,4})([\-])([0-9]{4})", "<strong>[연락처 숨김]</strong>", $content); 
-		}
-
+		// 연락처 가림
+		$this->hideContactNumber($content);
 		return $content;
 	}
 
@@ -816,10 +816,8 @@ class marketplaceItem extends Object
 		$comment_list = array();
 		foreach($output->data as $key => $val)
 		{
-			// If item is sold out, replace phone number
-			if($this->module_info->protect_contact == 'Y' && $this->isSoldout()) {
-				$val->content = eregi_replace("([0-9]{3})([\-])([0-9]{3,4})([\-])([0-9]{4})", "<strong>[연락처 숨김]</strong>", $val->content); 
-			}
+			// 내용에서 연락처 가림
+			$this->hideContactNumber($val->content);
 
 			$oCommentItem = new commentItem();
 			$oCommentItem->setAttribute($val);
@@ -1359,6 +1357,20 @@ class marketplaceItem extends Object
 	function getBrowserTitle()
 	{
 		return $this->getModuleName();
+	}
+
+	function hideContactNumber(&$content)
+	{
+		if($this->module_info->protect_contact_type == 'star')
+		{
+			$replace = "***-****-****";
+		}
+		else $replace = "<strong style='
+		color:red'>[연락처 숨김]</strong>";
+		
+		if(isCrawler() || ($this->module_info->protect_contact == 'Y' && $this->isSoldout())) {
+			$content = eregi_replace("([0-9]{3})([\-])([0-9]{3,4})([\-])([0-9]{4})", $replace, $content); 
+		}
 	}
 }
 /* End of file document.item.php */
