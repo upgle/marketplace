@@ -17,7 +17,7 @@
 <img src="{$val}" loop="$thumbnails => $val" />
 
 
-<dl class="xv">
+<dl class="xv" cond="!$oMarketItem->isNotice()">
 	<dt>상품명</dt>
 	<dd>{$oMarketItem->get('product_name')}</dd>
 
