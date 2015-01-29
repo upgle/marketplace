@@ -3,6 +3,13 @@
 <div cond="$XE_VALIDATOR_MESSAGE && $XE_VALIDATOR_ID == 'modules/marketplace/tpl/marketplace_insert/1'" class="message {$XE_VALIDATOR_MESSAGE_TYPE}">
 	<p>{$XE_VALIDATOR_MESSAGE}</p>
 </div>
+
+<div class="message error" cond="!$module_info->module_initialize">
+	<p>마켓플레이스 모듈 생성이 완료되었습니다. 시작 전 기본 설정을 해주시기 바랍니다.</p>
+	<p>아래의 옵션들을 사이트에 맞게 수정 후 <strong>[등록]</strong> 버튼을 눌러주세요.</p>
+
+</div>
+
 <form ruleset="insertMarketplace" class="x_form-horizontal" action="./" method="post" enctype="multipart/form-data">
 	<input type="hidden" name="module" value="marketplace" />
 	<input type="hidden" name="act" value="procMarketplaceAdminInsertMarketplace" />
