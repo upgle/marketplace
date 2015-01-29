@@ -855,8 +855,12 @@ class marketplaceController extends marketplace
 		// set defualt interval if no setting
 		$interval = ($this->module_info->reinsert_interval)? $this->module_info->reinsert_interval : 5;
 		$limit_date = date('YmdHis', strtotime('today - '.$interval.' days'));
+		
+		if(!$oMarketItem->get('reinsert_date'))
+			$last_date = $oMarketItem->get('regdate');
+		else $last_date = $oMarketItem->get('reinsert_date');
 
-		if((!$oMarketItem->get('reinsert_date') && $oMarketItem->get('regdate') < $limit_date) || ($oMarketItem->get('reinsert_date') && $oMarketItem->get('reinsert_date') < $limit_date))
+		if($last_date <= $limit_date)
 		{
 			$obj = new stdClass();
 			$obj->document_srl = $document_srl;
@@ -869,7 +873,8 @@ class marketplaceController extends marketplace
 		}
 		else
 		{
-			$this->setMessage('can_not_reinsert');
+			$left_date = date("Y-m-d H:i",strtotime($interval.' days', strtotime($last_date)));
+			$this->setMessage(sprintf(Context::getLang('guide_reinsert'),$left_date,$interval));
 		}
 	}
 

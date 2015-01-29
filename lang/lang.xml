@@ -273,12 +273,9 @@
 		<value xml:lang="ko"><![CDATA[방금]]></value>
 		<value xml:lang="en"><![CDATA[just now]]></value>
 	</item>
-
 	<item name="invalid_category">
 		<value xml:lang="ko"><![CDATA[카테고리를 선택해주시기 바랍니다.]]></value>
 	</item>
-
-
 	<item name="msg_find_keyword_title">
 		<value xml:lang="ko"><![CDATA[키워드 [%s]를 포함한 상품이 발견되었습니다.]]></value>
 	</item>
@@ -288,12 +285,18 @@
 	<item name="success_changed">
 		<value xml:lang="ko"><![CDATA[변경되었습니다.]]></value>
 	</item>
-	
-
 	<item name="add_content_time">
 		<value xml:lang="ko"><![CDATA[%s에 내용 추가]]></value>
 	</item>
-
+	<item name="guide_reinsert">
+		<value xml:lang="ko">
+			<![CDATA[이 상품은 %s 부터 재 등록하실 수 있습니다.
+					(글 작성 혹은 재 등록 이후 %d일 이후)]]>
+		</value>
+	</item>
+	<item name="success_reinsert">
+		<value xml:lang="ko"><![CDATA[상품이 재 등록 되었습니다.]]></value>
+	</item>
 	<item name="item_name">
 		<value xml:lang="ko"><![CDATA[상품명]]></value>
 	</item>
