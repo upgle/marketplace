@@ -56,6 +56,33 @@ class marketplaceAdminView extends marketplace {
 		$order_target['list_order'] = Context::getLang('document_srl');
 		$order_target['update_order'] = Context::getLang('last_update');
 		Context::set('order_target', $order_target);
+
+
+		// 제품 구분이 없으면 기본 값 세팅
+		$oMarketplaceModel = getModel('marketplace');
+		$output = $oMarketplaceModel->getSettingConditions($this->module_srl);
+		if(!$output->toBool())	return $output;
+		foreach($output->data as $key => $val)
+		{
+			$condition_list[$val->eid] = $val;
+		}
+		if(!count($output->data))
+		{
+			// insert item condition
+			$conditions = Context::getLang('conditions');
+
+			$oMarketplaceController = getController('marketplace');
+			foreach($conditions as $condition)
+			{
+				$obj = new stdClass();
+				$obj->module_srl = $this->module_srl;
+				$obj->eid = $condition['eid'];
+				$obj->name = $condition['name'];
+				$obj->short_name = $condition['short_name'];
+				$obj->desc = $condition['desc'];
+				$oMarketplaceController->insertSettingCondition($obj);
+			}
+		}
 	}
 
 	/**

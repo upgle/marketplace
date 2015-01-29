@@ -133,23 +133,6 @@ class marketplaceView extends marketplace
 		$this->condition_list = $condition_list;
 		Context::set('condition_list', $condition_list);
 
-		if(!count($output->data))
-		{
-			// insert item condition
-			$conditions = Context::getLang('conditions');
-
-			$oMarketplaceController = getController('marketplace');
-			foreach($conditions as $condition)
-			{
-				$obj = new stdClass();
-				$obj->module_srl = $this->module_srl;
-				$obj->eid = $condition['eid'];
-				$obj->name = $condition['name'];
-				$obj->short_name = $condition['short_name'];
-				$obj->desc = $condition['desc'];
-				$oMarketplaceController->insertSettingCondition($obj);
-			}
-		}
 	}
 
 	/**
