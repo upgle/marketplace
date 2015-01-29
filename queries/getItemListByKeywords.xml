@@ -28,7 +28,8 @@
 		<column name="items.item_status" />
     </columns>
     <conditions>
-        <condition operation="in" column="keyword_document.keyword" var="keywords" />
+        <condition operation="in" column="keyword_document.module_srl" var="module_srl" pipe="and"  />
+		<condition operation="in" column="keyword_document.keyword" var="keywords" notnull="notnull" pipe="and" />
     </conditions>
     <navigation>
         <index var="sort_index" default="keyword_document.regdate" order="desc" />

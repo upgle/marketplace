@@ -1071,9 +1071,11 @@ class marketplaceView extends marketplace
 		// Get documents by keyword
 		if(count($keyword_list))
 		{
+			$args->module_srl = $this->module_srl;
 			$args->page = Context::get('page');
 			$args->list_count = (Context::get('list_count')) ? Context::get('list_count') : 6;
 			$args->page_count = $this->page_count;
+
 			foreach($keyword_list as $key) 
 				$args->keywords[] = $key->keyword;
 			$output = $oMarketplaceModel->getItemListByKeywords($args);
