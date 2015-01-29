@@ -75,8 +75,8 @@
 		<div class="x_control-group">
 			<label class="x_control-label" for="reinsert_interval">재등록 허용 기간</label>
 			<div class="x_controls">
-				{@ if(!$module_info->reinsert_interval_day) $module_info->reinsert_interval_day = 5}
-				글 작성 혹은 재등록 후 <input type="text" name="reinsert_interval" id="reinsert_interval_day" value="{$module_info->reinsert_interval_day}" style="width:60px;text-align:center" /> 일 후 가능 (기본 5일)
+				{@ if(!$module_info->reinsert_interval) $module_info->reinsert_interval = 5}
+				글 작성 혹은 재등록 후 <input type="text" name="reinsert_interval" id="reinsert_interval" value="{$module_info->reinsert_interval}" style="width:60px;text-align:center" /> 일 후 가능 (기본 5일)
 			</div>
 		</div>
 
