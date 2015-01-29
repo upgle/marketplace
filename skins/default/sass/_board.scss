@@ -44,6 +44,28 @@
 	/* 게시물 관리용 체크박스 */
 	.chk_mng{vertical-align:middle}
 }
+
+.xe_content {
+	line-height: 1.5;
+
+	h1, h2, h3, h4 {margin: 4px 0; line-height: 1.5;}
+	ul {
+		line-height: 1.8;
+		list-style-type: disc; 
+		list-style-position: inside; 
+		padding-left: 10px;
+		ul {
+		   list-style-type: circle; 
+		   list-style-position: inside; 
+			padding-left: 25px;
+		}
+	}
+	li {
+		margin: 3px 0;
+		line-height: 1.9;
+	}
+}
+
 .blind{overflow:hidden;position:absolute;top:0;left:0;width:1px;height:1px;font-size:0;line-height:0}
 .edge{position:absolute;top:5px;right:5px;width:0;height:0;border-width:0 8px 8px;border-style:solid;border-color:transparent transparent #f9f9f9}
 .clear{clear:both}
