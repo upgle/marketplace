@@ -161,7 +161,7 @@ xe.lang.ask_change_selling = '{$lang->ask_change_selling}';
 			</div>
 			<!-- 판매중일때 연락처 공개 -->
 			<div class="seller_contact" cond="$oMarketItem->isSelling()">
-				<a href="javascript:getSellerContact('{$oMarketItem->document_srl}');" class="red"><span class="mp-text-get-phone-number mp-hidetext">판매자 연락처 보기</span></a>
+				<a href="javascript:getSellerContact('{$oMarketItem->document_srl}','.contact_number');" class="red"><span class="mp-text-get-phone-number mp-hidetext">판매자 연락처 보기</span></a>
 				<a onclick="popopen(this.href, 'popup'); return false;" href="{getUrl('', 'module', 'communication', 'act', 'dispCommunicationSendMessage', 'receiver_srl', $seller_info->member_srl)}"><i class="xe-message-bubble"></i> 쪽지보내기</a>
 				<block cond="$oMarketItem->isWishItem()">
 					<a class="active"|cond="$oMarketItem->isWishitem()" href="javascript:doToggleWishItem('{$oMarketItem->document_srl}');"><i class=" xe-folder-add"></i> 찜한상품</a>
@@ -171,7 +171,7 @@ xe.lang.ask_change_selling = '{$lang->ask_change_selling}';
 				</block>
 				<div class="contact_number">
 					<img class="callout" src="images/callout.gif" />
-					<strong>전화번호 :</strong> <span class="seller-mobile"></span>
+					<strong>전화번호 :</strong> <span class="response"></span>
 				</div>
 			</div>
 		</div>

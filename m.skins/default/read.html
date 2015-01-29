@@ -50,7 +50,12 @@
 	<!--@end-->
 	<!--@end-->
 </dl>
-
+<div class="getnumber">
+<a href="javascript:getSellerContact('{$oMarketItem->document_srl}','.contact_number');" class="bn white full"><span class="mp-text-get-phone-number mp-hidetext">판매자 연락처 보기</span></a>
+<div class="contact_number" style="display:none">
+	<strong>전화번호 :</strong> <span class="response"></span>
+</div>
+</div>
 
 {$oDocument->getContent(false)}
 

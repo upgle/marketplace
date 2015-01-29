@@ -63,6 +63,7 @@ class marketplaceMobile extends marketplaceView
 		$this->condition_list = $condition_list;
 		Context::set('condition_list', $condition_list);
 
+		Context::addJsFile($this->module_path.'tpl/js/marketplace.js');
 
 		$oDocumentModel = getModel('document');
 		$extra_keys = $oDocumentModel->getExtraKeys($this->module_info->module_srl);

@@ -54,20 +54,20 @@ function doChangeCategory()
 }
 
 
-function getSellerContact(document_srl) {
-	if (!jQuery('.contact_number').is(':visible') )
+function getSellerContact(document_srl, selector) {
+	if (!jQuery(selector).is(':visible') )
 	{
 		jQuery.exec_json(
 			"marketplace.getMarketplaceContactNumber",
 			{document_srl:document_srl }, 
 			function(data)
 			{
-				jQuery(".seller-mobile").text(data.mobile);
-				jQuery(".contact_number").show();
+				jQuery(selector).find('.response').text(data.mobile);
+				jQuery(selector).show();
 			}
 		);
 	}
-	else jQuery(".contact_number").hide();
+	else jQuery(selector).hide();
 }
 
 /* scrap */
