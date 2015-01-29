@@ -100,7 +100,7 @@
 .mp-box .board textarea { resize: vertical; }
 .mp-box .board .chk_mng { vertical-align: middle; }
 .mp-box .xe_content { line-height: 1.5; }
-.mp-box .xe_content h1, .mp-box .xe_content h2, .mp-box .xe_content h3, .mp-box .xe_content h4 { margin: 4px 0; line-height: 1.5; }
+.mp-box .xe_content h1, .mp-box .xe_content h2, .mp-box .xe_content h3, .mp-box .xe_content h4 { margin: 14px 0; line-height: 1.5; }
 .mp-box .xe_content ul { line-height: 1.8; list-style-type: disc; list-style-position: inside; padding-left: 10px; }
 .mp-box .xe_content ul ul { list-style-type: circle; list-style-position: inside; padding-left: 25px; }
 .mp-box .xe_content li { margin: 3px 0; line-height: 1.9; }
