@@ -847,10 +847,11 @@ class marketplaceController extends marketplace
 		$oMarketplaceModel = getModel('marketplace');
 		$oMarketItem = $oMarketplaceModel->getMarketplaceItem($document_srl);
 	
-		if(!$oMarketItem->isGranted())
-		{
-			return new Object(-1,'msg_not_permitted');
-		}
+		// 권한 체크
+		if(!$oMarketItem->isGranted()) return new Object(-1,'msg_not_permitted');
+		
+		// 판매중인 상품이 아니라면 return
+		if(!$oMarketItem->isSelling()) return new Object(-1,'msg_invalid_request');
 
 		// set defualt interval if no setting
 		$interval = ($this->module_info->reinsert_interval)? $this->module_info->reinsert_interval : 5;
