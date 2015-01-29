@@ -3,6 +3,7 @@
         <table name="marketplace_keyword_document" />
     </tables>
     <conditions>
-        <condition operation="less" column="regdate" var="regdate" filter="number" notnull="notnull"  />
+        <condition operation="equal" column="module_srl" var="module_srl" filter="number" pipe="and" />
+        <condition operation="less" column="regdate" var="regdate" filter="number" notnull="notnull" pipe="and"  />
     </conditions>
 </query>

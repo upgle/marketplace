@@ -3,6 +3,7 @@
         <table name="marketplace_keyword_document" />
     </tables>
     <columns>
+	    <column name="module_srl" var="module_srl" filter="number" notnull="notnull" />
         <column name="document_srl" var="document_srl" filter="number" notnull="notnull" />
         <column name="keyword" var="keyword" notnull="notnull" />
         <column name="regdate" var="regdate" default="curdate()" />

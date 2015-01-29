@@ -1,4 +1,5 @@
 <table name="marketplace_keyword_document">
+    <column name="module_srl" type="number" size="11" notnull="notnull" unique="unique_keywords" />
     <column name="keyword" type="varchar" size="15" notnull="notnull" unique="unique_keywords" />
     <column name="document_srl" type="number" size="11" notnull="notnull" unique="unique_keywords" />
     <column name="regdate" type="date" index="idx_regdate" />

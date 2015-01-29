@@ -270,6 +270,7 @@ class marketplaceController extends marketplace
 			if (stripos($obj->content, $keyword) !== false) {
 				
 				$args = new stdClass();
+				$args->module_srl = $this->module_srl;
 				$args->document_srl = $document_srl;
 				$args->keyword = $keyword;
 				executeQuery('marketplace.insertKeywordDocument', $args);
