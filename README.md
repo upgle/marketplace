@@ -1,4 +1,4 @@
-# 마켓플레이스 모듈 marketplace
+# 마켓플레이스 모듈 Marketplace
 마켓플레이스 모듈은 XpressEngine(이하 XE)을 기반으로 하는 중고장터 모듈입니다.
 
 ## 모듈 소개
@@ -12,8 +12,7 @@ XE로 운영되는 수많은 동호회와 커뮤니티, 까페들이 그 안에�
 마켓 플레이스 모듈은 여러분에게 더 완벽한 장터의 모습과 기능을 손쉽게 제공합니다.
 
 ## 모듈 데모 페이지
-http://marketplace.upgle.com
-
+### http://marketplace.upgle.com
 
 ## 모듈 기능 및 특징
 
@@ -50,3 +49,10 @@ XE로 구축된 사이트들은 포인트 모듈을 기본적으로 탑재하고
 
 #### 11. 키워드 알림 기능
 사용자는 원하는 상품의 키워드(예. 아이패드, 아이폰)를 미리 설정하여  장터에 글이 새로 등록될때 해당 키워드를 포함하고 있으면 사용자에게 알려줍니다. 쪽지 혹은 SMS(수정필요)등으로 알려줄 수 있으며 키워드 관리 페이지에서 알림받았던 상품들을 한번에 모아볼 수 있습니다.
+
+## 포함된 오픈소스 및 라이센스
+- Colorbox (Mit License, http://www.jacklmoore.com/colorbox/)
+- jQuery Dependent Selects (Mit License, https://github.com/simpleweb/jquery-dependent-selects)
+- Owl Carousel (Mit License, http://owlgraphic.com/owlcarousel/)
+- XE-ICON (OFL, https://github.com/xpressengine/XEIcon)
+- XE-CONTEST TEMPLATE #B - CSS (LGPL, https://github.com/xpressengine/XEcontest2014-templateB-Blog)
