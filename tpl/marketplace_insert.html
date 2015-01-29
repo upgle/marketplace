@@ -8,6 +8,8 @@
 	<input type="hidden" name="act" value="procMarketplaceAdminInsertMarketplace" />
 	<input type="hidden" name="page" value="{$page}" />
 	<input type="hidden" name="module_srl" value="{$module_info->module_srl}" />
+	<input type="hidden" name="module_initialize" value="1" />
+
 	<input cond="$mid || $module_srl" type="hidden" name="success_return_url" value="{getRequestUriByServerEnviroment()}" />
 	<input cond="$logged_info->is_admin != 'Y'" type="hidden" name="marketplace_name" value="{$module_info->mid}" />
 	<input type="hidden" name="xe_validator_id" value="modules/marketplace/tpl/marketplace_insert/1" />

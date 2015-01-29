@@ -17,6 +17,12 @@ class marketplaceView extends marketplace
 	function init()
 	{
 
+		// 초기 모듈 설정 체크
+		if(!$this->module_info->module_initialize) {
+			header('Location: '.getNotEncodedUrl('act','dispMarketplaceAdminMarketplaceInfo'));
+			die();
+		}
+
 		$oSecurity = new Security();
 		$oSecurity->encodeHTML('document_srl', 'comment_srl', 'vid', 'mid', 'page', 'category', 'search_target', 'search_keyword', 'sort_index', 'order_type', 'trackback_srl');
 
@@ -116,7 +122,7 @@ class marketplaceView extends marketplace
 			}
 		}
 
-		// 설정된 제품 구분이 없으면 기본값으로 설정
+		// 제품 구분이 얻어옴
 		$oMarketplaceModel = getModel('marketplace');
 		$output = $oMarketplaceModel->getSettingConditions($this->module_srl);
 		if(!$output->toBool())	return $output;
