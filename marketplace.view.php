@@ -24,7 +24,7 @@ class marketplaceView extends marketplace
 		}
 
 		$oSecurity = new Security();
-		$oSecurity->encodeHTML('document_srl', 'comment_srl', 'vid', 'mid', 'page', 'category', 'search_target', 'search_keyword', 'sort_index', 'order_type', 'trackback_srl', 'price_from', 'price_to', 'priority_area', 'item_condition.', 'used_month');
+		$oSecurity->encodeHTML('document_srl', 'comment_srl', 'vid', 'mid', 'page', 'category', 'search_target', 'search_keyword', 'sort_index', 'order_type', 'trackback_srl', 'price_from', 'price_to', 'priority_area', 'item_condition.', 'used_month', 'item_status', 'list_count');
 
 		/**
 		 * setup the module general information
