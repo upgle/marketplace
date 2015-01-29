@@ -31,6 +31,7 @@
 <block cond="!in_array($act, $_mypage_act)">
 <div class="mp-box">
     <div class="mp-sidebar mp-clearfix">
+		<block cond="count($cate_list)">
         <div class="menu_title mp-hidetext"><span>카테고리</span></div>
         <ul class="sidemenu">
             <li class="active"|cond="!$category"><a href="{getUrl('','mid',$mid)}">{$lang->total}</a></li>
@@ -51,7 +52,8 @@
             <li><a href="{getUrl('act','dispMarketplaceAdminMarketplaceInfo')}"><strong><i class="xe-tool"></i> 마켓플레이스 모듈 설정</a></strong></li>
 			</block>
         </ul>
-        <div class="option_selector">
+		</block>
+        <div class="option_selector" style="margin-top:0"|cond="!count($cate_list)">
         <form name="quick_search" action="{getUrl()}" method="get" no-error-return-url="true">
             <input type="hidden" name="mid" value="{$mid}" />
             <input type="hidden" name="category" value="{$category}" />
@@ -114,13 +116,23 @@
         </form>
         </div>
 
+        <ul class="sidemenu mp-margin-top-20" style="padding-top:10px" cond="!count($cate_list)">
+			<block cond="$logged_info">
+            <li><a href="{getUrl('', 'mid', $mid, 'act','dispMarketplaceWishList')}"><i class="xe-star"></i> 관심 상품 보기</a></li>
+            <li cond="$module_info->use_keyword_notify"><a href="{getUrl('','mid',$mid,'act','dispMarketplaceKeywordManage')}"><i class="xe-bell-ring"></i> 키워드 알림 설정</a></li>
+			</block>
+			<block cond="$grant->manager">
+			<li class="divider"></li>
+            <li><a href="{getUrl('act','dispMarketplaceAdminMarketplaceInfo')}"><strong><i class="xe-tool"></i> 마켓플레이스 모듈 설정</a></strong></li>
+			</block>
+        </ul>
+
 		<div class="mp-margin-top-25" cond="$module_info->mainbanner">
 			<!--일반 배너-->
 			<img src="{$module_info->mainbanner}" style="width:215px" cond="!$module_info->mainbanner_link" />
 			<!--링크 배너-->
 			<a href="{$module_info->mainbanner_link}" target="{$module_info->mainbanner_target}" cond="$module_info->mainbanner_link"><img src="{$module_info->mainbanner}" style="width:215px" /></a>
 		</div>
-
     </div>
 	{$module_info->header_text}
 </block>
