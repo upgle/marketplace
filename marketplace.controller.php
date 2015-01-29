@@ -840,7 +840,10 @@ class marketplaceController extends marketplace
 		$document_srl = Context::get('document_srl');
 		if(!$document_srl) return new Object(-1,'msg_invalid_request');
 		
-		// Get Document Item
+		// 재등록 기능 사용여부 체크
+		if(!$this->module_info->use_reinsert) return new Object(-1,'msg_invalid_request');
+
+		// Get Marketplace Item
 		$oMarketplaceModel = getModel('marketplace');
 		$oMarketItem = $oMarketplaceModel->getMarketplaceItem($document_srl);
 	
@@ -853,10 +856,8 @@ class marketplaceController extends marketplace
 		$interval = ($this->module_info->reinsert_interval)? $this->module_info->reinsert_interval : 5;
 		$limit_date = date('YmdHis', strtotime('today - '.$interval.' days'));
 
-
 		if((!$oMarketItem->get('reinsert_date') && $oMarketItem->get('regdate') < $limit_date) || ($oMarketItem->get('reinsert_date') && $oMarketItem->get('reinsert_date') < $limit_date))
 		{
-
 			$obj = new stdClass();
 			$obj->document_srl = $document_srl;
 			$obj->update_order = $obj->list_order = (getNextSequence() * -1);
