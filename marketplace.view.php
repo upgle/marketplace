@@ -560,12 +560,16 @@ class marketplaceView extends marketplace
 			return $this->stop('msg_invalid_request');
 		}
 
+		if($this->module_info->advertise_list_count)
+			$list_count = $this->module_info->advertise_list_count;
+		else $list_count = 5;
+
 		$oMarketplaceModel = getModel('marketplace');
 
 		$args = new stdClass();
 		$args->sort_index = "advertise.bid_price";
 		$args->order_type = "desc";
-		$args->list_count = "10";
+		$args->list_count = $list_count;
 
 		$output = $oMarketplaceModel->getAdvertiseList($args);
 		Context::set('advertise_list', $output->data);	
