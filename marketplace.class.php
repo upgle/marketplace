@@ -68,21 +68,38 @@ class marketplace extends ModuleObject
 
 		if(!$oModuleModel->getTrigger('document.deleteDocument', 'marketplace', 'controller', 'triggerDeleteMarketplaceItem', 'after')) return true;
 
-		// 오래된 키워드 및 검색된 문서 삭제 keyword_expiry_date
-		$args->module = 'marketplace';
-		$module_list = $oModuleModel->getModuleSrlList($args);
-		foreach($module_list as $val)
+		// 오래된 키워드 및 검색된 문서 삭제 keyword_expiry_date	
+		$doDelete = true;
+		$oCacheHandler = CacheHandler::getInstance('object');
+		if($oCacheHandler->isSupport())
 		{
-			$module_info = $oModuleModel->getModuleInfoByModuleSrl($val->module_srl);
-			if(!$module_info->keyword_expiry_date) $module_info->keyword_expiry_date = 1;
-			$expire_month = $module_info->keyword_expiry_date*-1;
-
-			$args = new stdClass();
-			$args->module_srl = $val->module_srl;
-			$args->regdate = date('YmdHis', strtotime($expire_month.'month'));
-			$output = executeQuery('marketplace.deleteKeywordDocumentOld', $args);
-			$output = executeQuery('marketplace.deleteKeywordMemberOld', $args);
+			$doDelete = false;
+			$cache_key = $oCacheHandler->getGroupKey('marketplace', 'last_olditem_delete');
+			$last_date = $oCacheHandler->get($cache_key);
+			if($last_date != date('Ymd',time())) $doDelete = true;
 		}
+		if($doDelete)
+		{
+			$args->module = 'marketplace';
+			$module_list = $oModuleModel->getModuleSrlList($args);
+			foreach($module_list as $val)
+			{
+				$module_info = $oModuleModel->getModuleInfoByModuleSrl($val->module_srl);
+				if(!$module_info->keyword_expiry_date) $module_info->keyword_expiry_date = 1;
+				$expire_month = $module_info->keyword_expiry_date*-1;
+
+				$args = new stdClass();
+				$args->module_srl = $val->module_srl;
+				$args->regdate = date('YmdHis', strtotime($expire_month.'month'));
+				$output = executeQuery('marketplace.deleteKeywordDocumentOld', $args);
+				$output = executeQuery('marketplace.deleteKeywordMemberOld', $args);
+			}
+			if($oCacheHandler->isSupport())
+			{
+				$oCacheHandler->put($cache_key, date('Ymd',time()));
+			}
+		}
+
 	}
 
 	/**
