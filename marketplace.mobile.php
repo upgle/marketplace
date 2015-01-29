@@ -12,7 +12,7 @@ class marketplaceMobile extends marketplaceView
 	function init()
 	{
 		$oSecurity = new Security();
-		$oSecurity->encodeHTML('document_srl', 'comment_srl', 'vid', 'mid', 'page', 'category', 'search_target', 'search_keyword', 'sort_index', 'order_type', 'trackback_srl');
+		$oSecurity->encodeHTML('document_srl', 'comment_srl', 'vid', 'mid', 'page', 'category', 'search_target', 'search_keyword', 'sort_index', 'order_type', 'trackback_srl', 'price_from', 'price_to', 'priority_area', 'item_condition.', 'used_month');
 
 		if($this->module_info->list_count) $this->list_count = $this->module_info->list_count;
 		if($this->module_info->search_list_count) $this->search_list_count = $this->module_info->search_list_count;
