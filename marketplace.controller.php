@@ -677,6 +677,10 @@ class marketplaceController extends marketplace
 		$bid_price = Context::get('bid_price');
 		if($bid_price > $balance) return new Object(-1,'입찰가는 최대 광고료보다 클 수 없습니다.');
 
+
+		if($bid_price < $this->module_info->minimum_bid_price)
+			return new Object(-1,'입찰가는 최저 입찰 금액보다 같거나 높게 설정하셔야 합니다.');
+
 		$oPointModel = getModel('point');
 		$member_point = $oPointModel->getPoint($logged_info->member_srl);
 
