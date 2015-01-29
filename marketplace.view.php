@@ -186,8 +186,11 @@ class marketplaceView extends marketplace
 		if(!$this->listConfig) $this->listConfig = array();
 		$this->_makeListColumnList();
 
-		// display the advertise list
-		$this->dispMarketplaceAdvertiseList();
+		// 모듈 광고 설정 체크 후 광고 출력
+		if($this->module_info->use_advertise)
+		{
+			$this->dispMarketplaceAdvertiseList();
+		}
 
 		// display the notice list
 		$this->dispMarketplaceNoticeList();
@@ -551,6 +554,12 @@ class marketplaceView extends marketplace
 
 	function dispMarketplaceAdvertiseList()
 	{
+		// 모듈 판매자 광고 설정 체크
+		if(!$this->module_info->use_advertise)
+		{
+			return $this->stop('msg_invalid_request');
+		}
+
 		$oMarketplaceModel = getModel('marketplace');
 
 		$args = new stdClass();
@@ -927,6 +936,12 @@ class marketplaceView extends marketplace
 	}
 	function dispMarketplaceAdvertiseInsert()
 	{
+		// 모듈 판매자 광고 설정 체크
+		if(!$this->module_info->use_advertise)
+		{
+			return $this->stop('msg_invalid_request');
+		}
+
 		// check grant
 		$logged_info = Context::get('logged_info');
 		if(!$logged_info)
@@ -943,10 +958,8 @@ class marketplaceView extends marketplace
 		if($output->data)
 		Context::set('advertise_info', $output->data);
 
-
 		$oMarketItem = $oMarketplaceModel->getMarketplaceItem(Context::get('document_srl'));
 		Context::set('oMarketItem', $oMarketItem);
-
 
 		$this->setBlankLayout();
 		$this->setTemplateFile('advertise_insert_cpc');
@@ -955,6 +968,12 @@ class marketplaceView extends marketplace
 
 	function dispMarketplaceAdvertiseManage()
 	{
+		// 모듈 판매자 광고 설정 체크
+		if(!$this->module_info->use_advertise)
+		{
+			return $this->stop('msg_invalid_request');
+		}
+
 		// check grant
 		$logged_info = Context::get('logged_info');
 		if(!$logged_info)
@@ -983,6 +1002,13 @@ class marketplaceView extends marketplace
 
 	function dispMarketplaceAdvertiseLog()
 	{
+
+		// 모듈 판매자 광고 설정 체크
+		if(!$this->module_info->use_advertise)
+		{
+			return $this->stop('msg_invalid_request');
+		}
+
 		// check grant
 		$logged_info = Context::get('logged_info');
 		if(!$logged_info)
