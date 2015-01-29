@@ -7,7 +7,7 @@
 <!--%import("js/mmarketplace.js")-->
 <!--%import("css/mmarketplace.css")-->
 <div class="hd hx h2">
-	<div class="category"><!--@if($module_info->use_category == "Y" && $oDocument->get('category_srl'))--><a href="{getUrl('document_srl','','category',$oDocument->get('category_srl'))}">{$category_list[$oDocument->get('category_srl')]->title}</a><!--@end--></div>
+	<div class="category"><!--@if($module_info->hide_category == "N" && $oDocument->get('category_srl'))--><a href="{getUrl('document_srl','','category',$oDocument->get('category_srl'))}">{$category_list[$oDocument->get('category_srl')]->title}</a><!--@end--></div>
 	<h2 class="title">{$oDocument->getTitle()}</h2>
 	<div class="ex">{$oDocument->getNickName()} | {$oDocument->getRegdate()} | <a href="#skip_co">{$lang->skip_to_content}</a></div>
 </div>

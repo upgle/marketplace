@@ -28,29 +28,10 @@ class marketplaceMobile extends marketplaceView
 			$this->module_info->secret = 'Y';
 		}
 
-		// use_category <=1.5.x, hide_category >=1.7.x
+		// hide category
 		$count_category = count($oDocumentModel->getCategoryList($this->module_info->module_srl));
-		if($count_category)
-		{
-			if($this->module_info->hide_category)
-			{
-				$this->module_info->use_category = ($this->module_info->hide_category == 'Y') ? 'N' : 'Y';
-			}
-			else if($this->module_info->use_category)
-			{
-				$this->module_info->hide_category = ($this->module_info->use_category == 'Y') ? 'N' : 'Y';
-			}
-			else
-			{
-				$this->module_info->hide_category = 'N';
-				$this->module_info->use_category = 'Y';
-			}
-		}
-		else
-		{
-			$this->module_info->hide_category = 'Y';
-			$this->module_info->use_category = 'N';
-		}
+		if($count_category) $this->module_info->hide_category = 'N';
+		else $this->module_info->hide_category = 'Y';
 
 
 		$oMarketplaceModel = getModel('marketplace');

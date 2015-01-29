@@ -29,7 +29,7 @@ xe.lang.ask_change_selling = '{$lang->ask_change_selling}';
 	<div class="read_header"|cond="!$oMarketItem->isNotice()" class="read_header notice"|cond="$oMarketItem->isNotice()" >
 		<h2><a href="{$oMarketItem->getPermanentUrl()}">{$oMarketItem->getTitle()}</a></h2>
 		<ul class="write_info">
-			<li cond="$module_info->use_category=='Y'">
+			<li cond="$module_info->hide_category=='N'">
 			<a href="{getUrl('category',$oMarketItem->get('category_srl'), 'document_srl', '')}" class="category">
 			<block cond="$category_list[$category_list[$oMarketItem->get('category_srl')]->parent_srl]->parent_srl">
 			{$category_list[$category_list[$category_list[$oMarketItem->get('category_srl')]->parent_srl]->parent_srl]->title} <i class="xe-angle-right"></i>

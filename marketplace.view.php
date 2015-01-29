@@ -52,29 +52,10 @@ class marketplaceView extends marketplace
 			$this->module_info->secret = 'Y';
 		}
 
-		// use_category <=1.5.x, hide_category >=1.7.x
+		// hide category
 		$count_category = count($oDocumentModel->getCategoryList($this->module_info->module_srl));
-		if($count_category)
-		{
-			if($this->module_info->hide_category)
-			{
-				$this->module_info->use_category = ($this->module_info->hide_category == 'Y') ? 'N' : 'Y';
-			}
-			else if($this->module_info->use_category)
-			{
-				$this->module_info->hide_category = ($this->module_info->use_category == 'Y') ? 'N' : 'Y';
-			}
-			else
-			{
-				$this->module_info->hide_category = 'N';
-				$this->module_info->use_category = 'Y';
-			}
-		}
-		else
-		{
-			$this->module_info->hide_category = 'Y';
-			$this->module_info->use_category = 'N';
-		}
+		if($count_category) $this->module_info->hide_category = 'N';
+		else $this->module_info->hide_category = 'Y';
 
 		/**
 		 * setup the template path based on the skin
@@ -206,8 +187,8 @@ class marketplaceView extends marketplace
 	 * @brief display the category list
 	 **/
 	function dispMarketplaceCategoryList(){
-		// check if the use_category option is enabled
-		if($this->module_info->use_category=='Y')
+		// check if the hide_category option is enabled
+		if($this->module_info->hide_category=='N')
 		{
 			$oDocumentModel = getModel('document');
 			Context::set('category_list', $oDocumentModel->getCategoryList($this->module_srl));
@@ -389,7 +370,7 @@ class marketplaceView extends marketplace
 		
 
 		// if the category is enabled, then get the category
-		if($this->module_info->use_category=='Y' && Context::get('category'))
+		if($this->module_info->hide_category=='N' && Context::get('category'))
 		{
 			$category_srl = Context::get('category');
 			$category_list = $oDocumentModel->getCategoryList($this->module_srl);			
@@ -594,7 +575,7 @@ class marketplaceView extends marketplace
 		/**
 		 * check if the category option is enabled not not
 		 **/
-		if($this->module_info->use_category=='Y')
+		if($this->module_info->hide_category=='N')
 		{
 			// get the user group information
 			if(Context::get('is_logged'))
@@ -724,7 +705,7 @@ class marketplaceView extends marketplace
 		/**
 		 * check if the category option is enabled not not
 		 **/
-		if($this->module_info->use_category=='Y')
+		if($this->module_info->hide_category=='N')
 		{
 			// get the user group information
 			if(Context::get('is_logged'))
@@ -1452,7 +1433,7 @@ class marketplaceView extends marketplace
 		/**
 		 * check if the category option is enabled not not
 		 **/
-		if($this->module_info->use_category=='Y')
+		if($this->module_info->hide_category=='N')
 		{
 			// get the user group information
 			if(Context::get('is_logged'))

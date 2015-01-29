@@ -1,6 +1,6 @@
 <div class="hx hd h2">
 	<h2><a href="{getUrl('','vid',$vid,'mid',$mid)}">{$module_info->browser_title}</a> <em>[{number_format($total_count)}]</em></h2>
-	<!--@if($module_info->use_category == "Y")--><a href="{getUrl('page','','act','dispMarketplaceCategory','')}" class="ca">{$lang->category}</a><!--@endif-->
+	<!--@if($module_info->hide_category == "N")--><a href="{getUrl('page','','act','dispMarketplaceCategory','')}" class="ca">{$lang->category}</a><!--@endif-->
 	<a href="{getUrl('act','dispMarketplaceWrite','document_srl','')}" class="write">내 물품 판매</a>
 </div>
 <ul class="lt">
@@ -21,7 +21,7 @@
 			</div>
 			<div class="meta">
 				<span class="category">
-					<!--@if($module_info->use_category == "Y" && $marketitem->get('category_srl'))-->{$category_list[$marketitem->get('category_srl')]->title} &rsaquo;<!--@end--> 				
+					<!--@if($module_info->hide_category == "N" && $marketitem->get('category_srl'))-->{$category_list[$marketitem->get('category_srl')]->title} &rsaquo;<!--@end--> 				
 				</span>
 				<span class="title"><strong>{$marketitem->getTitle($module_info->subject_cut_size)}</strong> <!--@if($marketitem->getCommentCount())--><em>[{$marketitem->getCommentCount()}]</em><!--@endif--></span>
 				<span class="auth">
