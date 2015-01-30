@@ -315,7 +315,7 @@ class marketplaceModel extends module
 		$list_config = $oModuleModel->getModulePartConfig('marketplace', $module_srl);
 		if(!$list_config || count($list_config) <= 0)
 		{
-			$list_config = array( 'no', 'title', 'nick_name','regdate','readed_count');
+			$list_config = array( 'no', 'title', 'nick_name','regdate','readed_count', 'price', 'product_name', 'original_price', 'item_condition');
 		}
 
 		// get the extra variables
