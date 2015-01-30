@@ -264,8 +264,8 @@ class marketplaceView extends marketplace
 				// add the document title to the browser
 				Context::addBrowserTitle($oMarketItem->getTitleText());
 
-				// update the document view count (if the document is not secret)
-				if($oMarketItem->isGranted()) $oMarketItem->updateReadedCount();
+				// update the document view count
+				$oMarketItem->updateReadedCount();
 			}
 		}
 		
