@@ -14,9 +14,6 @@ XE로 운영되는 수많은 동호회와 커뮤니티, 까페들이 그 안에�
 ### http://marketplace.upgle.com
 모듈 소개, 사용자 데모, 관리자 데모 및 XE 자료실 다운로드 링크를 제공합니다.
 
-## 라이센스 License
- [GPL v3 (GNU GENERAL PUBLIC LICENSE Version 3)](https://github.com/upgle/marketplace/blob/master/LICENSE.txt)
-
 ## 모듈 기능 및 특징
 
 1. **판매완료 / 판매중단 기본지원**
@@ -62,6 +59,9 @@ XE로 운영되는 수많은 동호회와 커뮤니티, 까페들이 그 안에�
 11. **키워드 알림 기능**
 
   사용자는 원하는 상품의 키워드(예. 아이패드, 아이폰)를 미리 설정하여  장터에 글이 새로 등록될때 해당 키워드를 포함하고 있으면 사용자에게 알려줍니다. 쪽지 혹은 SMS(연동 필요)등으로 알려줄 수 있으며 키워드 관리 페이지에서 알림받았던 상품들을 한번에 모아볼 수 있습니다.
+
+## 라이센스 License
+ [GPL v3 (GNU GENERAL PUBLIC LICENSE Version 3)](https://github.com/upgle/marketplace/blob/master/LICENSE.txt)
 
 ## 포함된 오픈소스 및 라이센스
 - Colorbox (Mit License, http://www.jacklmoore.com/colorbox/)
