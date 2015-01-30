@@ -12,7 +12,7 @@ class marketplaceView extends marketplace
 
 	/**
 	 * @brief 초기화 initialization
-	 * marketplace module can be used in either normal mode or admin mode.\n
+	 * marketplace module can be used in either normal mode or admin mode.
 	 **/
 	function init()
 	{

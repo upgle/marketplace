@@ -13,12 +13,24 @@ class marketplaceModel extends module
 	{
 	}
 
+	/**
+	 * @brief return marketplace item list
+	 * @param stdClass $args
+	 *  
+	 **/
 	function getMarketplaceItemList($args) 
 	{
 		$output = executeQueryArray('marketplace.getMarketplaceItemList', $args);		
 		return $this->_makeMarketplaceItemsGlobals($output);
 	}
 
+	/**
+	 * @brief return marketplace item list
+	 * @param itemObject $oDocument
+	 *   document item object or marketplace item object
+	 * @param stdClass $args
+	 *  
+	 **/
 	function getMarketplaceItemPage($oDocument, $args)
 	{
 		$sort_check->sort_index = $args->sort_index;
@@ -45,6 +57,12 @@ class marketplaceModel extends module
 		return $page;
 	}
 
+	/**
+	 * @brief return member's wishlist
+	 * @param int $member_srl
+	 *   xe member module member_srl
+	 *  
+	 **/
 	function getMarketplaceWishList($member_srl = false)
 	{
 		$logged_info = Context::get('logged_info');		
@@ -59,6 +77,10 @@ class marketplaceModel extends module
 		return $this->_makeMarketplaceItemsGlobals($output);
 	}
 
+	/**
+	 * @brief make item globals
+	 *  
+	 **/
 	function _makeMarketplaceItemsGlobals(&$output, $except_notice = false)
 	{
 		$idx = 0;
@@ -106,7 +128,12 @@ class marketplaceModel extends module
 		return $output;
 	}
 
-
+	/**
+	 * @brief return each member's item status count
+	 *   cancel, soldout, selling, total	
+	 * @param int $member_srl
+	 *   xe member module member_srl
+	 **/
 	function getMarketplaceItemStatusCount($member_srl) 
 	{
 		$module_info = Context::get('module_info');
@@ -128,7 +155,10 @@ class marketplaceModel extends module
 		return $result;
 	}
 
-
+	/**
+	 * @brief return all comments from seller's items
+	 * @param stdClass $args
+	 **/
 	function getMarketplaceSellerItemComments($args)
 	{
 		$logged_info = Context::get('logged_info');
@@ -144,6 +174,11 @@ class marketplaceModel extends module
 		return $output;
 	}
 
+	/**
+	 * @brief return marketplace item object
+	 * @param int $document_srl
+	 * @param bool $is_admin
+	 **/
 	function getMarketplaceItem($document_srl=0, $is_admin = false)
 	{
 		if(!$document_srl) return new marketplaceItem();
@@ -159,19 +194,20 @@ class marketplaceModel extends module
 		return $GLOBALS['XE_MARKETPLACE_LIST'][$document_srl];
 	}
 
+	/**
+	 * @brief return marketplace item status
+	 * @param int $document_srl
+	 **/
 	function getMarketplaceItemStatus($document_srl=0)
 	{
 		$output = $this->getMarketplaceItem($document_srl);
 		return $output->getItemStatus();
 	}
 
-
-	/* 
-	 * 프리미엄 광고 관련 함수
-	 * Advertise Functions
-	 *
-	*/
-
+	/**
+	 * @brief return advertise list
+	 * @param stdClass $args
+	 **/
 	function getAdvertiseList($args) 
 	{
 		$module_info = Context::get('module_info');
@@ -191,6 +227,10 @@ class marketplaceModel extends module
 		return $output;
 	}
 
+	/**
+	 * @brief return advertise info
+	 * @param int $document_srl
+	 **/
 	function getAdvertise($document_srl)
 	{
 		$args = new stdClass();
@@ -200,6 +240,10 @@ class marketplaceModel extends module
 		return $output;
 	}
 
+	/**
+	 * @brief return advertise info by bid price
+	 * @param int $bid_price
+	 **/
 	function getAdvertiseByBidPrice($bid_price)
 	{
 		$args = new stdClass();
@@ -209,13 +253,20 @@ class marketplaceModel extends module
 		return $output;
 	}
 
+	/**
+	 * @brief return advertise left balance
+	 * @param int $document_srl
+	 **/
 	function getAdvertiseBalance($document_srl)
 	{
 		$output = $this->getAdvertise($document_srl);
 		return $output->data->balance;
 	}
 
-
+	/**
+	 * @brief return advertise log list
+	 * @param stdClass $args
+	 **/
 	function getAdvertiseLogList($args)
 	{
 		$output = executeQueryArray('marketplace.getAdvertiseLogList', $args);
@@ -223,6 +274,10 @@ class marketplaceModel extends module
 		return $output;
 	}
 
+	/**
+	 * @brief return last advertise log
+	 * @param stdClass $args
+	 **/
 	function getAdvertiseLogLatestOne($args)
 	{
 		$output = executeQuery('marketplace.getAdvertiseLogLatestOne', $args);
@@ -230,6 +285,10 @@ class marketplaceModel extends module
 		return $output;
 	}
 
+	/**
+	 * @brief return bool is inserted advertise
+	 * @param int $document_srl
+	 **/
 	function isInsertedAdvertise($document_srl)
 	{
 		$output = $this->getAdvertise($document_srl);
@@ -237,12 +296,10 @@ class marketplaceModel extends module
 			else return false;
 	}
 
-
-	/* 
-	 * 키워드 관련 함수
-	 * Keyword Functions
-	 *
-	*/
+	/**
+	 * @brief return inserted all keyword
+	 * @param char $return_type
+	 **/
 	function getAllKeywords($return_type = 'stdClass')
 	{
 		$module_info = Context::get('module_info');
@@ -276,6 +333,10 @@ class marketplaceModel extends module
 		return $keyword_list;
 	}
 
+	/**
+	 * @brief return inserted keywords by member_srl
+	 * @param int $member_srl
+	 **/
 	function getKeywordsByMemberSrl($member_srl)
 	{
 		$module_info = Context::get('module_info');
@@ -287,6 +348,9 @@ class marketplaceModel extends module
 		return $output;
 	}
 
+	/**
+	 * @brief get Item list by keyword
+	 **/
 	function getItemListByKeywords($args)
 	{
 		$output = executeQueryArray('marketplace.getItemListByKeywords', $args);
@@ -294,6 +358,9 @@ class marketplaceModel extends module
 		return $this->_makeMarketplaceItemsGlobals($output);
 	}
 
+	/**
+	 * @brief get Member list by keyword
+	 **/
 	function getMemberListByKeyword($keyword)
 	{
 		$args = new stdClass();
@@ -301,7 +368,6 @@ class marketplaceModel extends module
 		$output = executeQueryArray('marketplace.getMemberListByKeyword', $args);
 		return $output;
 	}
-
 
 	/**
 	 * @brief get the list configuration
@@ -342,7 +408,6 @@ class marketplaceModel extends module
 		return $output;
 	}
 
-
 	/**
 	 * @brief return the default list configration value
 	 **/
@@ -371,7 +436,6 @@ class marketplaceModel extends module
 		return $extra_vars;
 
 	}
-
 
 	/**
 	 * @brief return sellers information
@@ -416,6 +480,10 @@ class marketplaceModel extends module
 		$this->add('mobile',$contact_number);
 	}
 
+
+	/**
+	 * @brief return district list from csv
+	 **/
 	function getDistrict()
 	{
 		// get Korea Disticts
@@ -433,7 +501,6 @@ class marketplaceModel extends module
 		return $output;
 	}
 
-
 	function getSettingCondition($module_srl, $eid)
 	{
 		$obj->eid = $eid;
@@ -449,7 +516,9 @@ class marketplaceModel extends module
 		return $output;
 	}
 
-
+	/**
+	 * @brief return categories
+	 **/
 	function ajaxGetCategory()
 	{
 		$category_srl = $_GET['category_srl'];
