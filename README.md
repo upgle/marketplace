@@ -14,6 +14,9 @@ XE로 운영되는 수많은 동호회와 커뮤니티, 까페들이 그 안에�
 ### http://marketplace.upgle.com
 모듈 소개, 사용자 데모, 관리자 데모 및 XE 자료실 다운로드 링크를 제공합니다.
 
+## 라이센스 License
+ [GPL v3 (GNU GENERAL PUBLIC LICENSE Version 3)](https://github.com/upgle/marketplace/blob/master/LICENSE.txt)
+
 ## 모듈 기능 및 특징
 
 1. **판매완료 / 판매중단 기본지원**
