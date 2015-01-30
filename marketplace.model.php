@@ -344,6 +344,36 @@ class marketplaceModel extends module
 
 
 	/**
+	 * @brief return the default list configration value
+	 **/
+	function getDefaultListConfig($module_srl)
+	{
+		// add virtual srl, title, registered date, update date, nickname, ID, name, readed count, voted count etc.
+		$virtual_vars = array( 'no', 'title', 'price', 'product_name', 'original_price', 'item_condition', 'used_month', 'priority_area', 'regdate', 'last_update', 'last_post', 'nick_name',
+				'user_id', 'user_name', 'readed_count', 'voted_count', 'blamed_count', 'thumbnail', 'summary', 'comment_status');
+		foreach($virtual_vars as $key)
+		{
+			$extra_vars[$key] = new ExtraItem($module_srl, -1, Context::getLang($key), $key, 'N', 'N', 'N', null);
+		}
+
+		// get the extra variables from the document model
+		$oDocumentModel = getModel('document');
+		$inserted_extra_vars = $oDocumentModel->getExtraKeys($module_srl);
+
+		if(count($inserted_extra_vars))
+		{
+			foreach($inserted_extra_vars as $obj)
+			{
+				$extra_vars['extra_vars'.$obj->idx] = $obj;
+			}
+		}
+
+		return $extra_vars;
+
+	}
+
+
+	/**
 	 * @brief return sellers information
 	 **/
 	function getSellerInfo($member_srl) 
@@ -384,35 +414,6 @@ class marketplaceModel extends module
 		$contact_number = implode('-',$member_info->{$this->module_info->contact_number_field});
 
 		$this->add('mobile',$contact_number);
-	}
-
-	/**
-	 * @brief return the default list configration value
-	 **/
-	function getDefaultListConfig($module_srl)
-	{
-		// add virtual srl, title, registered date, update date, nickname, ID, name, readed count, voted count etc.
-		$virtual_vars = array( 'no', 'title', 'price', 'product_name', 'original_price', 'item_condition', 'used_month', 'priority_area', 'regdate', 'last_update', 'last_post', 'nick_name',
-				'user_id', 'user_name', 'readed_count', 'voted_count', 'blamed_count', 'thumbnail', 'summary', 'comment_status');
-		foreach($virtual_vars as $key)
-		{
-			$extra_vars[$key] = new ExtraItem($module_srl, -1, Context::getLang($key), $key, 'N', 'N', 'N', null);
-		}
-
-		// get the extra variables from the document model
-		$oDocumentModel = getModel('document');
-		$inserted_extra_vars = $oDocumentModel->getExtraKeys($module_srl);
-
-		if(count($inserted_extra_vars))
-		{
-			foreach($inserted_extra_vars as $obj)
-			{
-				$extra_vars['extra_vars'.$obj->idx] = $obj;
-			}
-		}
-
-		return $extra_vars;
-
 	}
 
 	function getDistrict()
