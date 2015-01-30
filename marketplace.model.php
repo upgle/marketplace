@@ -392,7 +392,7 @@ class marketplaceModel extends module
 	function getDefaultListConfig($module_srl)
 	{
 		// add virtual srl, title, registered date, update date, nickname, ID, name, readed count, voted count etc.
-		$virtual_vars = array( 'no', 'title', 'regdate', 'last_update', 'last_post', 'nick_name',
+		$virtual_vars = array( 'no', 'title', 'price', 'product_name', 'original_price', 'item_condition', 'used_month', 'priority_area', 'regdate', 'last_update', 'last_post', 'nick_name',
 				'user_id', 'user_name', 'readed_count', 'voted_count', 'blamed_count', 'thumbnail', 'summary', 'comment_status');
 		foreach($virtual_vars as $key)
 		{

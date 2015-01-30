@@ -303,11 +303,30 @@
 	<item name="item_price">
 		<value xml:lang="ko"><![CDATA[상품 가격]]></value>
 	</item>
+	<item name="price">
+		<value xml:lang="ko"><![CDATA[가격]]></value>
+	</item>
 	<item name="bid_price">
 		<value xml:lang="ko"><![CDATA[입찰가]]></value>
 	</item>
 	<item name="balance">
 		<value xml:lang="ko"><![CDATA[광고료 제한 금액]]></value>
+	</item>
+	<item name="product_name">
+		<value xml:lang="ko"><![CDATA[상품명]]></value>
+	</item>
+
+	<item name="original_price">
+		<value xml:lang="ko"><![CDATA[상품 구매 가격]]></value>
+	</item>
+	<item name="item_condition">
+		<value xml:lang="ko"><![CDATA[상품 구분]]></value>
+	</item>
+	<item name="used_month">
+		<value xml:lang="ko"><![CDATA[사용 기간]]></value>
+	</item>
+	<item name="priority_area">
+		<value xml:lang="ko"><![CDATA[우선 거래 지역]]></value>
 	</item>
 	<item name="item_status" type="array">
 		<item name="selling">
