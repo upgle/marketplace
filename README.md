@@ -1,4 +1,4 @@
-# 마켓플레이스 모듈 Marketplace
+# About Marketplace Module
 마켓플레이스 모듈은 XpressEngine(이하 XE)을 기반으로 하는 중고장터 모듈입니다.
 
 ## 모듈 소개
