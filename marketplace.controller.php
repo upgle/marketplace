@@ -674,10 +674,12 @@ class marketplaceController extends marketplace
 		if(!Context::get('is_logged')) return new Object(-1, 'msg_invalid_request');
 		$logged_info = Context::get('logged_info');
 
+		$document_srl = Context::get('document_srl');
+		if(!$document_srl) return new Object(-1,'msg_invalid_request');
+
 		$balance = Context::get('balance');
 		$bid_price = Context::get('bid_price');
 		if($bid_price > $balance) return new Object(-1,'입찰가는 최대 광고료보다 클 수 없습니다.');
-
 
 		if($bid_price < $this->module_info->minimum_bid_price)
 			return new Object(-1,'입찰가는 최저 입찰 금액보다 같거나 높게 설정하셔야 합니다.');
@@ -692,14 +694,11 @@ class marketplaceController extends marketplace
 
 		// 같은 입찰가의 광고가 진행중인지 체크
 		$output = $oMarketplaceModel->getAdvertiseByBidPrice($bid_price);
-		if($output->data) 
+		if($output->data && $output->data->document_srl != $document_srl) 
 		{
 			return new Object(-1,'해당 입찰가는 이미 등록되어있습니다.');
 		}
 	
-		$document_srl = Context::get('document_srl');
-		if(!$document_srl) return new Object(-1,'msg_invalid_request');
-
 		$args = new stdClass();
 		$args->document_srl = $document_srl;
 		$args->bid_price = $bid_price;
