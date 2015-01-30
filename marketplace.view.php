@@ -343,6 +343,7 @@ class marketplaceView extends marketplace
 		}
 
 		$oDocumentModel = getModel('document');
+		$oMarketplaceModel = getModel('marketplace');
 
 		// setup module_srl/page number/ list number/ page count
 		$args = new stdClass();
@@ -397,14 +398,14 @@ class marketplaceView extends marketplace
 			$args->order_type = $this->module_info->order_type?$this->module_info->order_type:'asc';
 		}
 
-		// set the current page of documents
+		// 페이지가 없는경우 페이지를 구함
 		$document_srl = Context::get('document_srl');
 		if(!$args->page && $document_srl)
 		{
 			$oDocument = $oDocumentModel->getDocument($document_srl);
 			if($oDocument->isExists() && !$oDocument->isNotice())
 			{
-				$page = $oDocumentModel->getDocumentPage($oDocument, $args);
+				$page = $oMarketplaceModel->getMarketplaceItemPage($oDocument, $args);
 				Context::set('page', $page);
 				$args->page = $page;
 			}
@@ -419,7 +420,6 @@ class marketplaceView extends marketplace
 		// setup the list config variable on context
 		Context::set('list_config', $this->listConfig);
 
-		$oMarketplaceModel = getModel('marketplace');
 		$output = $oMarketplaceModel->getMarketplaceItemList($args);
 
 		Context::set('marketitem_list', $output->data);

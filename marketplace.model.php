@@ -19,6 +19,32 @@ class marketplaceModel extends module
 		return $this->_makeMarketplaceItemsGlobals($output);
 	}
 
+	function getMarketplaceItemPage($oDocument, $args)
+	{
+		$sort_check->sort_index = $args->sort_index;
+		if($sort_check->sort_index === 'list_order' || $sort_check->sort_index === 'update_order')
+		{
+			if($args->order_type === 'desc')
+			{
+				$args->{'rev_' . $sort_check->sort_index} = $oDocument->get($sort_check->sort_index);
+			}
+			else
+			{
+				$args->{$sort_check->sort_index} = $oDocument->get($sort_check->sort_index);
+			}
+		}
+		else
+		{
+			return 1;
+		}
+
+		$output = executeQuery('marketplace.getMarketplaceItemListPage', $args);		
+		$count = $output->data->count;
+		$page = (int)(($count-1)/$args->list_count)+1;
+
+		return $page;
+	}
+
 	function getMarketplaceWishList($member_srl = false)
 	{
 		$logged_info = Context::get('logged_info');		
