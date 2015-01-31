@@ -264,7 +264,7 @@ class marketplaceController extends marketplace
 
 		// Check Keywords in content and notice
 		$oMarketplaceModel = getModel('marketplace');
-		$keywords = $oMarketplaceModel->getAllKeywords('array');
+		$keywords = $oMarketplaceModel->getAllKeywords();
 
 		foreach($keywords as $keyword) {
 			if (stripos($obj->content, $keyword) !== false) {

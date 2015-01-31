@@ -52,9 +52,7 @@ class marketplaceModel extends module
 
 		$output = executeQuery('marketplace.getMarketplaceItemListPage', $args);		
 		$count = $output->data->count;
-		$page = (int)(($count-1)/$args->list_count)+1;
-
-		return $page;
+		return (int)(($count-1)/$args->list_count)+1;
 	}
 
 	/**
@@ -168,9 +166,8 @@ class marketplaceModel extends module
 		if(!$args->module_srl) $args->module_srl = $module_info->module_srl;
 		if(!$args->module_srl) return new Object(-1, 'msg_invalid_request');
 		$args->member_srl = $logged_info->member_srl;
-		$output = executeQueryArray('marketplace.getSellerItemComments', $args);
 		
-		return $output;
+		return executeQueryArray('marketplace.getSellerItemComments', $args);
 	}
 
 	/**
@@ -234,9 +231,7 @@ class marketplaceModel extends module
 	{
 		$args = new stdClass();
 		$args->document_srl = $document_srl;
-		$output = executeQuery('marketplace.getAdvertiseByDocumentSrl', $args);
-
-		return $output;
+		return executeQuery('marketplace.getAdvertiseByDocumentSrl', $args);
 	}
 
 	/**
@@ -247,9 +242,7 @@ class marketplaceModel extends module
 	{
 		$args = new stdClass();
 		$args->bid_price = $bid_price;
-		$output = executeQuery('marketplace.getAdvertiseByBidPrice', $args);
-
-		return $output;
+		return executeQuery('marketplace.getAdvertiseByBidPrice', $args);
 	}
 
 	/**
@@ -268,9 +261,7 @@ class marketplaceModel extends module
 	 **/
 	function getAdvertiseLogList($args)
 	{
-		$output = executeQueryArray('marketplace.getAdvertiseLogList', $args);
-
-		return $output;
+		return executeQueryArray('marketplace.getAdvertiseLogList', $args);
 	}
 
 	/**
@@ -279,9 +270,7 @@ class marketplaceModel extends module
 	 **/
 	function getAdvertiseLogLatestOne($args)
 	{
-		$output = executeQuery('marketplace.getAdvertiseLogLatestOne', $args);
-
-		return $output;
+		return executeQuery('marketplace.getAdvertiseLogLatestOne', $args);
 	}
 
 	/**
@@ -319,17 +308,14 @@ class marketplaceModel extends module
 			if($oCacheHandler->isSupport())
 				$oCacheHandler->put($cache_key, $keyword_list);
 		}
-		if($return_type == 'array') 
+		
+		// make return array
+		$_keyword_list = array();
+		foreach($keyword_list as $val)
 		{
-			$_output = array();
-			foreach($keyword_list as $val)
-			{
-				$_output[] = $val->keyword;
-			}
-			$keyword_list = $_output;
+			$_keyword_list[] = $val->keyword;
 		}
-
-		return $keyword_list;
+		return $_keyword_list;
 	}
 
 	/**
@@ -343,8 +329,7 @@ class marketplaceModel extends module
 		$args = new stdClass();
 		$args->module_srl = $module_info->module_srl;
 		$args->member_srl = $member_srl;
-		$output = executeQueryArray('marketplace.getKeywordsByMemberSrl', $args);	
-		return $output;
+		return executeQueryArray('marketplace.getKeywordsByMemberSrl', $args);	
 	}
 
 	/**
@@ -364,8 +349,7 @@ class marketplaceModel extends module
 	{
 		$args = new stdClass();
 		$args->keyword = $keyword;
-		$output = executeQueryArray('marketplace.getMemberListByKeyword', $args);
-		return $output;
+		return executeQueryArray('marketplace.getMemberListByKeyword', $args);
 	}
 
 	/**
@@ -487,8 +471,7 @@ class marketplaceModel extends module
 	{
 		// get Korea Disticts
 		$district_file = FileHandler::readFile(_XE_PATH_ . 'modules/marketplace/districts.ko.csv');
-		$output = explode("\n", $district_file); 
-		return $output;
+		return explode("\n", $district_file); 
 	}
 
 	function getWishlistItem($args)
@@ -496,23 +479,20 @@ class marketplaceModel extends module
 		if(!$args->document_srl || !$args->member_srl) 
 			return new Object(-1, 'msg_invalid_request');
 
-		$output = executeQuery('marketplace.getWishlistItem', $args);
-		return $output;
+		return executeQuery('marketplace.getWishlistItem', $args);
 	}
 
 	function getSettingCondition($module_srl, $eid)
 	{
 		$obj->eid = $eid;
 		$obj->module_srl = $module_srl;
-		$output = executeQuery('marketplace.getSettingCondition', $obj);
-		return $output;
+		return executeQuery('marketplace.getSettingCondition', $obj);
 	}
 
 	function getSettingConditions($module_srl)
 	{
 		$obj->module_srl = $module_srl;
-		$output = executeQueryArray('marketplace.getSettingConditions', $obj);
-		return $output;
+		return executeQueryArray('marketplace.getSettingConditions', $obj);
 	}
 
 	/**

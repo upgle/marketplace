@@ -20,7 +20,8 @@ class marketplaceView extends marketplace
 		// 초기 모듈 설정 체크
 		if(!$this->module_info->module_initialize) {
 			header('Location: '.getNotEncodedUrl('act','dispMarketplaceAdminMarketplaceInfo'));
-			die();
+			Context::close();
+			exit;
 		}
 
 		$oSecurity = new Security();
@@ -54,7 +55,7 @@ class marketplaceView extends marketplace
 
 		// hide category
 		$count_category = count($oDocumentModel->getCategoryList($this->module_info->module_srl));
-		if($count_category) $this->module_info->hide_category = 'N';
+		if($count_category > 0) $this->module_info->hide_category = 'N';
 		else $this->module_info->hide_category = 'Y';
 
 		/**
