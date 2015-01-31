@@ -110,6 +110,11 @@ class marketplaceItem extends Object
 		$args->document_srl = $this->document_srl;
 		$output = executeQuery('marketplace.getMarketplaceItem', $args, $columnList);
 
+		// add document_srl if it is notice ( Solution MYSQL Left join Issue )
+		if($output->data && $output->data->is_notice == 'Y') 
+			$output->data->document_srl = $this->document_srl;
+
+
 		if($marketplace_item === false)
 		{
 			$marketplace_item = $output->data;
