@@ -209,6 +209,70 @@
 		<value xml:lang="ko"><![CDATA[댓글이 작성된 게시물의 글을 수정 또는 삭제 할 수 없습니다.]]></value>
 		<value xml:lang="en"><![CDATA[You cannot modify or delete document which has any comment on it.]]></value>
 	</item>
+
+	<item name="time_gap" type="array">
+		<item name="just_now">
+			<value xml:lang="ko"><![CDATA[방금]]></value>
+			<value xml:lang="en"><![CDATA[Just now]]></value>
+		</item>
+		<item name="second">
+			<value xml:lang="ko"><![CDATA[%d초 전]]></value>
+			<value xml:lang="en"><![CDATA[%d second ago]]></value>
+		</item>
+		<item name="seconds">
+			<value xml:lang="ko"><![CDATA[%d초 전]]></value>
+			<value xml:lang="en"><![CDATA[%d seconds ago]]></value>
+		</item>
+		<item name="min">
+			<value xml:lang="ko"><![CDATA[%d분 전]]></value>
+			<value xml:lang="en"><![CDATA[%d minute ago]]></value>
+		</item>
+		<item name="mins">
+			<value xml:lang="ko"><![CDATA[%d분 전]]></value>
+			<value xml:lang="en"><![CDATA[%d minutes ago]]></value>
+		</item>
+		<item name="hour">
+			<value xml:lang="ko"><![CDATA[%d시간 전]]></value>
+			<value xml:lang="en"><![CDATA[%d hour ago]]></value>
+		</item>
+		<item name="hours">
+			<value xml:lang="ko"><![CDATA[%d시간 전]]></value>
+			<value xml:lang="en"><![CDATA[%d hours ago]]></value>
+		</item>
+		<item name="day">
+			<value xml:lang="ko"><![CDATA[%d일 전]]></value>
+			<value xml:lang="en"><![CDATA[%d day ago]]></value>
+		</item>
+		<item name="days">
+			<value xml:lang="ko"><![CDATA[%d일 전]]></value>
+			<value xml:lang="en"><![CDATA[%d days ago]]></value>
+		</item>
+		<item name="week">
+			<value xml:lang="ko"><![CDATA[%d주일 전]]></value>
+			<value xml:lang="en"><![CDATA[%d week ago]]></value>
+		</item>
+		<item name="weeks">
+			<value xml:lang="ko"><![CDATA[%d주일 전]]></value>
+			<value xml:lang="en"><![CDATA[%d weeks ago]]></value>
+		</item>
+		<item name="month">
+			<value xml:lang="ko"><![CDATA[%d개월 전]]></value>
+			<value xml:lang="en"><![CDATA[%d month ago]]></value>
+		</item>
+		<item name="months">
+			<value xml:lang="ko"><![CDATA[%d개월 전]]></value>
+			<value xml:lang="en"><![CDATA[%d months ago]]></value>
+		</item>
+		<item name="year">
+			<value xml:lang="ko"><![CDATA[%d년 전]]></value>
+			<value xml:lang="en"><![CDATA[%d year ago]]></value>
+		</item>
+		<item name="years">
+			<value xml:lang="ko"><![CDATA[%d년 전]]></value>
+			<value xml:lang="en"><![CDATA[%d years ago]]></value>
+		</item>
+	</item>
+
 	<item name="year">
 		<value xml:lang="ko"><![CDATA[년]]></value>
 		<value xml:lang="en"><![CDATA[year]]></value>

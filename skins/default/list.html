@@ -192,7 +192,7 @@
 					<!-- 타이틀 -->
                     <div class="ta_l bd_tit"><span class="badge_soldout" cond="$document->isSoldout()">판매완료</span><span class="badge_reupload" cond="$document->isReinserted() && $document->isSelling()">재등록</span><a href="{getUrl('document_srl',$document->document_srl, 'listStyle', $listStyle, 'cpage','')}" class="soldout"|cond="$document->isSoldout()">{$document->getTitle()}</a> <em class="cmt_count" cond="$document->getCommentCount()">({$document->getCommentCount()})</em> </div>
 					<!-- 작성일 -->
-                    <div class="ta_l bd_date"><i class="xe-time-o"></i> {$document->getRegdate('Y년 m월 d일')} ({$document->getRegdateElapsedString()}) / <a href="#popup_menu_area" class="member_{$document->get('member_srl')}" onclick="return false">{$document->getNickName()}</a></div>
+                    <div class="ta_l bd_date"><i class="xe-time-o"></i> {$document->getRegdate('Y년 m월 d일')} ({$document->getTimeGap()}) / <a href="#popup_menu_area" class="member_{$document->get('member_srl')}" onclick="return false">{$document->getNickName()}</a></div>
                 </td>
                 <td>
 					<!-- 가격 -->

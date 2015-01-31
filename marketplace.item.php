@@ -631,38 +631,71 @@ class marketplaceItem extends Object
 	}
 
 
+	function getTimeGap()
+	{
+		$regdate = $this->get('regdate');
+		$gap = $_SERVER['REQUEST_TIME'] + zgap() - ztime($regdate);
 
-	function getRegdateElapsedString($full = false) {
+		$lang_time_gap = Context::getLang('time_gap');
 
-
-		$datetime = $this->getRegdate('Y-m-d H:i:s');
-
-		$now = new DateTime;
-		$ago = new DateTime($datetime);
-		$diff = $now->diff($ago);
-
-		$diff->w = floor($diff->d / 7);
-		$diff->d -= $diff->w * 7;
-
-		$string = array(
-			'y' => 'year',
-			'm' => 'month',
-			'w' => 'week',
-			'd' => 'day',
-			'h' => 'hour',
-			'i' => 'minute',
-			's' => 'second',
-		);
-		foreach ($string as $k => &$v) {
-			if ($diff->$k) {
-				$v = $diff->$k . Context::getLang($v.($diff->$k > 1 ? 's' : '')) ;
-			} else {
-				unset($string[$k]);
-			}
+		if ($gap < 30)
+		{
+			$buff = $lang_time_gap['just_now'];
+		}		
+		elseif($gap < 60)
+		{
+			$buff = sprintf($lang_time_gap['second'], (int) $gap);
+		}
+		elseif($gap < 60 * 2)
+		{
+			$buff = sprintf($lang_time_gap['min'], (int) ($gap / 60) + 1);
+		}
+		elseif($gap < 60 * 60)
+		{
+			$buff = sprintf($lang_time_gap['mins'], (int) ($gap / 60) + 1);
+		}
+		elseif($gap < 60 * 60 * 2)
+		{
+			$buff = sprintf($lang_time_gap['hour'], (int) ($gap / 60 / 60) + 1);
+		}
+		elseif($gap < 60 * 60 * 24)
+		{
+			$buff = sprintf($lang_time_gap['hours'], (int) ($gap / 60 / 60) + 1);
+		}
+		elseif($gap < 60 * 60 * 24 * 2)
+		{
+			$buff = sprintf($lang_time_gap['day'], (int) ($gap / 60 / 60 / 24 ) + 1);
+		}
+		elseif($gap < 60 * 60 * 24 * 7)
+		{
+			$buff = sprintf($lang_time_gap['days'], (int) ($gap / 60 / 60 / 24) + 1);
+		}
+		elseif($gap < 60 * 60 * 24 * 7 * 2)
+		{
+			$buff = sprintf($lang_time_gap['week'], (int) ($gap / 60 / 60 / 24 / 7) + 1);
+		}
+		elseif($gap < 60 * 60 * 24 * 30)
+		{
+			$buff = sprintf($lang_time_gap['weeks'], (int) ($gap / 60 / 60 / 24 / 7 ) + 1);
+		}
+		elseif($gap < 60 * 60 * 24 * 30 * 2)
+		{
+			$buff = sprintf($lang_time_gap['month'], (int) ($gap / 60 / 60 / 24 / 30) + 1);
+		}
+		elseif($gap < 60 * 60 * 24 * 365)
+		{
+			$buff = sprintf($lang_time_gap['months'], (int) ($gap / 60 / 60 / 24 / 30) + 1);
+		}
+		elseif($gap < 60 * 60 * 24 * 365 * 2)
+		{
+			$buff = sprintf($lang_time_gap['year'], (int) ($gap / 60 / 60 / 24 / 365) + 1);
+		}
+		else
+		{
+			$buff = sprintf($lang_time_gap['years'], (int) ($gap / 60 / 60 / 24 / 7 / 4 / 12) + 1);
 		}
 
-		if (!$full) $string = array_slice($string, 0, 1);
-		return $string ? implode(', ', $string) . Context::getLang('time_ago') : Context::getLang('time_just_now');
+		return $buff;
 	}
 
 	function getRegdateGM()
