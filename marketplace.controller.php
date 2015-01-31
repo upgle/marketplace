@@ -71,7 +71,7 @@ class marketplaceController extends marketplace
 			return new Object(-1, "msg_invalid_request");
 		}
 
-		if(!$this->grant->write_document)
+		if(!$this->grant->manager)
 		{
 			return new Object(-1, 'msg_not_permitted');
 		}

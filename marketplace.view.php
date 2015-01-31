@@ -691,7 +691,7 @@ class marketplaceView extends marketplace
 	{
 
 		// check grant
-		if(!$this->grant->write_document)
+		if(!$this->grant->manager)
 		{
 			return $this->dispMarketplaceMessage('msg_not_permitted');
 		}
