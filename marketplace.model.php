@@ -183,7 +183,6 @@ class marketplaceModel extends module
 		{
 			$oMarketItem = new marketplaceItem($document_srl, $load_extra_vars, $columnList);
 			$GLOBALS['XE_MARKETPLACE_LIST'][$document_srl] = $oMarketItem;
-			if($load_extra_vars) $this->setToAllDocumentExtraVars();
 		}
 		if($is_admin) $GLOBALS['XE_MARKETPLACE_LIST'][$document_srl]->setGrant();
 

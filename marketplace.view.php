@@ -218,7 +218,7 @@ class marketplaceView extends marketplace
 		if($document_srl)
 		{
 			$oMarketItem = $oMarketplaceModel->getMarketplaceItem($document_srl);
-
+				
 			// if the document is existed
 			if($oMarketItem->isExists())
 			{
