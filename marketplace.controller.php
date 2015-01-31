@@ -659,7 +659,7 @@ class marketplaceController extends marketplace
 		$this->deleteAdvertise($document_srl);
 		$this->setMessage('success_changed');
 
-		if($type == 'cancel');
+		if($type == 'cancel')
 			$this->add('success_return_url',getAutoEncodedUrl('','mid',$this->mid,'act','dispMarketplaceItemManage','item_status','cancel'));
 	}
 
@@ -864,7 +864,7 @@ class marketplaceController extends marketplace
 			$last_date = $oMarketItem->get('regdate');
 		else $last_date = $oMarketItem->get('reinsert_date');
 
-		$now = time();
+		$now = $_SERVER['REQUEST_TIME'];
 		$limit_time = strtotime($interval.' days', strtotime($last_date));
 
 		if($limit_time <= $now)
