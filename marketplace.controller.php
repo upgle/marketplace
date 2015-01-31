@@ -51,7 +51,7 @@ class marketplaceController extends marketplace
 		$this->_checkKeyword($document_srl);
 
 		// alert a message
-		$this->setMessage($msg_code);
+		$this->setMessage($output->get('msg_code'));
 
 		if (Context::get('success_return_url')){
 			$this->setRedirectUrl(Context::get('success_return_url'));
@@ -81,7 +81,7 @@ class marketplaceController extends marketplace
 		$document_srl = $output->get('document_srl');
 
 		// alert a message
-		$this->setMessage($msg_code);
+		$this->setMessage($output->get('msg_code'));
 
 		if (Context::get('success_return_url')){
 			$this->setRedirectUrl(Context::get('success_return_url'));
@@ -162,12 +162,13 @@ class marketplaceController extends marketplace
 			}
 
 			$output = $oDocumentController->updateDocument($oDocument, $obj);
-			$msg_code = 'success_updated';
+			$output->add('msg_code','success_updated');
 
 		// insert a new document otherwise
 		} else {
 			$output = $oDocumentController->insertDocument($obj);
-			$msg_code = 'success_registed';
+			$output->add('msg_code','success_registed');
+
 			$obj->document_srl = $output->get('document_srl');
 
 			// insert detailed information
