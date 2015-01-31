@@ -209,7 +209,6 @@
 		<value xml:lang="ko"><![CDATA[댓글이 작성된 게시물의 글을 수정 또는 삭제 할 수 없습니다.]]></value>
 		<value xml:lang="en"><![CDATA[You cannot modify or delete document which has any comment on it.]]></value>
 	</item>
-
 	<item name="time_gap" type="array">
 		<item name="just_now">
 			<value xml:lang="ko"><![CDATA[방금]]></value>
@@ -271,71 +270,6 @@
 			<value xml:lang="ko"><![CDATA[%d년 전]]></value>
 			<value xml:lang="en"><![CDATA[%d years ago]]></value>
 		</item>
-	</item>
-
-	<item name="year">
-		<value xml:lang="ko"><![CDATA[년]]></value>
-		<value xml:lang="en"><![CDATA[year]]></value>
-	</item>
-	<item name="years">
-		<value xml:lang="ko"><![CDATA[년]]></value>
-		<value xml:lang="en"><![CDATA[years]]></value>
-	</item>
-	<item name="month">
-		<value xml:lang="ko"><![CDATA[개월]]></value>
-		<value xml:lang="en"><![CDATA[month]]></value>
-	</item>
-	<item name="months">
-		<value xml:lang="ko"><![CDATA[개월]]></value>
-		<value xml:lang="en"><![CDATA[months]]></value>
-	</item>
-	<item name="week">
-		<value xml:lang="ko"><![CDATA[주일]]></value>
-		<value xml:lang="en"><![CDATA[week]]></value>
-	</item>
-	<item name="weeks">
-		<value xml:lang="ko"><![CDATA[주일]]></value>
-		<value xml:lang="en"><![CDATA[weeks]]></value>
-	</item>
-	<item name="day">
-		<value xml:lang="ko"><![CDATA[일]]></value>
-		<value xml:lang="en"><![CDATA[day]]></value>
-	</item>
-	<item name="days">
-		<value xml:lang="ko"><![CDATA[일]]></value>
-		<value xml:lang="en"><![CDATA[days]]></value>
-	</item>
-	<item name="hour">
-		<value xml:lang="ko"><![CDATA[시간]]></value>
-		<value xml:lang="en"><![CDATA[hour]]></value>
-	</item>
-	<item name="hours">
-		<value xml:lang="ko"><![CDATA[시간]]></value>
-		<value xml:lang="en"><![CDATA[hours]]></value>
-	</item>
-	<item name="minute">
-		<value xml:lang="ko"><![CDATA[분]]></value>
-		<value xml:lang="en"><![CDATA[minute]]></value>
-	</item>
-	<item name="minutes">
-		<value xml:lang="ko"><![CDATA[분]]></value>
-		<value xml:lang="en"><![CDATA[minutes]]></value>
-	</item>
-	<item name="second">
-		<value xml:lang="ko"><![CDATA[초]]></value>
-		<value xml:lang="en"><![CDATA[second]]></value>
-	</item>
-	<item name="seconds">
-		<value xml:lang="ko"><![CDATA[초]]></value>
-		<value xml:lang="en"><![CDATA[seconds]]></value>
-	</item>
-	<item name="time_ago">
-		<value xml:lang="ko"><![CDATA[ 전]]></value>
-		<value xml:lang="en"><![CDATA[ ago]]></value>
-	</item>
-	<item name="time_just_now">
-		<value xml:lang="ko"><![CDATA[방금]]></value>
-		<value xml:lang="en"><![CDATA[just now]]></value>
 	</item>
 	<item name="invalid_category">
 		<value xml:lang="ko"><![CDATA[카테고리를 선택해주시기 바랍니다.]]></value>
