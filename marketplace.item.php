@@ -52,6 +52,12 @@ class marketplaceItem extends Object
 	var $module_info = null;
 
 	/**
+	 * marketplace list
+	 * @static array
+	 */
+	public static $marketplace_list = array();
+
+	/**
 	 * Constructor
 	 * @param int $document_srl
 	 * @param bool $load_extra_vars
@@ -90,7 +96,6 @@ class marketplaceItem extends Object
 		if(!$this->document_srl) return;
 
 		$marketplace_item = false;
-		$cache_put = false;
 		$columnList = array();
 		$this->columnList = array();
 
@@ -106,6 +111,7 @@ class marketplaceItem extends Object
 			}
 		}
 
+
 		$args = new stdClass();
 		$args->document_srl = $this->document_srl;
 		$output = executeQuery('marketplace.getMarketplaceItem', $args, $columnList);
@@ -113,7 +119,6 @@ class marketplaceItem extends Object
 		// add document_srl if it is notice ( Solution MYSQL Left join Issue )
 		if($output->data && $output->data->is_notice == 'Y') 
 			$output->data->document_srl = $this->document_srl;
-
 
 		if($marketplace_item === false)
 		{
@@ -133,7 +138,6 @@ class marketplaceItem extends Object
 			$marketplace_item->comment_count = $output->data->comment_count;
 			$marketplace_item->item_status = $output->data->item_status;
 		}
-
 
 		$this->setAttribute($marketplace_item, $load_extra_vars);
 	}
@@ -160,10 +164,10 @@ class marketplaceItem extends Object
 		$oDocumentModel = getModel('document');
 		if($load_extra_vars)
 		{
-			$GLOBALS['XE_MARKETPLACE_LIST'][$attribute->document_srl] = $this;
+			self::$marketplace_list[$attribute->document_srl] = $this;
 			$oDocumentModel->setToAllDocumentExtraVars();
 		}
-		$GLOBALS['XE_MARKETPLACE_LIST'][$this->document_srl] = $this;
+		self::$marketplace_list[$this->document_srl] = $this;
 	}
 
 	function isExists()

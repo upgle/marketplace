@@ -21,7 +21,7 @@ class marketplaceModel extends module
 	function getMarketplaceItemList($args) 
 	{
 		$output = executeQueryArray('marketplace.getMarketplaceItemList', $args);		
-		return $this->_makeMarketplaceItemsGlobals($output);
+		return $this->_makeItemsListStatic($output);
 	}
 
 	/**
@@ -72,14 +72,14 @@ class marketplaceModel extends module
 		$args->member_srl = $member_srl;
 		$output = executeQueryArray('marketplace.getWishlist', $args);
 		if(!$output->toBool()) return $output;
-		return $this->_makeMarketplaceItemsGlobals($output);
+		return $this->_makeItemsListStatic($output);
 	}
 
 	/**
 	 * @brief make item globals
 	 *  
 	 **/
-	function _makeMarketplaceItemsGlobals(&$output, $except_notice = false)
+	function _makeItemsListStatic(&$output, $except_notice = false)
 	{
 		$idx = 0;
 		$data = $output->data;
@@ -103,26 +103,26 @@ class marketplaceModel extends module
 		{
 			if($except_notice && $attribute->is_notice == 'Y') continue;
 			$document_srl = $attribute->document_srl;
-			if(!$GLOBALS['XE_MARKETPLACE_LIST'][$document_srl])
+
+			$oDocument = new marketplaceItem();
+			if(!marketplaceItem::$marketplace_list[$document_srl])
 			{
-				$oDocument = null;
-				$oDocument = new marketplaceItem();
 				$oDocument->setAttribute($attribute, false);
 				if($is_admin) $oDocument->setGrant();
-				$GLOBALS['XE_MARKETPLACE_LIST'][$document_srl] = $oDocument;
 			}
 
-			$output->data[$virtual_number] = $GLOBALS['XE_MARKETPLACE_LIST'][$document_srl];
+			$output->data[$virtual_number] = marketplaceItem::$marketplace_list[$document_srl];
 			$virtual_number--;
 		}
+
 		if(count($output->data))
 		{
 			foreach($output->data as $number => $document)
 			{
-				$output->data[$number] = $GLOBALS['XE_MARKETPLACE_LIST'][$document->document_srl];
+				$output->data[$number] = marketplaceItem::$marketplace_list[$document->document_srl];
 			}
 		}
-
+		
 		return $output;
 	}
 
@@ -179,14 +179,14 @@ class marketplaceModel extends module
 	{
 		if(!$document_srl) return new marketplaceItem();
 
-		if(!$GLOBALS['XE_MARKETPLACE_LIST'][$document_srl])
+		if(!marketplaceItem::$marketplace_list[$document_srl])
 		{
 			$oMarketItem = new marketplaceItem($document_srl, $load_extra_vars, $columnList);
-			$GLOBALS['XE_MARKETPLACE_LIST'][$document_srl] = $oMarketItem;
+			marketplaceItem::$marketplace_list[$document_srl] = $oMarketItem;
 		}
-		if($is_admin) $GLOBALS['XE_MARKETPLACE_LIST'][$document_srl]->setGrant();
+		if($is_admin) marketplaceItem::$marketplace_list[$document_srl]->setGrant();
 
-		return $GLOBALS['XE_MARKETPLACE_LIST'][$document_srl];
+		return marketplaceItem::$marketplace_list[$document_srl];
 	}
 
 	/**
@@ -338,7 +338,7 @@ class marketplaceModel extends module
 	{
 		$output = executeQueryArray('marketplace.getItemListByKeywords', $args);
 
-		return $this->_makeMarketplaceItemsGlobals($output);
+		return $this->_makeItemsListStatic($output);
 	}
 
 	/**
