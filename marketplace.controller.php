@@ -146,11 +146,6 @@ class marketplaceController extends marketplace
 				return new Object(-1,'msg_not_permitted');
 			}
 
-			if($this->module_info->protect_content=="Y" && $oDocument->get('comment_count')>0 && $this->grant->manager==false)
-			{
-				return new Object(-1,'msg_protect_content');
-			}
-
 			if(!$this->grant->manager)
 			{
 				// notice & document style same as before if not manager
@@ -416,11 +411,6 @@ class marketplaceController extends marketplace
 
 		$oDocumentModel = &getModel('document');
 		$oDocument = $oDocumentModel->getDocument($document_srl);
-		// check protect content
-		if($this->module_info->protect_content=="Y" && $oDocument->get('comment_count')>0 && $this->grant->manager==false)
-		{
-			return new Object(-1, 'msg_protect_content');
-		}
 
 		// generate document module controller object
 		$oDocumentController = getController('document');

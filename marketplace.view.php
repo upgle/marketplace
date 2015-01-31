@@ -618,11 +618,6 @@ class marketplaceView extends marketplace
 		if($oDocument->get('module_srl') == $oDocument->get('member_srl')) $savedDoc = TRUE;
 		$oDocument->add('module_srl', $this->module_srl);
 
-		if($oDocument->isExists() && $this->module_info->protect_content=="Y" && $oDocument->get('comment_count')>0 && $this->grant->manager==false)
-		{
-			return new Object(-1, 'msg_protect_content');
-		}
-
 		// if the document is not granted, then back to the password input form
 		$oModuleModel = getModel('module');
 		if($oDocument->isExists()&&!$oDocument->isGranted())
@@ -747,11 +742,6 @@ class marketplaceView extends marketplace
 
 		if($oDocument->get('module_srl') == $oDocument->get('member_srl')) $savedDoc = TRUE;
 		$oDocument->add('module_srl', $this->module_srl);
-
-		if($oDocument->isExists() && $this->module_info->protect_content=="Y" && $oDocument->get('comment_count')>0 && $this->grant->manager==false)
-		{
-			return new Object(-1, 'msg_protect_content');
-		}
 
 		// if the document is not granted, then back to the password input form
 		$oModuleModel = getModel('module');
@@ -1127,11 +1117,6 @@ class marketplaceView extends marketplace
 		if(!$oDocument->isGranted())
 		{
 			return $this->setTemplateFile('input_password_form');
-		}
-
-		if($this->module_info->protect_content=="Y" && $oDocument->get('comment_count')>0 && $this->grant->manager==false)
-		{
-			return $this->dispMarketplaceMessage('msg_protect_content');
 		}
 
 		Context::set('oDocument',$oDocument);
