@@ -18,6 +18,8 @@
     <conditions>
         <condition operation="equal" column="documents.module_srl" var="module_srl" />
         <condition operation="equal" column="documents.member_srl" var="member_srl" notnull="notnull" pipe="and" />
+        <condition operation="notequal" column="comments.member_srl" var="member_srl" notnull="notnull" pipe="and" />
+
     </conditions>
 
     <navigation>
