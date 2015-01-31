@@ -15,7 +15,8 @@
                 <div class="mp-title-insert-myitem mp-hidetext">내 상품 등록</div>
                 <a href="{getUrl('act','dispMarketplaceContent','')}" class="mp-button button-white button-small button-return"><i class="xe-mail-reply"></i> 마켓으로 돌아가기</a>
             </div>
-			<div class="mp-notice"><i class="xe-announce"> 한줄 공지사항 부분입니다. 이 부분은 세팅에서 설정이 가능합니다.</i></div>
+			{@ if(!$module_info->notice_write_form) $module_info->notice_write_form = '한줄 공지사항 부분입니다. 이 부분은 스킨 설정에서 설정이 가능합니다.'}
+			<div class="mp-notice"><i class="xe-announce"> {$module_info->notice_write_form}</i></div>
 
 			<div class="mp-block">
 

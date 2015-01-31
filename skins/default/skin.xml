@@ -9,6 +9,10 @@
     </author>
     <license>LGPL v2</license>
     <extra_vars>
+	    <var name="notice_write_form" type="textarea">
+            <title xml:lang="ko">한줄 공지 (상품 등록 화면)</title>
+			<description xml:lang="ko">상품 등록 화면의 한줄공지사항입니다.</description>
+        </var>
 		<var name="flybanner" type="select">
 			<title xml:lang="ko">글 보기 화면 플라이배너</title>
 			<description xml:lang="ko">글 보기 화면 좌측에 떠있는 배너입니다.</description>
