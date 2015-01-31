@@ -8,7 +8,8 @@
         </table>
     </tables>
     <columns>
-        <column name="*" />
+        <column name="documents.*" />
+        <column name="items.*" />
     </columns>
     <conditions>
         <condition operation="equal" column="documents.document_srl" var="document_srl" filter="number" notnull="notnull" />
