@@ -163,14 +163,13 @@ class marketplaceModel extends module
 	{
 		$logged_info = Context::get('logged_info');
 		$oDocumentModel = getModel('document');
-		$output = $oDocumentModel->getDocumentListByMemberSrl($logged_info->member_srl, array('document_srl'));
 
-		foreach($output as $key => $val)
-		{
-			$args->document_srls[] = $val->document_srl;
-		}
-		$output = executeQuery('marketplace.getCommentsByDocumentSrl', $args);
-
+		$module_info = Context::get('module_info');
+		if(!$args->module_srl) $args->module_srl = $module_info->module_srl;
+		if(!$args->module_srl) return new Object(-1, 'msg_invalid_request');
+		$args->member_srl = $logged_info->member_srl;
+		$output = executeQueryArray('marketplace.getSellerItemComments', $args);
+		
 		return $output;
 	}
 
