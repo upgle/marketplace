@@ -880,21 +880,6 @@ class marketplaceItem extends Object
 		return $comment_list;
 	}
 
-	function getTrackbackCount()
-	{
-		return $this->get('trackback_count');
-	}
-
-	function getTrackbacks()
-	{
-		if(!$this->document_srl) return;
-
-		if(!$this->allowTrackback() || !$this->get('trackback_count')) return;
-
-		$oTrackbackModel = getModel('trackback');
-		return $oTrackbackModel->getTrackbackList($this->document_srl, $is_admin);
-	}
-
 	function thumbnailExists($width = 80, $height = 0, $type = '')
 	{
 		if(!$this->document_srl) return false;
