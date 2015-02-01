@@ -159,14 +159,10 @@ class marketplaceModel extends module
 	 **/
 	function getMarketplaceSellerItemComments($args)
 	{
-		$logged_info = Context::get('logged_info');
-		$oDocumentModel = getModel('document');
-
 		$module_info = Context::get('module_info');
 		if(!$args->module_srl) $args->module_srl = $module_info->module_srl;
-		if(!$args->module_srl) return new Object(-1, 'msg_invalid_request');
-		$args->member_srl = $logged_info->member_srl;
-		
+		if(!$args->module_srl || !$args->member_srl) return new Object(-1, 'msg_invalid_request');
+
 		return executeQueryArray('marketplace.getSellerItemComments', $args);
 	}
 
@@ -205,8 +201,7 @@ class marketplaceModel extends module
 	 **/
 	function getAdvertiseList($args) 
 	{
-		$module_info = Context::get('module_info');
-		$args->module_srl = $module_info->module_srl;
+		if(!$args->module_srl) return new Object(-1, 'msg_invalid_request');
 
 		$output = executeQueryArray('marketplace.getAdvertiseList', $args);
 
@@ -217,7 +212,6 @@ class marketplaceModel extends module
 			$oMarketItem->setAttribute($attribute, false);
 			$output->data[$key] = $oMarketItem;
 		}
-
 
 		return $output;
 	}
@@ -237,10 +231,12 @@ class marketplaceModel extends module
 	 * @brief return advertise info by bid price
 	 * @param int $bid_price
 	 **/
-	function getAdvertiseByBidPrice($bid_price)
+	function getAdvertiseByBidPrice($bid_price, $module_srl = false)
 	{
 		$args = new stdClass();
 		$args->bid_price = $bid_price;
+		$args->module_srl = ($module_srl) ? $module_srl : null;
+
 		return executeQuery('marketplace.getAdvertiseByBidPrice', $args);
 	}
 
@@ -287,13 +283,14 @@ class marketplaceModel extends module
 	 * @brief return inserted all keyword
 	 * @param char $return_type
 	 **/
-	function getAllKeywords($return_type = 'stdClass')
+	function getAllKeywords($module_srl)
 	{
-		$module_info = Context::get('module_info');
+		if(!$module_srl) return new Object(-1, 'msg_invalid_request');
+
 		$oCacheHandler = CacheHandler::getInstance('object');
 		if($oCacheHandler->isSupport())
 		{
-			$object_key = 'keyword_list:' . $module_info->module_srl;
+			$object_key = 'keyword_list:' . $module_srl;
 			$cache_key = $oCacheHandler->getGroupKey('marketplace', $object_key);			
 			$keyword_list = $oCacheHandler->get($cache_key);
 		}
@@ -301,7 +298,7 @@ class marketplaceModel extends module
 		if(!$keyword_list)
 		{
 			$args = new stdClass();
-			$args->module_srl = $module_info->module_srl;
+			$args->module_srl = $module_srl;
 			$output = executeQuery('marketplace.getAllKeywords', $args);
 			$keyword_list = $output->data;
 			if($oCacheHandler->isSupport())
@@ -321,12 +318,10 @@ class marketplaceModel extends module
 	 * @brief return inserted keywords by member_srl
 	 * @param int $member_srl
 	 **/
-	function getKeywordsByMemberSrl($member_srl)
+	function getKeywordsByMemberSrl($member_srl, $module_srl = false)
 	{
-		$module_info = Context::get('module_info');
-
 		$args = new stdClass();
-		$args->module_srl = $module_info->module_srl;
+		$args->module_srl = ($module_srl) ? $module_srl : null;
 		$args->member_srl = $member_srl;
 		return executeQueryArray('marketplace.getKeywordsByMemberSrl', $args);	
 	}
@@ -344,10 +339,11 @@ class marketplaceModel extends module
 	/**
 	 * @brief get Member list by keyword
 	 **/
-	function getMemberListByKeyword($keyword)
+	function getMemberListByKeyword($keyword, $module_srl = false)
 	{
 		$args = new stdClass();
 		$args->keyword = $keyword;
+		$args->module_srl = ($module_srl) ? $module_srl : null;
 		return executeQueryArray('marketplace.getMemberListByKeyword', $args);
 	}
 

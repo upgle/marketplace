@@ -6,7 +6,7 @@
 		<column name="keyword_member.*" />
     </columns>
     <conditions>
-        <condition operation="equal" column="module_srl" var="module_srl" filter="number" notnull="notnull" pipe="and" />
+        <condition operation="equal" column="module_srl" var="module_srl" filter="number" pipe="and" />
         <condition operation="equal" column="member_srl" var="member_srl" filter="number" notnull="notnull" pipe="and" />
         <condition operation="equal" column="keyword" var="keyword" pipe="and" />
     </conditions>

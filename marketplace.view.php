@@ -549,6 +549,7 @@ class marketplaceView extends marketplace
 		$oMarketplaceModel = getModel('marketplace');
 
 		$args = new stdClass();
+		$args->module_srl = $this->module_srl;
 		$args->sort_index = "advertise.bid_price";
 		$args->order_type = "desc";
 		$args->list_count = $list_count;
@@ -853,6 +854,7 @@ class marketplaceView extends marketplace
 
 		$oMemberModel = getModel('member');
 		$oMarketplaceModel = getModel('marketplace');
+		$args->member_srl = $logged_info->member_srl;
 		$output = $oMarketplaceModel->getMarketplaceSellerItemComments($args);
 		if(!$output->toBool())
 		{
@@ -961,6 +963,7 @@ class marketplaceView extends marketplace
 		$this->dispMarketplaceCategoryList();
 
 		$oMarketplaceModel = getModel('marketplace');
+		$args->module_srl = $this->module_srl;
 		$args->member_srl = $logged_info->member_srl;
 		$output = $oMarketplaceModel->getAdvertiseList($args);
 
@@ -1037,7 +1040,7 @@ class marketplaceView extends marketplace
 
 		// Get user keyword
 		$oMarketplaceModel = getModel('marketplace');
-		$output = $oMarketplaceModel->getKeywordsByMemberSrl($member_srl);
+		$output = $oMarketplaceModel->getKeywordsByMemberSrl($member_srl, $this->module_srl);
 		$keyword_list = $output->data;
 
 		// Get documents by keyword

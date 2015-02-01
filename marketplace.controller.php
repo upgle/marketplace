@@ -260,7 +260,7 @@ class marketplaceController extends marketplace
 
 		// Check Keywords in content and notice
 		$oMarketplaceModel = getModel('marketplace');
-		$keywords = $oMarketplaceModel->getAllKeywords();
+		$keywords = $oMarketplaceModel->getAllKeywords($this->module_srl);
 
 		foreach($keywords as $keyword) {
 			if (stripos($obj->content, $keyword) !== false) {
@@ -271,7 +271,7 @@ class marketplaceController extends marketplace
 				$args->keyword = $keyword;
 				executeQuery('marketplace.insertKeywordDocument', $args);
 
-				$output = $oMarketplaceModel->getMemberListByKeyword($keyword);
+				$output = $oMarketplaceModel->getMemberListByKeyword($keyword, $this->module_srl);
 				if($output->toBool() && $output->data) {
 					foreach($output->data as $val) {
 						//send message
@@ -684,7 +684,7 @@ class marketplaceController extends marketplace
 		}
 
 		// 같은 입찰가의 광고가 진행중인지 체크
-		$output = $oMarketplaceModel->getAdvertiseByBidPrice($bid_price);
+		$output = $oMarketplaceModel->getAdvertiseByBidPrice($bid_price, $this->module_srl);
 		if($output->data && $output->data->document_srl != $document_srl) 
 		{
 			return new Object(-1,'해당 입찰가는 이미 등록되어있습니다.');
@@ -890,7 +890,7 @@ class marketplaceController extends marketplace
 
 		// get member keywords
 		$oMarketplaceModel = getModel('marketplace');
-		$output = $oMarketplaceModel->getKeywordsByMemberSrl($logged_info->member_srl);
+		$output = $oMarketplaceModel->getKeywordsByMemberSrl($logged_info->member_srl, $this->module_srl);
 		if(!$output->toBool()) return new Object(-1, $output->message);
 
 		// limit keyword insert
