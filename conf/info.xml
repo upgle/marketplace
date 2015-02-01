@@ -3,8 +3,8 @@
 	<title xml:lang="ko">마켓플레이스</title>
 	<title xml:lang="en">Marketplace</title>
 	<description xml:lang="ko">중고 장터를 만들 수 있습니다. 생성/추가 관리등의 관리자 기능도 포함합니다.</description>
-	<version>1.1.0</version>
-	<date>2015-01-31</date>
+	<version>1.2</version>
+	<date>2015-02-02</date>
 	<category>service</category>
 	<author email_address="admin@upgle.com" link="http://upgle.com/">
 		<name xml:lang="ko">UPGLE</name>
