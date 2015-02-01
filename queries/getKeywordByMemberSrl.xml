@@ -1,4 +1,4 @@
-<query id="getKeywordsByMemberSrl" action="select">
+<query id="getKeywordByMemberSrl" action="select">
     <tables>
         <table name="marketplace_keyword_member" alias="keyword_member" />
     </tables>
@@ -8,6 +8,7 @@
     <conditions>
         <condition operation="equal" column="module_srl" var="module_srl" filter="number" pipe="and" />
         <condition operation="equal" column="member_srl" var="member_srl" filter="number" notnull="notnull" pipe="and" />
+        <condition operation="equal" column="keyword" var="keyword" notnull="notnull" pipe="and" />
     </conditions>
 </query>
 

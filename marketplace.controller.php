@@ -901,12 +901,8 @@ class marketplaceController extends marketplace
 		else
 		{
 			// check exist
-			$args = new stdClass();
-			$args->module_srl = $this->module_srl;
-			$args->member_srl = $logged_info->member_srl;
-			$args->keyword = $keyword;
-			$output = executeQuery('marketplace.getKeywordsByMemberSrl', $args);
-			if($output->data)  return new Object(-1,'msg_already_exist_keyword');
+			$output = $oMarketplaceModel->getKeywordByMemberSrl($keyword, $logged_info->member_srl, $this->module_srl);
+			if($output->data) return new Object(-1,'msg_already_exist_keyword');
 
 			// DB insert
 			$args = new stdClass();

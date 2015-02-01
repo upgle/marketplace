@@ -327,6 +327,22 @@ class marketplaceModel extends module
 	}
 
 	/**
+	 * @brief return inserted keyword by member_srl
+	 * @param int $member_srl
+	 **/
+	function getKeywordByMemberSrl($keyword, $member_srl, $module_srl = false)
+	{
+		if(!$keyword) return new Object(-1, 'msg_invalid_request');
+
+		$args = new stdClass();
+		$args->module_srl = ($module_srl) ? $module_srl : null;
+		$args->member_srl = $member_srl;
+		$args->keyword = $keyword;
+
+		return executeQueryArray('marketplace.getKeywordByMemberSrl', $args);	
+	}
+
+	/**
 	 * @brief get Item list by keyword
 	 **/
 	function getItemListByKeywords($args)
