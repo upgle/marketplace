@@ -11,6 +11,7 @@
 		<h1>제품구분 관리</h1>
 		<form ruleset="insertExtraVar" action="./" method="post" class="x_form-horizontal">
 			<input type="hidden" name="module" value="marketplace" />
+			<input type="hidden" name="module_srl" value="{$module_info->module_srl}" />
 			<input type="hidden" name="act" value="procMarketplaceAdminInsertItemCondition" />
 			<input type="hidden" name="success_return_url" value="{getUrl('eid', '','type','')}" />
 			<input type="hidden" name="eid" value="{$condition->eid}" cond="$condition->eid" />

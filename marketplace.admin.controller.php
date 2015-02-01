@@ -92,19 +92,18 @@ class marketplaceAdminController extends marketplace {
 
 	public function procMarketplaceAdminInsertItemCondition() 
 	{
-	
-		$module_info = Context::get('module_info');
+		$module_srl = Context::get('module_srl');
 
 		// insert part config
 		$obj = new stdClass();
-		$obj->module_srl = $module_info->module_srl;
+		$obj->module_srl = $module_srl;
 		$obj->eid = Context::get('eid');
 		$obj->name = Context::get('name');
 		$obj->short_name = Context::get('short_name');
 		$obj->desc = Context::get('desc');
 
 		$oMarketplaceModel = getModel('marketplace');
-		$output = $oMarketplaceModel->getSettingCondition($module_info->module_srl, Context::get('eid'));
+		$output = $oMarketplaceModel->getSettingCondition($module_srl, Context::get('eid'));
 		if($output->data)
 		{
 			//update if exist
@@ -130,7 +129,7 @@ class marketplaceAdminController extends marketplace {
 		}
 		else
 		{
-			$this->setRedirectUrl(getNotEncodedUrl('', 'module', 'admin', 'act', 'dispMarketplaceAdminItemConditions', 'module_srl', $module_info->module_srl));
+			$this->setRedirectUrl(getNotEncodedUrl('', 'module', 'admin', 'act', 'dispMarketplaceAdminItemConditions', 'module_srl', $module_srl));
 		}
 	}
 	public function procMarketplaceAdminDeleteItemCondition() 
