@@ -186,8 +186,8 @@ xe.lang.ask_change_selling = '{$lang->ask_change_selling}';
 		<colgroup><col style="width: 190px;"><col></colgroup>
 		<tbody>
 			<tr>
-				<th>닉네임 <block cond="$seller_info->user_name">(이름)</block></th>
-				<td><strong cond="$seller_info->nick_name">{$seller_info->nick_name}</strong> <block cond="$seller_info->user_name">({$seller_info->user_name})</block></td>
+				<th>닉네임 <block cond="$oMarketItem->getUserName()">(이름)</block></th>
+				<td><strong cond="$oMarketItem->getNickName()">{$oMarketItem->getNickName()}</strong> <block cond="$oMarketItem->getUserName()">({$oMarketItem->getUserName()})</block></td>
 			</tr>
 			<tr>
 				<th>가입 일 (최근 로그인)</th>

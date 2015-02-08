@@ -89,7 +89,6 @@
 			</div>
 		</div>
 
-		
         <div class="x_control-group">
 			<label class="x_control-label">연락처 보호 기능</label>
 			<div class="x_controls">
@@ -105,6 +104,13 @@
 					<option value="star" selected="selected"|cond="$module_info->protect_contact_type == 'star'">(별표형식) ***-****-****</option>
 					<option value="0" selected="text"|cond="$module_info->protect_contact_type == 'text'">(안내형식) [연락처 가림]</option>
 				</select>
+			</div>
+		</div>
+
+        <div class="x_control-group">
+			<label class="x_control-label">판매자 이름 보호 기능</label>
+			<div class="x_controls">
+				<label class="x_inline" for="protect_username"><input type="checkbox" name="protect_username" id="protect_username" value="Y" checked="checked"|cond="$module_info->protect_username == 'Y'" /> 판매자 이름을 일부만 보이도록 (홍*동) 형태로 숨겨줍니다.</label>
 			</div>
 		</div>
 

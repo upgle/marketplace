@@ -439,8 +439,6 @@ class marketplaceModel extends module
 		$oMemberModel = getModel('member');
 		$seller_info = $oMemberModel->getMemberInfoByMemberSrl($member_srl);
 
-		$seller_info->secured_user_name = $seller_info->user_name;
-
 		$oDocumentModel = getModel('document');
 		$seller_info->count_document = $oDocumentModel->getDocumentCountByMemberSrl($member_srl);
 

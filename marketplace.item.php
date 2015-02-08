@@ -414,7 +414,11 @@ class marketplaceItem extends Object
 
 	function getUserName()
 	{
-		return htmlspecialchars($this->get('user_name'), ENT_COMPAT | ENT_HTML401, 'UTF-8', false);
+		$user_name = htmlspecialchars($this->get('user_name'), ENT_COMPAT | ENT_HTML401, 'UTF-8', false);
+		
+		if($this->module_info->protect_username == 'Y')	$user_name = substr_replace($user_name, '*', 1, 1);
+
+		return $user_name;
 	}
 
 	function getNickName()
