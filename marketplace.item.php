@@ -416,8 +416,11 @@ class marketplaceItem extends Object
 	{
 		$user_name = htmlspecialchars($this->get('user_name'), ENT_COMPAT | ENT_HTML401, 'UTF-8', false);
 		
-		if($this->module_info->protect_username == 'Y')	$user_name = substr_replace($user_name, '*', 1, 1);
-
+		if($this->module_info->protect_username == 'Y')
+		{
+			$len = mb_strlen($user_name, 'UTF-8');
+			return mb_substr($user_name, 0, 1, 'UTF-8').'*'.mb_substr($user_name, 2, $len, 'UTF-8');
+		}
 		return $user_name;
 	}
 
