@@ -65,7 +65,7 @@ xe.lang.ask_change_selling = '{$lang->ask_change_selling}';
 					</td>
 					<td>
 						<!-- 카테고리 -->
-						<div class="ta_l bd_catetgory">
+						<div class="ta_l bd_catetgory" cond="$document->get('category_srl')">
 						<a href="{getUrl('category',$document->get('category_srl'), 'document_srl', '')}" class="category">
 						[{$category_list[$document->get('category_srl')]->title}] 
 						</a>
