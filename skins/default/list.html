@@ -1,22 +1,23 @@
 <include target="_header.html" cond="!$oDocument->isExists()"  />
 <include target="_header_read.html" cond="$oDocument->isExists()"  />
 
-<div class="mp-content" style="<!--@if($module_info->flybanner_width)-->width:{960-$module_info->flybanner_width}px;<!--@else-->width:{960-110}px;<!--@end-->
-"|cond="$oDocument->isExists() && $module_info->flybanner == 'Y'" style="width:960px"|cond="$oDocument->isExists() && $module_info->flybanner != 'Y'">
+<div class="mp-content" style="<!--@if($module_info->flybanner_width)-->margin-left:{$module_info->flybanner_width}px;<!--@else-->margin-left:110px;<!--@end-->
+"|cond="$oDocument->isExists() && $module_info->flybanner == 'Y'" style="margin-left:0px"|cond="$oDocument->isExists() && $module_info->flybanner != 'Y'">
 	<include cond="$oDocument->isExists()" target="_read.html" />
 
 	<block cond="!$oDocument->isExists()">
-    <div class="mp-searchbox" style="float:left">
-        <form cond="$grant->view" action="{getUrl()}" method="get" onsubmit="return procFilter(this, search)" id="marketplace_search" class="marketplace_search" no-error-return-url="true">
-            <input type="hidden" name="vid" value="{$vid}" />
-            <input type="hidden" name="mid" value="{$mid}" />
-            <input type="hidden" name="category" value="{$category}" />
+    <div style="overflow:hidden">
+        <div class="mp-searchbox" style="float:left">
+            <form cond="$grant->view" action="{getUrl()}" method="get" onsubmit="return procFilter(this, search)" id="marketplace_search" class="marketplace_search" no-error-return-url="true">
+                <input type="hidden" name="vid" value="{$vid}" />
+                <input type="hidden" name="mid" value="{$mid}" />
+                <input type="hidden" name="category" value="{$category}" />
 
-            <input type="text" placeholder="이곳에 검색어를 입력하세요" name="search_keyword" value="{htmlspecialchars($search_keyword)}" title="{$lang->cmd_search}" /><input type="submit" value="검색" class="mp-hidetext" onclick="xGetElementById('marketplace_search').submit();return false;" />
-        </form>
+                <input type="text" placeholder="이곳에 검색어를 입력하세요" name="search_keyword" value="{htmlspecialchars($search_keyword)}" title="{$lang->cmd_search}" /><input type="submit" value="검색" class="mp-hidetext" onclick="xGetElementById('marketplace_search').submit();return false;" />
+            </form>
+        </div>
+        <a href="{getUrl('act','dispMarketplaceWrite','document_srl','')}" class="mp-button button-red" style="float:right; margin-left:10px"><i class="xe-photo-camera-b"></i> 내 물품 판매하기</a>
     </div>
-    <a href="{getUrl('act','dispMarketplaceWrite','document_srl','')}" class="mp-button button-red" style="float:right; margin-left:10px"><i class="xe-photo-camera-b"></i> 내 물품 판매하기</a>
-	<div class="mp-clearfix"></div>
 	</block>
 	<block cond="$module_info->use_advertise && !$oDocument->isExists() && !Context::get('search_keyword') && !$category" >
     <div class="mp-premiumarea mp-margin-top-30">
