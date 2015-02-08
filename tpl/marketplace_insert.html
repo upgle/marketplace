@@ -89,6 +89,20 @@
 			</div>
 		</div>
 
+
+        <div class="x_control-group">
+			<label class="x_control-label">판매완료 글 댓글 허용</label>
+			<div class="x_controls">
+				<label class="x_inline" for="allow_comment_soldout"><input type="checkbox" name="allow_comment_soldout" id="allow_comment_soldout" value="Y" checked="checked"|cond="$module_info->allow_comment_soldout == 'Y'" /> 판매완료된 상품에 댓글을 작성할 수있도록 허용합니다.</label>
+			</div>
+		</div>
+
+
+	</section>
+
+	<section class="section">
+		<h1>개인정보 보호 설정</h1>
+
         <div class="x_control-group">
 			<label class="x_control-label">연락처 보호 기능</label>
 			<div class="x_controls">
@@ -113,10 +127,7 @@
 				<label class="x_inline" for="protect_username"><input type="checkbox" name="protect_username" id="protect_username" value="Y" checked="checked"|cond="$module_info->protect_username == 'Y'" /> 판매자 이름을 일부만 보이도록 (홍*동) 형태로 숨겨줍니다.</label>
 			</div>
 		</div>
-
-
 	</section>
-
 
 
 	<section class="section">

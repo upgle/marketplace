@@ -1226,8 +1226,9 @@ class marketplaceItem extends Object
 	function isEnableComment()
 	{
 		// Return false if not authorized, if a secret document, if the document is set not to allow any comment
-		if (!$this->allowComment()) return false;
+		if(!$this->allowComment()) return false;
 		if(!$this->isGranted() && $this->isSecret()) return false;
+		if($this->isSoldout() && $this->module_info->allow_comment_soldout !== 'Y') return false;
 
 		return true;
 	}
