@@ -228,7 +228,7 @@
 .list_header .btn_area .select_area{display:inline-block}
 .list_header .btn_area .select_area:after{content:"";display:block;clear:both}
 .list_header .btn_area .select_area .search_select{
-padding:6px 5px 7px 8px;border:1px solid #e0e0e0}
+padding:0px 9px;border:1px solid #e0e0e0; height:32px; line-height:32px; box-sizing: border-box;}
 .list_header .btn_area .select_area .search_select select{height:17px;font-size:13px;border:0;color:#747474}
 .list_header .btn_area .select_area .search_con{float:left}
 .list_header .btn_area .select_area .search_con:after{content:"";display:block;clear:both}

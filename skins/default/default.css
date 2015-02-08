@@ -848,8 +848,11 @@
   display: block;
   clear: both; }
 .mp-box .list_header .btn_area .select_area .search_select {
-  padding: 6px 5px 7px 8px;
-  border: 1px solid #e0e0e0; }
+  padding: 0px 9px;
+  border: 1px solid #e0e0e0;
+  height: 32px;
+  line-height: 32px;
+  box-sizing: border-box; }
 .mp-box .list_header .btn_area .select_area .search_select select {
   height: 17px;
   font-size: 13px;
