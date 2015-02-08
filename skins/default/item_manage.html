@@ -77,7 +77,7 @@ xe.lang.ask_change_selling = '{$lang->ask_change_selling}';
 							<div class="manage_area">
 							<!-- 프리미엄 광고 관리 -->
 							<block cond="$document->isSelling()">
-							<a onclick="popopen(this.href); return false;" href="{getUrl('act','dispMarketplaceAdvertiseInsert','document_srl',$document->document_srl)}" class="btn_action btn_action_yellow" cond="!$document->isAdvertise()"><i class="xe-tree" ></i> 프리미엄 광고 등록</a> <span href="{getUrl('act','dispMarketplaceAdvertiseManage')}" class="btn_action" style="background:#5D6872;color:#fff" cond="$document->isAdvertise()"><i class="xe-leaf" ></i> 광고 잔액 : {number_format($document->getAdvertiseBalance())} P</span>
+							<a onclick="popopen(this.href); return false;" href="{getUrl('act','dispMarketplaceAdvertiseInsert','document_srl',$document->document_srl)}" class="btn_action btn_action_yellow" cond="$module_info->use_advertise && !$document->isAdvertise()"><i class="xe-tree" ></i> 프리미엄 광고 등록</a> <span href="{getUrl('act','dispMarketplaceAdvertiseManage')}" class="btn_action" style="background:#5D6872;color:#fff" cond="$document->isAdvertise()"><i class="xe-leaf" ></i> 광고 잔액 : {number_format($document->getAdvertiseBalance())} P</span>
 							<a href="javascript:doChangeItemStatus({$document->document_srl},'soldout');" class="btn_action"><i class="xe-status-check"></i> 판매 완료</a> <a href="javascript:doChangeItemStatus({$document->document_srl},'cancel');" class="btn_action"><i class="xe-close-circle"></i> 판매 중단</a> 
 
 							</block>
