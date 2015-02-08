@@ -136,10 +136,9 @@
 }
 /* content area */
 .mp-content {
-	float:right;
-	width: 715px;
 	margin-bottom:20px;
-
+	margin-left: 240px;
+	overflow: hidden;
 
 	.content_header {
 		position:relative;
