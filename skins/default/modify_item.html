@@ -1,5 +1,6 @@
 <load target="default.css" />
 <load target="plugin/xe-icon/xeicon.css" />
+<load target="marketplace.default.js" type="body" />
 
 <!--relatedselects plugin load-->
 <load target="plugin/dependent-selects/jquery.dependent-selects.js" type="head" />
@@ -50,7 +51,7 @@
 
                     <section class="mp-section">
                       <label for="item_price" class="mp-label">판매 가격</label>
-                      <input id="item_price" type="text" value="{$oMarketItem->get('price')}" name="item_price" class="mp-input number"> 원 <span id="item_price_ko"></span>
+                      <input id="item_price" type="text" value="{number_format($oMarketItem->get('price'))}" name="item_price" class="mp-input number"> 원 <span id="item_price_ko"></span>
                     </section>
 
                     <div class="mp-block">
@@ -63,7 +64,7 @@
 
                         <section class="mp-section">
                             <label for="item_original_price" class="mp-label">구매 가격</label>
-                            <input id="item_original_price" type="text" value="{$oMarketItem->get('original_price')}" name="item_original_price" class="mp-input number"> 원
+                            <input id="item_original_price" type="text" value="{$oMarketItem->get('original_price')}"|cond="$oMarketItem->get('original_price')" name="item_original_price" class="mp-input number"> 원
                         </section>
 						
                         <section class="mp-section">
