@@ -313,6 +313,15 @@
 	<item name="product_name">
 		<value xml:lang="ko"><![CDATA[상품명]]></value>
 	</item>
+	<item name="delivery">
+		<value xml:lang="ko"><![CDATA[택배거래]]></value>
+	</item>
+	<item name="direct_dealing">
+		<value xml:lang="ko"><![CDATA[직거래]]></value>
+	</item>
+	<item name="safe_dealing">
+		<value xml:lang="ko"><![CDATA[안전거래]]></value>
+	</item>
 
 	<item name="original_price">
 		<value xml:lang="ko"><![CDATA[상품 구매 가격]]></value>
@@ -335,6 +344,14 @@
 		</item>
 		<item name="cancel">
 			<value xml:lang="ko"><![CDATA[판매 중단]]></value>
+		</item>
+	</item>
+	<item name="option_allow" type="array">
+		<item name="Y">
+			<value xml:lang="ko"><![CDATA[가능]]></value>
+		</item>
+		<item name="N">
+			<value xml:lang="ko"><![CDATA[불가능]]></value>
 		</item>
 	</item>
 	<item name="conditions" type="array">

@@ -1419,6 +1419,12 @@ class marketplaceView extends marketplace
 		}
 		Context::set('oMarketItem', $oMarketItem);
 
+		// 상품 수정 기능 옵션 체크
+		if(!$this->module_info->item_modify || $this->module_info->item_modify =='N')
+		{
+			return new Object(-1, 'msg_invalid_request');
+		}
+
 		/**
 		 * check if the category option is enabled not not
 		 **/

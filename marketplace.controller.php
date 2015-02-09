@@ -338,15 +338,22 @@ class marketplaceController extends marketplace
 			return new Object(-1, "msg_invalid_request");
 		}
 
+		// 상품 수정 기능 옵션 체크
+		if(!$this->module_info->item_modify || $this->module_info->item_modify =='N')
+		{
+			return new Object(-1, 'msg_invalid_request');
+		}
+
 		if(!$this->grant->write_document)
 		{
 			return new Object(-1, 'msg_not_permitted');
 		}
 		$logged_info = Context::get('logged_info');
+		$document_srl = (int)Context::get('document_srl');
 
 		// Update Category
 		$obj->category_srl =  Context::get('category_srl');
-		$obj->document_srl =  Context::get('document_srl');
+		$obj->document_srl =  $document_srl;
 		$oMarketplaceModel = getModel('marketplace');
 		$oMarketItem = $oMarketplaceModel->getMarketplaceItem($obj->document_srl);
 
@@ -360,20 +367,73 @@ class marketplaceController extends marketplace
 		$obj->module_srl = $this->module_srl;
 
 		$args = new stdClass();
-		$args->document_srl = $obj->document_srl;
-		$args->original_price = str_replace(",","",$obj->item_original_price);
-		$args->price = str_replace(",","",$obj->item_price);
+		$args->document_srl = $document_srl;
+		$args->original_price = (int)str_replace(",","",$obj->item_original_price);
+		$args->price = (int)str_replace(",","",$obj->item_price);
 		$args->item_condition = $obj->item_condition;
 
 		$args->priority_area = $obj->priority_area;
 		$args->product_name = $obj->item_name;
-		$args->used_month = $obj->item_used_month;
+		$args->used_month = (int)$obj->item_used_month;
 			
 		$args->delivery =  ($obj->item_delivery)? $obj->item_delivery : 'N';
 		$args->direct_dealing = ($obj->item_direct_dealing)? $obj->item_direct_dealing : 'N';
 		$args->safe_dealing = ($obj->item_safe_dealing)? $obj->item_safe_dealing : 'N';
 
 		$output = executeQuery('marketplace.updateMarketplaceItemInfo', $args);
+		
+		// 제품 구분이 얻어옴
+		$oMarketplaceModel = getModel('marketplace');
+		$output = $oMarketplaceModel->getSettingConditions($this->module_srl);
+		if(!$output->toBool())	return $output;
+		foreach($output->data as $key => $val)
+		{
+			$condition_list[$val->eid] = $val;
+		}
+
+		// 기존 데이터와 비교하여 로그 남김
+		if($this->module_info->item_modify == 'LOG')
+		{
+			$option_allow = Context::getLang('option_allow');
+			foreach($args as $key => $val)
+			{
+				$org_val = $oMarketItem->get($key);
+				if($org_val !== $val)
+				{
+					if(is_numeric($val)) $val = number_format($val);
+					if(is_numeric($org_val)) $org_val = number_format($org_val);
+					if($key == 'item_condition') 
+					{
+						$val = $condition_list[$val]->name;
+						$org_val = $condition_list[$org_val]->name;
+					}
+
+					switch ($key) {
+					case 'delivery':
+					case 'direct_dealing':
+					case 'safe_dealing':
+						$_log .= Context::getLang($key)."가 <strong>{$option_allow[$val]}</strong>으로 변경되었습니다.<br />";
+						break;
+					case 'used_month' :
+						$_log .= Context::getLang($key)."이 <strong>{$org_val}개월</strong>에서 <strong>{$val}개월</strong>로 변경되었습니다.<br />";
+						break;
+					default:
+						$_log .= Context::getLang($key)."이 <strong>{$org_val}</strong>에서 <strong>{$val}</strong>으로 변경되었습니다.<br />";
+					}
+				}
+			}
+			// update document content
+			if($_log)
+			{
+				$obj = new stdClass();
+				$obj->document_srl = $document_srl;
+				$obj->content =		
+					$oMarketItem->get('content')
+						."<br /><p><strong>[".sprintf(Context::getLang('add_content_time'),date('Y.m.d H:i:s',time()))."]</strong></p>"
+						.$_log;
+				$output = executeQuery('marketplace.updateDocumentContent', $obj);
+			}
+		}
 
 		// remove cache
 		$this->removeItemCache($document_srl);

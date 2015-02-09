@@ -97,6 +97,16 @@
 			</div>
 		</div>
 
+		<div class="x_control-group">
+			<label class="x_control-label" for="item_modify">상품 정보 수정</label>
+			<div class="x_controls">
+				<select name="item_modify" id="item_modify">
+					<option value="LOG" selected="selected"|cond="$module_info->item_modify == 'LOG'">수정 가능 (단 로그 기록)</option>
+					<option value="Y" selected="selected"|cond="$module_info->item_modify == 'Y'">수정 가능 (단 로그 미기록)</option>
+                    <option value="N" selected="selected"|cond="$module_info->item_modify == 'N'">수정 불가능</option>
+				</select>
+			</div>
+		</div>
 
 	</section>
 
