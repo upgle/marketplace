@@ -14,5 +14,6 @@
         <column name="delivery" var="delivery" />
         <column name="direct_dealing" var="direct_dealing" />
         <column name="safe_dealing" var="safe_dealing" />
+        <column name="seller_contact" var="seller_contact" />
     </columns>
 </query>

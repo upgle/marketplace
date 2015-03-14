@@ -65,6 +65,7 @@
 			<label class="x_control-label" for="contact_number_field">연락처 필드 설정</label>
 			<div class="x_controls">
 				<select name="contact_number_field" id="contact_number_field">
+					<option value="default" selected="selected"|cond="!$val->column_name || $val->column_name=='default'">상품 등록 시 입력 받음 (회원정보 사용안함)</option>
 					<option value="{$val->column_name}" selected="selected"|cond="$val->column_name == $module_info->contact_number_field" loop="$form_list => $val">{$val->column_title} ({$val->column_name})</option>
 				</select>
 				<p class="x_help-block">장터에서 사용할 연락처 필드를 선택합니다. 이 필드는 [회원설정 > 회원관리 > 사용자 정의 항목]에서 추가한 항목입니다.</p>

@@ -245,6 +245,8 @@ class marketplaceController extends marketplace
 		$args->direct_dealing = ($obj->item_direct_dealing)? $obj->item_direct_dealing : 'N';
 		$args->safe_dealing = ($obj->item_safe_dealing)? $obj->item_safe_dealing : 'N';
 
+		if($phone = $obj->phone) $args->seller_contact = is_array($phone) ? removeHackTag(implode('-', $phone)) : removeHackTag($phone);
+
 		$output = executeQuery('marketplace.insertMarketplaceItemInfo', $args);
 
 		// make thumbnail files valid

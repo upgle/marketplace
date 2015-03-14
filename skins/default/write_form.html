@@ -2,7 +2,6 @@
 
 <!--relatedselects plugin load-->
 <load target="plugin/dependent-selects/jquery.dependent-selects.js" type="head" />
-
 <form action="./" method="post" enctype="multipart/form-data" class="mp-form-insert" ruleset="insertItem">
     <input type="hidden" name="act" value="procMarketplaceInsertDocument" />
     <input type="hidden" name="mid" value="{$mid}" />
@@ -24,7 +23,7 @@
 					<p>{$XE_VALIDATOR_MESSAGE}</p>
 				</div>
 			
-				<div class="information">
+				<div class="information" cond="$module_info->contact_number_field != 'default'">
 					<h3><i class="xe-information-circle" style="color:red"></i> 연락처를 꼭 확인하세요!</h3>
 					<p>현재 등록된 회원님의 연락처는 ( <strong>{$contact_number}</strong> )입니다.<br />
 					회원님의 연락처가 올바르지 않다면 <a href="{getUrl('mid',$mid,'act','dispMemberInfo')}">회원정보수정</a>에서 변경해주시기 바랍니다.</p>
@@ -100,6 +99,12 @@
                     });
                     </script>
 
+                    <section class="mp-section" cond ="$module_info->contact_number_field == 'default'">
+                        <label for="phone" class="mp-label">판매자 연락처</label>
+                        <input type="text" value="" name="phone[]" class="mp-input input-phone"> - <input type="text" value="" name="phone[]" class="mp-input input-phone"> - <input type="text" value="" name="phone[]" class="mp-input input-phone">
+                        <p class="description">구매자가 알 수 있도록 연락처를 정확히 입력하시기 바랍니다.</p>
+                    </section>
+
                     <section class="mp-section">
                         <label for="item_name" class="mp-label">판매 상품명 <small>(*검색용)</small></label>
                         <input id="item_name" type="text" value="" name="item_name" class="mp-input input-full">
@@ -138,8 +143,6 @@
                             </select> 
                         </section>
 
-
-   
 						<block cond="count($extra_keys)">
                         <section class="mp-section mp-extra-vars" loop="$extra_keys=>$key,$val">
                           <label for="extra_vars{$val->idx}" class="mp-label"><em cond="$val->is_required=='Y'">*</em> {$val->name}</label>
