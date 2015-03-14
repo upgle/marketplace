@@ -139,7 +139,7 @@ xe.lang.ask_change_selling = '{$lang->ask_change_selling}';
 						<td class="price">{number_format($oMarketItem->get('price'))}<small>원</small></td>
 					</tr>
 
-					<tr>
+					<tr cond="$oMarketItem->get('priority_area')">
 						<td><span class="label">우선 거래 지역</span></td>
 						<td>{$oMarketItem->get('priority_area')}</td>
 					</tr>

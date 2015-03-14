@@ -181,11 +181,12 @@
                             <label><input type="checkbox" name="item_delivery" value="Y" checked="checked"  /> 택배거래</label> <label><input type="checkbox" name="item_direct_dealing" value="Y"  checked="checked" /> 직거래</label> <label><input type="checkbox" name="item_safe_dealing" value="Y" checked="checked"  /> 안전거래</label>
                         </section>
 
-                        <section class="mp-section">
+                        <section class="mp-section" cond="$module_info->item_priority_area != 'N'">
                           <label class="mp-label">거래 우선 지역</label>
-                            <select id="priority_area" name="priority_area" class="mp-input mp-district">
+                            <select id="priority_area" name="priority_area" class="mp-input mp-district" cond="$module_info->item_priority_area == 'SELECT'">
                                 <option loop="$korea_districts => $val" value="{$val}">{$val}</option>
                             </select>
+                            <input type="text" name="priority_area" class="mp-input" cond="$module_info->item_priority_area == 'INPUT'" />
                         </section>
                         <script>
                         jQuery('.mp-district').dependentSelects({

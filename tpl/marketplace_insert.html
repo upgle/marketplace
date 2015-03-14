@@ -109,6 +109,17 @@
 			</div>
 		</div>
 
+		<div class="x_control-group">
+			<label class="x_control-label" for="item_priority_area">직거래 우선 지역</label>
+			<div class="x_controls">
+				<select name="item_priority_area" id="item_priority_area">
+					<option value="SELECT" selected="selected"|cond="$module_info->item_priority_area == 'SELECT'">사용함 (데이터베이스 사용 / 셀렉트 박스)</option>
+					<option value="INPUT" selected="selected"|cond="$module_info->item_priority_area == 'INPUT'">사용함 (사용자 직접입력 / INPUT 박스)</option>
+                    <option value="N" selected="selected"|cond="$module_info->item_priority_area == 'N'">사용안함</option>
+				</select>
+			</div>
+		</div>
+
 	</section>
 
 	<section class="section">
