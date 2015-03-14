@@ -377,12 +377,12 @@ padding:0px 9px;border:1px solid #e0e0e0; height:32px; line-height:32px; box-siz
 				padding: 5px 8px 3px;
 				margin-bottom: 24px;
 				background-color: #fff;
-				font-family: dotum, '돋움';
+				font-family: $font-dotum;
 				font-size: 11px;
 				border:1px solid #f0f0f0;
 				letter-spacing : 1.4px
 			}
-			table {	font-family: dotum, "돋움";	}
+			table {	font-family: $font-dotum;	}
 			table td {
 				padding: 5px 0 4px 13px;
 				line-height: 1.6;
@@ -731,7 +731,7 @@ padding:0px 9px;border:1px solid #e0e0e0; height:32px; line-height:32px; box-siz
 		.btn_dscription {
 			margin: 7px 4px 0;
 			text-align:center;
-			font-family: dotum, '돋움';
+			font-family: $font-dotum;
 			line-height: 1.5;
 		}
 		.xe-icon {

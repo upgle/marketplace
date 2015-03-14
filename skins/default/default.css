@@ -1348,13 +1348,13 @@
   padding: 5px 8px 3px;
   margin-bottom: 24px;
   background-color: #fff;
-  font-family: dotum, '돋움';
+  font-family: Dotum, sans-serif;
   font-size: 11px;
   border: 1px solid #f0f0f0;
   letter-spacing: 1.4px;
 }
 .mp-box .board_read .itm_info .info_details table {
-  font-family: dotum, "돋움";
+  font-family: Dotum, sans-serif;
 }
 .mp-box .board_read .itm_info .info_details table td {
   padding: 5px 0 4px 13px;
@@ -2243,7 +2243,7 @@
   background-color: #fff;
 }
 .mp-box .tbl_seller_info {
-  font-family: Dotum;
+  font-family: Dotum, sans-serif;
   width: 100%;
   line-height: 19px;
 }
@@ -2281,7 +2281,7 @@
 .mp-box .item_controlbox .btn_area .btn_dscription {
   margin: 7px 4px 0;
   text-align: center;
-  font-family: dotum, '돋움';
+  font-family: Dotum, sans-serif;
   line-height: 1.5;
 }
 .mp-box .item_controlbox .btn_area .xe-icon {
