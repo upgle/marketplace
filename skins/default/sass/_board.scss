@@ -32,6 +32,7 @@
 /* Board */
 .board 
 {
+	float:left;
 	img{vertical-align:top;border:0}
 	caption, legend{visibility:hidden;width:0;height:0;font-size:0;line-height:0;overflow:hidden}
 	label, table, input, button, textarea, select {
@@ -101,7 +102,7 @@
 .board_header .board_tab li.active {font-weight: bold;}
 
 /* Board List */
-.board_list{line-height:1.5}
+.board_list{float:left; width:100%; line-height:1.5}
 .board_list img{vertical-align:top}
 
 .bd_category ul:after{content:"";display:block;clear:both}
@@ -119,6 +120,8 @@
 .board_list .hover_info .btn_show:hover,.board_list .hover_info .btn_move:hover{opacity:1;filter:alpha(opacity=100)}
 .board_list .hover_info .btn_show{margin-right:4px}
 .board_list .hover_info .btn_move{border-color:#414141;background-color:#414141}
+
+.list_footer {float:left;width:100%}
 
 /* bd_paginate */
 .bd_paginate{position:relative;margin-top:19px;text-align:center;}
@@ -219,9 +222,9 @@
 .tbl_board_lst tbody tr:first-child td{border-color:#bcbcbc}
 
 /* board - list_header */
-.list_header {width:100%}
+.list_header {float:left; width:100%; margin-bottom:10px;}
 .list_header .btn_type, .btn_type i{transition: all 0.2s ease-in-out;-webkit-transition: all 0.2s ease-in-out; text-decoration:none;}
-.list_header .btn_area{margin-bottom:10px;*zoom:1;overflow:hidden}
+.list_header .btn_area{*zoom:1;}
 .list_header .btn_area .btn_area_l{float:left}
 .list_header .btn_area .btn_area_count{line-height:32px; padding-left:5px;}
 .list_header .btn_area .btn_lst{vertical-align:top}

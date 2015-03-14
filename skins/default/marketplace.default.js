@@ -66,6 +66,8 @@ jQuery(function($) {
 		$("#item_price_ko").text('( ' + int_to_han(this.value.replace(/[^0-9]/g,'')) + '원 )');
 	});
 
+	jQuery(".select_redirect").selectOrDie({links: true});
+
 });
 
 function quickSearchSubmit(){

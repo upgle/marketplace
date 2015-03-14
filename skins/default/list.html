@@ -1,12 +1,12 @@
 <include target="_header.html" cond="!$oDocument->isExists()"  />
 <include target="_header_read.html" cond="$oDocument->isExists()"  />
 
-<div class="mp-content" style="<!--@if($module_info->flybanner_width)-->margin-left:{$module_info->flybanner_width}px;<!--@else-->margin-left:110px;<!--@end-->
+<div class="mp-content mp-clearfix" style="<!--@if($module_info->flybanner_width)-->margin-left:{$module_info->flybanner_width}px;<!--@else-->margin-left:110px;<!--@end-->
 "|cond="$oDocument->isExists() && $module_info->flybanner == 'Y'" style="margin-left:0px"|cond="$oDocument->isExists() && $module_info->flybanner != 'Y'">
 	<include cond="$oDocument->isExists()" target="_read.html" />
 
 	<block cond="!$oDocument->isExists()">
-    <div style="overflow:hidden">
+    <div class="mp-listheader">
         <div class="mp-searchbox" style="float:left">
             <form cond="$grant->view" action="{getUrl()}" method="get" onsubmit="return procFilter(this, search)" id="marketplace_search" class="marketplace_search" no-error-return-url="true">
                 <input type="hidden" name="vid" value="{$vid}" />
@@ -73,25 +73,15 @@
 	  /*
 	  jQuery('.thumb_area').height(jQuery('.thumb_area').children('img').height());
 	  */
-
-      jQuery('.select_redirect').bind('change', function () {
-          var url = jQuery(this).val(); // get selected value
-          if (url) { // require a URL
-              window.location = url; // redirect
-          }
-          return false;
-      });
-
     });
     </script>
 	</block>
 
-	<div style="border-top:1px solid #bbbbbb; border-bottom:1px solid #bbbbbb; padding: 13px 10px 12px; font-size: 13px;" class="mp-margin-top-30" cond="$category">
+	<div style="float:left;width:100%; box-sizing:border-box ;border-top:1px solid #bbbbbb; border-bottom:1px solid #bbbbbb; padding: 13px 10px 12px; font-size: 13px;" class="mp-margin-top-30" cond="$category">
 	<span style="color:#fff;background:#313131; padding:3px 6px;margin-right: 8px; border-radius:2px; font-size: 14px;">선택된 카테고리</span> {$category_list[$category_list[$category]->parent_srl]->title} <i class=" xe-angle-right" cond="$category_list[$category]->parent_srl"></i> {$category_list[$category]->title}
-	</div>
-	
+	</div>    
 	<!-- 게시판 시작 -->
-    <div class="board mp-margin-top-35">
+    <div class="board mp-clearfix mp-margin-top-35">
         <div class="list_header">
             <div class="btn_area">
                 <div class="btn_area_l btn_area_count">
@@ -99,28 +89,17 @@
                 </div>
 				<!-- 게시판 상단 컨트롤러 -->
                 <div class="btn_area_r">
-                    <div class="select_area">
-                        <form action="" method="post">
-                            <div class="search_select">
-                                <select class="select_redirect">
-                                <option value="{getUrl('list_count','5')}" selected="selected"|cond="Context::get('list_count')==5">5개씩 보기</option>
-                                <option value="{getUrl('list_count','10')}" selected="selected"|cond="Context::get('list_count')==10">10개씩 보기</option>
-                                <option value="{getUrl('list_count','25')}" selected="selected"|cond="Context::get('list_count')==25">25개씩 보기</option>
-                                <option value="{getUrl('list_count','50')}" selected="selected"|cond="Context::get('list_count')==50">50개씩 보기</option>
-                                </select>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="select_area">
-						<div class="search_select">
-							<select class="select_redirect">
-							<option value="{getUrl('sort_index','list_order','order_type','asc')}" selected="selected"|cond="Context::get('sort_index')=='list_order' && Context::get('order_type')=='asc'">신규등록순</option>
-							<option value="{getUrl('sort_index','price','order_type','asc')}" selected="selected"|cond="Context::get('sort_index')=='price' && Context::get('order_type')=='asc'">낮은가격순</option>
-							<option value="{getUrl('sort_index','price','order_type','desc')}" selected="selected"|cond="Context::get('sort_index')=='price' && Context::get('order_type')=='desc'">높은가격순</option>
-							</select>
-						</div>
-                    </div>
-
+                    <select class="select_redirect">
+                        <option value="{getUrl('list_count','5')}" selected="selected"|cond="Context::get('list_count')==5">5개씩 보기</option>
+                        <option value="{getUrl('list_count','10')}" selected="selected"|cond="Context::get('list_count')==10">10개씩 보기</option>
+                        <option value="{getUrl('list_count','25')}" selected="selected"|cond="Context::get('list_count')==25">25개씩 보기</option>
+                        <option value="{getUrl('list_count','50')}" selected="selected"|cond="Context::get('list_count')==50">50개씩 보기</option>
+                    </select>
+               		<select class="select_redirect">
+    					<option value="{getUrl('sort_index','list_order','order_type','asc')}" selected="selected"|cond="Context::get('sort_index')=='list_order' && Context::get('order_type')=='asc'">신규등록순</option>
+    					<option value="{getUrl('sort_index','price','order_type','asc')}" selected="selected"|cond="Context::get('sort_index')=='price' && Context::get('order_type')=='asc'">낮은가격순</option>
+    					<option value="{getUrl('sort_index','price','order_type','desc')}" selected="selected"|cond="Context::get('sort_index')=='price' && Context::get('order_type')=='desc'">높은가격순</option>
+					</select>
 					<!-- 판매중인 상품/ 판매완료 상품 보기 버튼 -->
                     <a class="btn_type btn_lst" style="padding: 0 8px;" href="{getUrl('item_status','selling')}" cond="!$item_status">
                         <i class=" xe-check-square"></i>
@@ -153,7 +132,6 @@
             <th scope="col"><div class="ta_c"><a href="#">가격</a></div></th>
             <th scope="col"><div class="ta_l"><a href="{getUrl('sort_index','readed_count','order_type',$order_type)}">{$lang->readed_count}</a></div></th>
 			<th scope="col" cond="$grant->manager"><div class="ta_c"><input type="checkbox" onclick="XE.checkboxToggleAll({ doClick:true });" class="iCheck" title="Check All" /></div></th>
-
             </tr>
             <!-- 목록 헤더 끝 -->
             </thead>
@@ -232,7 +210,6 @@
 	<div class="list_footer">
 		<div class="btnArea">
 			<a cond="$grant->manager" href="{getUrl('mid',$mid,'act','dispMarketplaceNoticeWrite')}" class="btn"><i class="xe-pen"></i> 공지사항 작성</a>
-
 			<a cond="$grant->manager" href="{getUrl('','module','document','act','dispDocumentManageDocument')}" class="btn" onclick="popopen(this.href,'manageDocument'); return false;">{$lang->cmd_manage_document}</a>
 		</div>
 	</div>

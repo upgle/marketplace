@@ -316,6 +316,8 @@
   margin-left: 215px;
 }
 .mp-box .mp-premiumarea {
+  float: left;
+  width: 100%;
   border-top: 1px solid #bcbcbc;
   padding-top: 14px;
   /* define xe content style */
@@ -555,6 +557,7 @@
   border-color: #00A8E6;
 }
 .mp-box .board {
+  float: left;
   /* 게시물 관리용 체크박스 */
 }
 .mp-box .board img {
@@ -666,6 +669,8 @@
   font-weight: bold;
 }
 .mp-box .board_list {
+  float: left;
+  width: 100%;
   line-height: 1.5;
 }
 .mp-box .board_list img {
@@ -731,6 +736,10 @@
 .mp-box .board_list .hover_info .btn_move {
   border-color: #414141;
   background-color: #414141;
+}
+.mp-box .list_footer {
+  float: left;
+  width: 100%;
 }
 .mp-box .bd_paginate {
   position: relative;
@@ -998,7 +1007,9 @@
   border-color: #bcbcbc;
 }
 .mp-box .list_header {
+  float: left;
   width: 100%;
+  margin-bottom: 10px;
 }
 .mp-box .list_header .btn_type, .mp-box .btn_type i {
   transition: all 0.2s ease-in-out;
@@ -1006,9 +1017,7 @@
   text-decoration: none;
 }
 .mp-box .list_header .btn_area {
-  margin-bottom: 10px;
   *zoom: 1;
-  overflow: hidden;
 }
 .mp-box .list_header .btn_area .btn_area_l {
   float: left;
