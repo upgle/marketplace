@@ -30,9 +30,6 @@
 		top:28px; right:24px
 	}
 	&.button-red {
-        -moz-box-shadow:inset 0px 1px 0px 0px #ff8d93, 0px 1px 0px 0px #d2d2d2;
-        -webkit-box-shadow:inset 0px 1px 0px 0px #ff8d93, 0px 1px 0px 0px #d2d2d2;
-        box-shadow:inset 0px 1px 0px 0px #ff8d93, 0px 1px 0px 0px #d2d2d2;
         background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ff4e57), color-stop(1, #ff383f));
         background:-moz-linear-gradient(top, #ff4e57 5%, #ff383f 100%);
         background:-webkit-linear-gradient(top, #ff4e57 5%, #ff383f 100%);
