@@ -478,7 +478,7 @@
   background: #f65c25;
   color: #fff;
   padding: 3px 3px 1px;
-  font-family: '돋움';
+  font-family: Dotum, sans-serif;
   z-index: 5;
   opacity: 0.95;
 }

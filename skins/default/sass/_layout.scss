@@ -300,7 +300,7 @@
 	background:#f65c25; 
 	color:#fff; 
 	padding:3px 3px 1px; 
-	font-family:'돋움'; 
+	font-family: $font-dotum; 
 	z-index:5; opacity:0.95;
 	&.mp-condition-badge-small { font-size:11px;}
 	&.mp-new {background-color:#00A3E3;}
