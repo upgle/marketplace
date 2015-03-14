@@ -180,7 +180,7 @@
                 <td class="bd_thmb">
 					<div style="position:relative">
 					<span class="mp-condition-badge mp-condition-badge-small mp-{$document->getItemCondition()}">{$condition_list[$document->getItemCondition()]->short_name}</span>
-                    <img src="{$document->getThumbnail(118,77)}" />
+                    <a href="{getUrl('document_srl',$document->document_srl, 'listStyle', $listStyle, 'cpage','')}"><img src="{$document->getThumbnail(118,77)}" /></a>
 					</div>
                 </td>
                 <td>
