@@ -272,11 +272,10 @@
 }
 
 .search_keyword {
-	font-style: italic;
 	&::-webkit-input-placeholder { font-family: $font-stack; font-style: italic; }
     &:-ms-input-placeholder {font-family: $font-stack; font-style: italic; }
     &:-moz-placeholder {font-family: $font-stack; font-style: italic; }
-    &::-moz-placeholder {font-family: $font-stack; text-font-style: italic; }
+    &::-moz-placeholder {font-family: $font-stack; 	font-style: italic; }
 }
 
 /* condition badge */

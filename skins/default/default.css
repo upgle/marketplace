@@ -445,9 +445,6 @@
   cursor: pointer;
   overflow: hidden;
 }
-.mp-box .search_keyword {
-  font-style: italic;
-}
 .mp-box .search_keyword::-webkit-input-placeholder {
   font-family: "맑은 고딕", "Malgun Gothic", "NanumGothic", "나눔고딕", "NanumGothicWeb", Dotum;
   font-style: italic;
@@ -462,7 +459,7 @@
 }
 .mp-box .search_keyword::-moz-placeholder {
   font-family: "맑은 고딕", "Malgun Gothic", "NanumGothic", "나눔고딕", "NanumGothicWeb", Dotum;
-  text-font-style: italic;
+  font-style: italic;
 }
 .mp-box .mp-condition-badge {
   position: absolute;
