@@ -13,7 +13,7 @@
                 <input type="hidden" name="mid" value="{$mid}" />
                 <input type="hidden" name="category" value="{$category}" />
 
-                <input type="text" placeholder="이곳에 검색어를 입력하세요" name="search_keyword" value="{htmlspecialchars($search_keyword)}" title="{$lang->cmd_search}" /><input type="submit" value="검색" class="mp-hidetext" onclick="xGetElementById('marketplace_search').submit();return false;" />
+                <input type="text" placeholder="이곳에 검색어를 입력하세요" class="search_keyword" name="search_keyword" value="{htmlspecialchars($search_keyword)}" title="{$lang->cmd_search}" /><input type="submit" value="검색" class="mp-hidetext" onclick="xGetElementById('marketplace_search').submit();return false;" />
             </form>
         </div>
         <a href="{getUrl('act','dispMarketplaceWrite','document_srl','')}" class="mp-button button-red" style="float:right; margin-left:10px"><i class="xe-photo-camera-b"></i> 내 물품 판매하기</a>

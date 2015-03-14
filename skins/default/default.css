@@ -445,31 +445,24 @@
   cursor: pointer;
   overflow: hidden;
 }
-.mp-box .mp-searchbox ::-webkit-input-placeholder {
-  /* WebKit browsers */
-  color: #8b8b8b;
+.mp-box .search_keyword {
   font-style: italic;
-  font-family: '나눔고딕';
 }
-.mp-box .mp-searchbox :-moz-placeholder {
-  /* Mozilla Firefox 4 to 18 */
-  color: #8b8b8b;
+.mp-box .search_keyword::-webkit-input-placeholder {
+  font-family: "맑은 고딕", "Malgun Gothic", "NanumGothic", "나눔고딕", "NanumGothicWeb", Dotum;
   font-style: italic;
-  font-family: '나눔고딕';
-  opacity: 1;
 }
-.mp-box .mp-searchbox ::-moz-placeholder {
-  /* Mozilla Firefox 19+ */
-  color: #8b8b8b;
+.mp-box .search_keyword:-ms-input-placeholder {
+  font-family: "맑은 고딕", "Malgun Gothic", "NanumGothic", "나눔고딕", "NanumGothicWeb", Dotum;
   font-style: italic;
-  font-family: '나눔고딕';
-  opacity: 1;
 }
-.mp-box .mp-searchbox :-ms-input-placeholder {
-  /* Internet Explorer 10+ */
-  color: #8b8b8b;
+.mp-box .search_keyword:-moz-placeholder {
+  font-family: "맑은 고딕", "Malgun Gothic", "NanumGothic", "나눔고딕", "NanumGothicWeb", Dotum;
   font-style: italic;
-  font-family: '나눔고딕';
+}
+.mp-box .search_keyword::-moz-placeholder {
+  font-family: "맑은 고딕", "Malgun Gothic", "NanumGothic", "나눔고딕", "NanumGothicWeb", Dotum;
+  text-font-style: italic;
 }
 .mp-box .mp-condition-badge {
   position: absolute;

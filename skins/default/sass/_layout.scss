@@ -269,28 +269,14 @@
 		cursor: pointer;
 		overflow:hidden;
 	}
-	::-webkit-input-placeholder { /* WebKit browsers */
-		color:    #8b8b8b;
-		font-style: italic;
-		font-family: '나눔고딕';
-	}
-	:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-		color:    #8b8b8b;
-		font-style: italic;
-		font-family: '나눔고딕';
-		opacity:  1;
-	}
-	::-moz-placeholder { /* Mozilla Firefox 19+ */
-		color:    #8b8b8b;
-		font-style: italic;
-		font-family: '나눔고딕';
-		opacity:  1;
-	}
-	:-ms-input-placeholder { /* Internet Explorer 10+ */
-		color:    #8b8b8b;
-		font-style: italic;
-		font-family: '나눔고딕';
-	}
+}
+
+.search_keyword {
+	font-style: italic;
+	&::-webkit-input-placeholder { font-family: $font-stack; font-style: italic; }
+    &:-ms-input-placeholder {font-family: $font-stack; font-style: italic; }
+    &:-moz-placeholder {font-family: $font-stack; font-style: italic; }
+    &::-moz-placeholder {font-family: $font-stack; text-font-style: italic; }
 }
 
 /* condition badge */
