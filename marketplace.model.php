@@ -457,18 +457,27 @@ class marketplaceModel extends module
 	 **/
 	function getMarketplaceContactNumber()
 	{
+		$field = $this->module_info->contact_number_field;
+
 		$oDocumentModel = getModel('document');
 		$document_srl = Context::get('document_srl');
 		$output = $oDocumentModel->getDocument($document_srl, false, false);
 		if(!$document_srl) return false;
 
-		$member_srl = $output->getMemberSrl();
-		$oMemberModel = getModel('member');
-		$member_info = $oMemberModel->getMemberInfoByMemberSrl($member_srl);
-		if(!$member_info) return false;
+		if($field == 'default')
+		{
+			$marketItem = $this->getMarketplaceItem($document_srl);
+			$contact_number = $marketItem->get('seller_contact');
+		}
+		else 
+		{
+			$member_srl = $output->getMemberSrl();
+			$oMemberModel = getModel('member');
+			$member_info = $oMemberModel->getMemberInfoByMemberSrl($member_srl);
+			if(!$member_info) return false;
 
-		$contact_number = implode('-',$member_info->{$this->module_info->contact_number_field});
-
+			$contact_number = implode('-',$member_info->{$field});
+		}
 		$this->add('mobile',$contact_number);
 	}
 
