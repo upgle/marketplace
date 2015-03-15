@@ -966,7 +966,7 @@
 }
 .mp-box .tbl_board_lst tbody td .bd_catetgory a {
   font-size: 11px;
-  font-family: dotum;
+  font-family: Dotum, sans-serif;
   color: #474747;
 }
 .mp-box .tbl_board_lst tbody tr .soldout {
@@ -1012,8 +1012,6 @@
   margin-bottom: 10px;
 }
 .mp-box .list_header .btn_type, .mp-box .btn_type i {
-  transition: all 0.2s ease-in-out;
-  -webkit-transition: all 0.2s ease-in-out;
   text-decoration: none;
 }
 .mp-box .list_header .btn_area {
@@ -1091,35 +1089,28 @@
 }
 .mp-box .list_header .btn_area .btn_type {
   display: inline-block;
-  height: 30px;
+  height: 33px;
+  box-sizing: border-box;
   line-height: 29px;
-  border: 1px solid #e0e0e0;
-  color: #747474;
+  border: 1px solid #DDD;
+  color: #444;
   text-align: center;
-}
-.mp-box .list_header .btn_area .btn_type i {
-  font-size: 18px;
-  color: #9d9d9d;
-  vertical-align: middle;
+  background: #FCFCFC;
 }
 .mp-box .list_header .btn_area .btn_type .btn_txt {
   font-size: 13px;
   vertical-align: middle;
 }
 .mp-box .list_header .btn_area .btn_type:hover {
-  background-color: #414141;
-  color: #f9f9f9;
-  text-decoration: none;
-}
-.mp-box .list_header .btn_area .btn_type:hover i {
-  color: #f9f9f9;
+  border-color: #A4A4A4;
 }
 .mp-box .btn_area .btn_area_r .btn_type i {
   font-size: 15px;
   line-height: 30px;
 }
 .mp-box .btn_area .btn_area_r .btn_type .btn_txt {
-  font-size: 13px;
+  font-size: 12px;
+  padding: 10px 13px;
   vertical-align: baseline;
 }
 .mp-box .bd_write_area.gb_write_type {

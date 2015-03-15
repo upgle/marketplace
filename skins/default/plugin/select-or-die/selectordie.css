@@ -35,13 +35,12 @@
         position: relative;
         line-height: 1 !important;
 
-        width: 140px;
-        padding: 10px 10px !important;
+        width: 130px;
+        padding: 9px 10px 10px 15px !important;
         border: 1px solid #DDD !important;
         background: #FCFCFC;
         color: #444444;
-        font-size: 11px;
-        font-weight: 700;
+        font-size: 12px;
         text-align: left;
         text-transform: uppercase;
         outline: 0;
@@ -69,9 +68,11 @@
             }
 
     /* Change the border color on hover, focus and when open */
-    .sod_select:hover,
+
+    .sod_select:hover { border-color: #A4A4A4 !important; }
+
     .sod_select.open,
-    .sod_select.focus { border-color: #A4A4A4 !important; }
+    .sod_select.focus { border-color: #ddd !important; }
 
         .sod_select.open { color: #919191; }
         .sod_select.focus { box-shadow: 0 0 1px rgba(0,0,0,.2); }
@@ -108,7 +109,7 @@
             left: 0;
             display: none;
             height: auto;
-            width: 140px;
+            width: 130px;
             margin: 0 0 0 -1px;
             background: #ffffff;
             border: 1px solid #ddd;

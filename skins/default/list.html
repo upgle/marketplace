@@ -101,12 +101,10 @@
     					<option value="{getUrl('sort_index','price','order_type','desc')}" selected="selected"|cond="Context::get('sort_index')=='price' && Context::get('order_type')=='desc'">높은가격순</option>
 					</select>
 					<!-- 판매중인 상품/ 판매완료 상품 보기 버튼 -->
-                    <a class="btn_type btn_lst" style="padding: 0 8px;" href="{getUrl('item_status','selling')}" cond="!$item_status">
-                        <i class=" xe-check-square"></i>
+                    <a class="btn_type btn_lst" href="{getUrl('item_status','selling')}" cond="!$item_status">
                         <span class="btn_txt">판매중인 상품만 보기</span>
                     </a>
-                    <a class="btn_type btn_lst" style="padding: 0 8px;" href="{getUrl('item_status','')}" cond="$item_status=='selling'">
-                        <i class=" xe-check-square"></i>
+                    <a class="btn_type btn_lst" href="{getUrl('item_status','')}" cond="$item_status=='selling'">
                         <span class="btn_txt">판매완료된 상품도 보기</span>
                     </a>
                 </div>

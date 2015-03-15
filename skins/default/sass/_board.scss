@@ -209,7 +209,7 @@
 .tbl_board_lst tbody td .bd_tit .cmt_count {color:red; font-size:10px; font-style:normal}
 .tbl_board_lst tbody td .bd_date{margin-top:3px}
 .tbl_board_lst tbody td .bd_catetgory{margin-bottom:1px;}
-.tbl_board_lst tbody td .bd_catetgory a{font-size:11px;font-family:dotum; color:#474747;}
+.tbl_board_lst tbody td .bd_catetgory a{font-size:11px;font-family:$font-dotum; color:#474747;}
 .tbl_board_lst tbody tr .soldout{text-decoration: line-through; color:#939393}
 
 .tbl_board_lst tbody .bd_notice .bd_tit a{font-size:12px;font-weight:600;color:#2c2c2c}
@@ -223,7 +223,7 @@
 
 /* board - list_header */
 .list_header {float:left; width:100%; margin-bottom:10px;}
-.list_header .btn_type, .btn_type i{transition: all 0.2s ease-in-out;-webkit-transition: all 0.2s ease-in-out; text-decoration:none;}
+.list_header .btn_type, .btn_type i{text-decoration:none;}
 .list_header .btn_area{*zoom:1;}
 .list_header .btn_area .btn_area_l{float:left}
 .list_header .btn_area .btn_area_count{line-height:32px; padding-left:5px;}
@@ -241,13 +241,11 @@ padding:0px 9px;border:1px solid #e0e0e0; height:32px; line-height:32px; box-siz
 .list_header .btn_area .select_area .search_con .btn_search:hover,
 .list_header .btn_area .select_area .search_con .btn_search:focus{background-color:#414141;color:#fff;text-decoration:none;}
 .list_header .btn_area .btn_area_r{float:right}
-.list_header .btn_area .btn_type{display:inline-block;height:30px;line-height:29px;border:1px solid #e0e0e0;color:#747474;text-align:center}
-.list_header .btn_area .btn_type i{font-size:18px;color:#9d9d9d;vertical-align:middle}
+.list_header .btn_area .btn_type{display:inline-block;height:33px;box-sizing:border-box;line-height:29px;border:1px solid #DDD;color:#444;text-align:center; background:#FCFCFC}
 .list_header .btn_area .btn_type .btn_txt{font-size:13px;vertical-align:middle}
-.list_header .btn_area .btn_type:hover{background-color:#414141;color:#f9f9f9;text-decoration:none;}
-.list_header .btn_area .btn_type:hover i{color:#f9f9f9}
+.list_header .btn_area .btn_type:hover{border-color:#A4A4A4;}
 .btn_area .btn_area_r .btn_type i{font-size:15px;line-height:30px}
-.btn_area .btn_area_r .btn_type .btn_txt{font-size:13px;vertical-align:baseline;}
+.btn_area .btn_area_r .btn_type .btn_txt{font-size:12px;padding:10px 13px;vertical-align:baseline;}
 
 .bd_write_area{}
 .bd_write_area.gb_write_type{margin-bottom:45px}
