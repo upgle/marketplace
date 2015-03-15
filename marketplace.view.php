@@ -115,6 +115,8 @@ class marketplaceView extends marketplace
 		$this->condition_list = $condition_list;
 		Context::set('condition_list', $condition_list);
 
+		// Set currency format
+		Context::set('currency_format', $oMarketplaceModel->getCurrencyFormat($this->module_srl));
 	}
 
 	/**

@@ -131,12 +131,12 @@ xe.lang.ask_change_selling = '{$lang->ask_change_selling}';
 
 					<tr cond="$oMarketItem->get('original_price')">
 						<td><span class="label">구매 가격</span></td>
-						<td>{number_format($oMarketItem->get('original_price'))}원</td>
+						<td>{$oMarketItem->getOriginalPrice()}</td>
 					</tr>
 
 					<tr>
 						<td><span class="label">판매 가격</span></td>
-						<td class="price">{number_format($oMarketItem->get('price'))}<small>원</small></td>
+						<td class="price">{$oMarketItem->getPrice(true)}</td>
 					</tr>
 
 					<tr cond="$oMarketItem->get('priority_area')">

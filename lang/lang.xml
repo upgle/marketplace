@@ -354,6 +354,40 @@
 			<value xml:lang="ko"><![CDATA[불가능]]></value>
 		</item>
 	</item>
+	<item name="currency_unit" type="array">
+		<item name="won_special" type="array">
+			<item name="title">
+				<value xml:lang="ko"><![CDATA[￦ (원화)]]></value>
+			</item>
+			<item name="format">
+				<value xml:lang="ko"><![CDATA[￦ %s]]></value>
+			</item>			
+		</item>
+		<item name="won" type="array">
+			<item name="title">
+				<value xml:lang="ko"><![CDATA[원 (원화)]]></value>
+			</item>
+			<item name="format">
+				<value xml:lang="ko"><![CDATA[%s 원]]></value>
+			</item>			
+		</item>
+		<item name="dollar" type="array">
+			<item name="title">
+				<value xml:lang="ko"><![CDATA[$ (달러)]]></value>
+			</item>
+			<item name="format">
+				<value xml:lang="ko"><![CDATA[$ %s]]></value>
+			</item>			
+		</item>
+		<item name="yen" type="array">
+			<item name="title">
+				<value xml:lang="ko"><![CDATA[¥ (엔화)]]></value>
+			</item>
+			<item name="format">
+				<value xml:lang="ko"><![CDATA[¥ %s]]></value>
+			</item>			
+		</item>
+	</item>
 	<item name="conditions" type="array">
 		<item name="used" type="array">
 			<item name="eid">

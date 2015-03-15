@@ -75,8 +75,6 @@
 			<div class="mp-block">
 				<h1 class="section_title">2. 판매 정보 등록</h1>
 				<div class="mp-block">
-
-
                     <section class="mp-section" cond="$module_info->hide_category=='N'" >
                       <label class="mp-label">상품 카테고리</label>			
                         <select name="category_srl" class="mp-input mp-dependent">
@@ -113,7 +111,7 @@
                     
                     <section class="mp-section">
                       <label for="item_price" class="mp-label">판매 가격</label>
-                      <input id="item_price" type="text" value="" name="item_price" class="mp-input number"> 원 <span id="item_price_ko"></span>
+                      {sprintf($currency_format, '<input id="item_price" type="text" value="" name="item_price" class="mp-input number">')} <span id="item_price_ko"></span>
                     </section>
 
                     <div class="mp-block">
@@ -127,7 +125,7 @@
 
                         <section class="mp-section">
                             <label for="item_original_price" class="mp-label">구매 가격 (선택)</label>
-                            <input id="item_original_price" type="text" value="" name="item_original_price" class="mp-input number"> 원
+                            {sprintf($currency_format, '<input id="item_original_price" type="text" value="" name="item_original_price" class="mp-input number">')}
                         </section>
 
                         <section class="mp-section">

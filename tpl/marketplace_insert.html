@@ -71,8 +71,15 @@
 				<p class="x_help-block">장터에서 사용할 연락처 필드를 선택합니다. 이 필드는 [회원설정 > 회원관리 > 사용자 정의 항목]에서 추가한 항목입니다.</p>
 			</div>
 		</div>
-
-
+		<div class="x_control-group">
+			<label class="x_control-label" for="currency_unit">기본 화폐 설정</label>
+			<div class="x_controls">
+				<select name="currency_unit" id="currency_unit">
+					<option value="{$key}" selected="selected"|cond="$module_info->currency_unit == $key" loop="$lang->currency_unit => $key, $val">{$val['title']}</option>
+				</select>
+				<p class="x_help-block">장터 모듈에서 기본으로 사용하는 화폐입니다.</p>
+			</div>
+		</div>
 		<div class="x_control-group">
 			<label class="x_control-label" for="use_reinsert">재등록 기능</label>
 			<div class="x_controls">

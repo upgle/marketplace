@@ -82,8 +82,10 @@ class marketplaceItem extends Object
 
 	function setModuleInfo($document_srl)
 	{
+		$mid = Context::get('mid');
 		$oModuleModel = getModel('module');
-		$this->module_info = $oModuleModel->getModuleInfoByDocumentSrl($document_srl);
+
+		$this->module_info = ! $document_srl ? $oModuleModel->getModuleInfoByMid($mid) : $oModuleModel->getModuleInfoByDocumentSrl($document_srl);
 	}
 
 	/**
@@ -1144,9 +1146,22 @@ class marketplaceItem extends Object
 		return $this->get('item_status');
 	}
 
-	function getPrice($number_format = false)
+	function getOriginalPrice($number_format = true)
 	{
-		if($number_format) return number_format($this->get('price'));
+		$module_srl = $this->get('module_srl');
+		$oMarketplaceModel = getModel('marketplace');
+		$format = $oMarketplaceModel->getCurrencyFormat($module_srl);
+
+		if($number_format) return sprintf($format, number_format($this->get('original_price')));
+		return $this->get('original_price');
+	}
+	function getPrice($number_format = true)
+	{
+		$module_srl = $this->get('module_srl');
+		$oMarketplaceModel = getModel('marketplace');
+		$format = $oMarketplaceModel->getCurrencyFormat($module_srl);
+
+		if($number_format) return sprintf($format, number_format($this->get('price')));
 		return $this->get('price');
 	}
 

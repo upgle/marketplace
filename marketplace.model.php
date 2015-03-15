@@ -513,6 +513,17 @@ class marketplaceModel extends module
 		return executeQueryArray('marketplace.getSettingConditions', $obj);
 	}
 
+	function getCurrencyFormat($module_srl = false)
+	{
+		if(!module_srl) return '%s';
+		$oModuleModel = getModel('module');
+		$module_info = $oModuleModel->getModuleInfoByModuleSrl($module_srl);
+		if(!$module_info->currency_unit) $module_info->currency_unit = 'won';
+
+		$currency_unit = Context::getLang('currency_unit');
+		return $currency_unit[$module_info->currency_unit]['format'];
+	}
+
 	/**
 	 * @brief return categories
 	 **/

@@ -173,7 +173,7 @@
                 </td>
                 <td>
 					<!-- 가격 -->
-                    <div class="ta_c mp-price"><span class="won">￦</span>{number_format($document->get('price'))}</div>
+                    <div class="ta_c mp-price">{$document->getPrice(true)}</div>
                     <div class="ta_c mp-price price-original" cond="$document->get('original_price')">({number_format($document->get('original_price'))})</div>
                 </td>
                 <td>
